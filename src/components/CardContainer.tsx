@@ -25,7 +25,6 @@ export const CardContainer: React.FC<Props> = ({ MainNode, DetailsNode }) => {
 
   useEffect(() => {
     if (exited && entered) {
-      console.log("✅ Both exit and enter transitions are done");
       if (classNames !== "fade") {
         setClassNames("fade");
       } else {
