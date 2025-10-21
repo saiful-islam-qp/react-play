@@ -1,0 +1,8 @@
+.main {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+}
