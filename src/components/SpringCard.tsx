@@ -1,5 +1,5 @@
 import React, { useState, type ComponentType } from "react";
-import { animated, useSpring, useTransition } from "@react-spring/web";
+import { animated, useTransition } from "@react-spring/web";
 import styles from "./CardContainer.module.css";
 
 interface Props {
@@ -16,11 +16,7 @@ export const SpringCard: React.FC<Props> = ({ MainNode, DetailsNode }) => {
     leave: { opacity: 0.2, transform: "scale(1.2)" },
     config: {
       tension: 170,
-      mass: 1,
-      friction: 26,
-      clamp: false,
-      precision: 0.01,
-      velocity: 0,
+      friction: 100,
     },
     exitBeforeEnter: true,
   });
