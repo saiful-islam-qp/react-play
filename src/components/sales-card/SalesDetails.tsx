@@ -5,25 +5,13 @@ interface Props {
   handler?: () => void;
 }
 
-export const SalesDetails: React.FC<Props> = ({ handler }) => {
+export const SalesDetails: React.FC<Props> = () => {
   return (
     <div className={`${styles.container} ${styles.bgGray}`}>
       <div className="flex items-center" style={{ position: "relative" }}>
         <h2 className={styles.title} style={{ margin: "0 auto" }}>
           Sales Details Breakdown
         </h2>
-        <span
-          onClick={handler}
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            cursor: "pointer",
-            fontSize: "14px",
-          }}
-        >
-          Back
-        </span>
       </div>
       <div className={styles.content}>
         <h4 style={{ margin: "4 0" }}>Heading</h4>
@@ -73,11 +61,6 @@ export const SalesDetails: React.FC<Props> = ({ handler }) => {
           </tfoot>
         </table>
         <div style={{ minHeight: "100px" }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-          doloribus est blanditiis sed fugiat, ducimus dolores recusandae vitae
-          cupiditate nisi!
-        </div>
-        <div style={{ minHeight: "80px" }}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
           doloribus est blanditiis sed fugiat, ducimus dolores recusandae vitae
           cupiditate nisi!

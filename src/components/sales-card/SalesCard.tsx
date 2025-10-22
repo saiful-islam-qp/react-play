@@ -13,9 +13,6 @@ export const SalesCard: React.FC<Props> = ({ handler }) => {
       <div className={styles.content}>
         <MyChartComponent handler={handler} />
       </div>
-      <button onClick={handler} style={{ marginTop: "16px" }}>
-        Breakdown
-      </button>
     </div>
   );
 };

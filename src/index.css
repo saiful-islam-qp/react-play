@@ -167,38 +167,26 @@ button:focus-visible {
 
   /* Test View In and Out Transitions  */
 
-  .test-header-in-enter {
-    transform: scale(0.1);
-  }
-
-  .test-header-in-enter-active,
-  .test-header-in-exit,
-  .test-header-in-exit-active {
-    transform: scale(1);
-    transform-origin: 0 0;
-    transition: transform 500ms ease;
-  }
-
   .test-view-in-enter {
-    transform: scale(0.1);
+    transform: scale(0.05);
   }
   .test-view-in-enter-active {
     transform: scale(1);
     transform-origin: 0 0;
-    transition: transform 600ms ease;
+    transition: transform 450ms ease 200ms;
   }
 
   .test-view-in-exit {
     transform: scale(1);
   }
   .test-view-in-exit-active {
-    transform: scale(0.1);
+    transform: scale(0.05);
     transform-origin: 0 0;
     transition: transform 500ms ease;
   }
 
   .test-view-out-enter {
-    transform: scale(0.1);
+    transform: scale(0.05);
   }
   .test-view-out-enter-active {
     transform: scale(1);
@@ -209,9 +197,28 @@ button:focus-visible {
     transform: scale(1);
   }
   .test-view-out-exit-active {
-    transform: scale(0.1);
+    transform: scale(0.05);
     transform-origin: 0 0;
-    transition: transform 500ms ease;
+    transition: transform 400ms ease 250ms;
+  }
+
+  /* Test header IN and OUT transitions */
+  .test-header-in-enter {
+    transform: scale(0);
+  }
+  .test-header-in-enter-active {
+    transform: scale(1);
+    transform-origin: 0 0;
+    transition: transform 400ms ease;
+  }
+
+  .test-header-out-exit {
+    transform: scale(1);
+  }
+  .test-header-out-exit-active {
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    transition: transform 800ms ease;
   }
 
   .grid-container {

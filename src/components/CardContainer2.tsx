@@ -15,6 +15,7 @@ export const CardContainerNew: React.FC<Props> = ({
 }) => {
   const [state, setState] = React.useState(true);
   const [classNames, setClassNames] = useState("test-view-in");
+  const [headerClasses, setHeaderClasses] = useState("test-header-in");
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const [exited, setExited] = useState(false);
@@ -32,8 +33,10 @@ export const CardContainerNew: React.FC<Props> = ({
     if (exited && entered) {
       if (classNames !== "test-view-in") {
         setClassNames("test-view-in");
+        setHeaderClasses("test-header-in");
       } else {
         setClassNames("test-view-out");
+        setHeaderClasses("test-header-out");
       }
 
       setExited(false);
@@ -52,10 +55,14 @@ export const CardContainerNew: React.FC<Props> = ({
               nodeRef.current.addEventListener("transitionend", done, true);
             }
           }}
-          classNames={classNames}
+          classNames={headerClasses}
           unmountOnExit
         >
-          <div ref={headerRef} className={styles.headerContainer}>
+          <div
+            ref={headerRef}
+            className={styles.headerContainer}
+            style={{ padding: !state ? "8px 16px" : "0px" }}
+          >
             {!state ? (
               <div className="flex items-center gap-4">
                 <FontAwesomeIcon
