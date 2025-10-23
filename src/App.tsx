@@ -6,15 +6,6 @@ import { SalesDetails } from "./components/sales-card/SalesDetails";
 function App() {
   return (
     <>
-      {/* <h1>Custom Component</h1>
-      <div className="card flex wrap gap-4" style={{ marginBottom: "32px" }}>
-        <div className="flex-1">
-          <CardContainer MainNode={SalesCard} DetailsNode={SalesDetails} />
-        </div>
-        <div className="flex-1">
-          <CardContainer MainNode={SalesCard} DetailsNode={SalesDetails} />
-        </div>
-      </div> */}
       <h1>Custom Component with React Spring</h1>
       <div className="card flex wrap gap-4">
         <div className="flex-1">
