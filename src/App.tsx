@@ -1,5 +1,4 @@
 import "./App.css";
-import { CardContainer } from "./components/CardContainer";
 import { CardContainerNew } from "./components/CardContainer2";
 import { SalesCard } from "./components/sales-card/SalesCard";
 import { SalesDetails } from "./components/sales-card/SalesDetails";

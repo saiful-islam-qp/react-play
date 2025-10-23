@@ -14,7 +14,7 @@ export const CardContainerNew: React.FC<Props> = ({
   DetailsNode,
 }) => {
   const [state, setState] = React.useState(true);
-  const [classNames, setClassNames] = useState("v2-view-in");
+  const [classNames, setClassNames] = useState("fade");
   const [headerClasses, setHeaderClasses] = useState("v2-header-in");
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
@@ -31,11 +31,11 @@ export const CardContainerNew: React.FC<Props> = ({
 
   useEffect(() => {
     if (exited && entered) {
-      if (classNames !== "v2-view-in") {
-        setClassNames("v2-view-in");
+      if (classNames !== "fade") {
+        setClassNames("fade");
         setHeaderClasses("v2-header-in");
       } else {
-        setClassNames("v2-view-out");
+        setClassNames("zoom");
         setHeaderClasses("v2-header-out");
       }
 
