@@ -6,16 +6,16 @@
 
 .container {
   position: relative;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 0px 8px 4px rgba(199, 192, 192, 0.1);
-  border: 1px solid rgba(254, 253, 253, 0.1);
+  /* box-shadow: 0px 0px 8px 3px rgba(199, 192, 192, 0.1); */
+  border: 1px solid rgba(152, 151, 151, 0.1);
   position: relative;
 }
 
 .headerContainer {
   position: absolute;
-  top: 0px;
+  top: 4px;
   left: 0px;
   z-index: 1;
   width: 100%;
@@ -23,5 +23,7 @@
 
 .headerContainer * {
   margin: 0;
-  color: #888;
+  color: #636363;
+  font-weight: 600;
+  font-size: 15px;
 }

@@ -9,9 +9,7 @@ export const SalesDetails: React.FC<Props> = () => {
   return (
     <div className={`${styles.container} ${styles.bgGray}`}>
       <div className="flex items-center" style={{ position: "relative" }}>
-        <h2 className={styles.title} style={{ margin: "0 auto" }}>
-          Sales Details Breakdown
-        </h2>
+        <h2 className={styles.title}>Sales Details Breakdown</h2>
       </div>
       <div className={styles.content}>
         <h4 style={{ margin: "4 0" }}>Heading</h4>

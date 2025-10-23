@@ -14,8 +14,8 @@ export const CardContainerNew: React.FC<Props> = ({
   DetailsNode,
 }) => {
   const [state, setState] = React.useState(true);
-  const [classNames, setClassNames] = useState("test-view-in");
-  const [headerClasses, setHeaderClasses] = useState("test-header-in");
+  const [classNames, setClassNames] = useState("v2-view-in");
+  const [headerClasses, setHeaderClasses] = useState("v2-header-in");
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const [exited, setExited] = useState(false);
@@ -31,12 +31,12 @@ export const CardContainerNew: React.FC<Props> = ({
 
   useEffect(() => {
     if (exited && entered) {
-      if (classNames !== "test-view-in") {
-        setClassNames("test-view-in");
-        setHeaderClasses("test-header-in");
+      if (classNames !== "v2-view-in") {
+        setClassNames("v2-view-in");
+        setHeaderClasses("v2-header-in");
       } else {
-        setClassNames("test-view-out");
-        setHeaderClasses("test-header-out");
+        setClassNames("v2-view-out");
+        setHeaderClasses("v2-header-out");
       }
 
       setExited(false);
@@ -98,7 +98,7 @@ export const CardContainerNew: React.FC<Props> = ({
             ref={nodeRef}
             className={styles.container}
             style={{
-              padding: !state ? "40px 0 0 40px" : "0px",
+              padding: !state ? "40px 16px 16px 40px" : "0px",
             }}
           >
             {state ? (
