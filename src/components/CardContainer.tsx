@@ -62,10 +62,6 @@ export const CardContainer: React.FC<Props> = ({
     }
   }, [selectedContentAnimation, selectedHeaderAnimation]);
 
-  useEffect(() => {
-    console.log("class", classNames, "header", headerClasses);
-  }, [classNames, headerClasses]);
-
   return (
     <div className={styles.main}>
       <SwitchTransition mode="out-in">

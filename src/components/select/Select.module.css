@@ -1,0 +1,51 @@
+.headless_ui_options {
+  background-color: var(--main-bg-color);
+  border: 1px solid #cccccc;
+  border-radius: var(--border-radius);
+  padding: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.headless_ui_options:focus,
+.headless_ui_options:focus-visible {
+  outline: unset;
+  border-color: var(--highlight-color);
+}
+
+.headless_ui_button {
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--main-bg-color);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.headless_ui_button:focus,
+.headless_ui_button:focus-visible {
+  outline: unset;
+  border-color: var(--highlight-color);
+}
+
+.headless_ui_option {
+  padding: 8px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 4px 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.headless_ui_option[data-selected] {
+  background-color: var(--highlight-color);
+  color: #fff;
+}
+
+.headless_ui_option[data-focus] {
+  background-color: var(--highlight-color);
+  color: #fff;
+}

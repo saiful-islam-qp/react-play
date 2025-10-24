@@ -4,6 +4,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
+import styles from "./Select.module.css";
 
 export interface IOption {
   id: number | string;
@@ -26,15 +27,15 @@ export function SelectBox({
   return (
     <Listbox
       as="div"
-      className="headless-ui-select"
+      className="headless_ui_select"
       value={selected}
       onChange={setSelected}
     >
-      <ListboxButton className="headless-ui-button">
+      <ListboxButton className={styles.headless_ui_button}>
         {selected?.name || "Select"}
       </ListboxButton>
       <ListboxOptions
-        className="headless-ui-options"
+        className={styles.headless_ui_options}
         anchor={{ to: "bottom start", gap: "4px" }}
         style={{ minWidth: "fit-content", width: width }}
       >
@@ -42,7 +43,7 @@ export function SelectBox({
           <ListboxOption
             key={option.id}
             value={option}
-            className="headless-ui-option"
+            className={styles.headless_ui_option}
           >
             {option.name}
           </ListboxOption>

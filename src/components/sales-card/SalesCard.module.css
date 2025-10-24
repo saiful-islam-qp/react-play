@@ -2,10 +2,12 @@
   padding: 1em;
   background-color: #fff;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
+  /* box-shadow: var(--box-shadow); */
 }
 
 .title {
+  color: #555;
   font-size: 0.9em;
   font-weight: 600;
   line-height: 1.1;
@@ -18,9 +20,5 @@
 }
 
 .bgGray {
-  background-color: #f3f3f3;
-}
-
-.bgBlue {
-  background-color: #ffffff;
+  background-color: var(--secondary-bg-color);
 }

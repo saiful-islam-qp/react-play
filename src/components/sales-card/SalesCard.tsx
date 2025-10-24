@@ -8,7 +8,7 @@ interface Props {
 
 export const SalesCard: React.FC<Props> = ({ handler }) => {
   return (
-    <div className={`${styles.container} ${styles.bgBlue}`}>
+    <div className={`${styles.container}`}>
       <h2 className={styles.title}>Sales by region</h2>
       <div className={styles.content}>
         <MyChartComponent handler={handler} />
