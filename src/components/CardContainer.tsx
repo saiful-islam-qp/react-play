@@ -92,7 +92,7 @@ export const CardContainer: React.FC<Props> = ({
                   onClick={setIsOpen}
                   style={{ width: "20px", height: "20px", cursor: "pointer" }}
                 />
-                <div>
+                <div className="flex items-center gap-4">
                   {titles.map((title) => (
                     <span key={title} className="m-0">
                       {title}

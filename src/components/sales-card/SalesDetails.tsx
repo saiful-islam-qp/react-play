@@ -5,22 +5,20 @@ import { CardContainer } from "../CardContainer";
 import { Sale2Details } from "./Sales2Details";
 import { DonutChart } from "../charts/DonutChart";
 
-interface Props {
-  handler?: () => void;
-}
-
-export const SalesDetails: React.FC<Props> = () => {
+export const SalesDetails: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const openHandler = () => {
+  const [titles, setTitles] = useState(["Sales by country"]);
+  const openHandler = (data?: unknown) => {
+    setTitles(data ? [titles[0], String(data)] : titles);
     setIsOpen((prev: boolean) => !prev);
   };
 
   return (
-    <CardContainer isOpen={isOpen} setIsOpen={openHandler}>
+    <CardContainer isOpen={isOpen} setIsOpen={openHandler} titles={titles}>
       {isOpen ? (
         <Sale2Details />
       ) : (
-        <div className={`${styles.container} ${styles.bgGray}`}>
+        <div className={`${styles.container}`}>
           <h2 className={styles.title}>Sales by country</h2>
           <div className={styles.content}>
             <DonutChart handler={openHandler} />

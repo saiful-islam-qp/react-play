@@ -1,25 +1,23 @@
-import Highcharts, { color } from "highcharts";
+import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 interface Props {
-  handler?: () => void;
+  handler?: (data: unknown) => void;
 }
 
 export function DonutChart({ handler }: Props) {
-  const options = {
+  const options: Highcharts.Options = {
     chart: {
       type: "pie",
-      style: {
-        fontFamily: "Fira Sans, sans-serif",
-        backgroundColor: "transparent",
-      },
+      style: { fontFamily: "Fira Sans, sans-serif" },
+      backgroundColor: "transparent",
     },
     accessibility: {
       point: {
         valueSuffix: "%",
       },
     },
-    title: null,
+    title: { text: undefined },
     tooltip: {
       pointFormat: "{series.name}: <b>{point.percentage:.0f}%</b>",
     },
@@ -30,7 +28,7 @@ export function DonutChart({ handler }: Props) {
       enabled: false,
     },
     plotOptions: {
-      series: {
+      pie: {
         allowPointSelect: true,
         cursor: "pointer",
         borderRadius: 4,
@@ -42,7 +40,7 @@ export function DonutChart({ handler }: Props) {
             style: {
               fontSize: "0.9em",
               fontWeight: "400",
-              color: color("#100f0fff").get(),
+              color: "#100f0f",
             },
           },
           {
@@ -52,14 +50,17 @@ export function DonutChart({ handler }: Props) {
             style: {
               fontSize: "0.9em",
               fontWeight: "400",
-              color: color("#fff").get(),
+              color: "#ffffff",
             },
           },
         ],
         point: {
           events: {
-            click: function () {
-              handler && handler();
+            click: function (this: Highcharts.Point, event) {
+              event.preventDefault();
+              console.log("Clicked", this.name);
+
+              if (handler) handler(this.name);
             },
           },
         },
@@ -68,38 +69,19 @@ export function DonutChart({ handler }: Props) {
     },
     series: [
       {
+        type: "pie",
         name: "Country share",
-        colorByPoint: true,
         innerSize: "75%",
         data: [
-          {
-            name: "Japan",
-            y: 23.9,
-          },
-          {
-            name: "India",
-            y: 12.6,
-          },
-          {
-            name: "China",
-            y: 37.0,
-          },
-          {
-            name: "Bangladesh",
-            y: 5.1,
-          },
-          {
-            name: "South Korea",
-            y: 30.4,
-          },
+          { name: "Japan", y: 23.9 },
+          { name: "India", y: 12.6 },
+          { name: "China", y: 37.0 },
+          { name: "Bangladesh", y: 5.1 },
+          { name: "South Korea", y: 30.4 },
         ],
       },
     ],
   };
 
-  return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    </div>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
 }
