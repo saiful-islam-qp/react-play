@@ -1,12 +1,6 @@
 import React from "react";
 import { SelectBox, type IOption } from "../select/Select";
-
-interface Props {
-  selectedHeaderAnimation?: IOption;
-  setSelectedHeaderAnimation?: (animation: IOption) => void;
-  selectedContentAnimation?: IOption;
-  setSelectedContentAnimation?: (animation: IOption) => void;
-}
+import { useAnimationState } from "../../context/AnimationContext";
 
 const headerAnimationOptions = [
   { id: "v1", name: "V1" },
@@ -21,19 +15,23 @@ const contentAnimationOptions = [
   { id: "v3", name: "V4. Slide-Left" },
 ];
 
-export const AnimationSelector: React.FC<Props> = ({
-  selectedHeaderAnimation,
-  selectedContentAnimation,
-  setSelectedHeaderAnimation,
-  setSelectedContentAnimation,
-}) => {
+export const AnimationSelector: React.FC = () => {
+  const { state, dispatch } = useAnimationState();
+
+  const setSelectedHeaderAnimation = (option: IOption) => {
+    dispatch({ type: "SET_HEADER_ANIMATION", payload: option });
+  };
+  const setSelectedContentAnimation = (option: IOption) => {
+    dispatch({ type: "SET_CONTENT_ANIMATION", payload: option });
+  };
+
   return (
     <div className="flex items-center wrap gap-4 mb-4">
       <div className="flex items-center gap-4">
         <p className="m-0">Header Animation</p>
         <SelectBox
           options={headerAnimationOptions}
-          selected={selectedHeaderAnimation}
+          selected={state.headerAnimation}
           setSelected={setSelectedHeaderAnimation}
           width="5rem"
         />
@@ -42,7 +40,7 @@ export const AnimationSelector: React.FC<Props> = ({
         <p className="m-0">Content Animation</p>
         <SelectBox
           options={contentAnimationOptions}
-          selected={selectedContentAnimation}
+          selected={state.contentAnimation}
           setSelected={setSelectedContentAnimation}
           width="5rem"
         />

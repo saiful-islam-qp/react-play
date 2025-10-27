@@ -3,10 +3,9 @@ import { SwitchTransition, CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CardContainer.module.css";
+import { useAnimationState } from "../context/AnimationContext";
 
 interface Props {
-  selectedContentAnimation?: string;
-  selectedHeaderAnimation?: string;
   children?: React.ReactNode;
   isOpen?: boolean;
   setIsOpen?: () => void;
@@ -14,19 +13,14 @@ interface Props {
 }
 
 export const CardContainer: React.FC<Props> = ({
-  selectedContentAnimation = "fade-zoom",
-  selectedHeaderAnimation = "v2",
   isOpen = false,
   setIsOpen,
   children,
   titles = [],
 }) => {
-  const [classNames, setClassNames] = useState(
-    `${selectedContentAnimation}-view-in`
-  );
-  const [headerClasses, setHeaderClasses] = useState(
-    `${selectedHeaderAnimation}-header-in`
-  );
+  const { state } = useAnimationState();
+  const [classNames, setClassNames] = useState(`v2-view-in`);
+  const [headerClasses, setHeaderClasses] = useState(`v2-header-in`);
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const [exited, setExited] = useState(false);
@@ -42,28 +36,28 @@ export const CardContainer: React.FC<Props> = ({
 
   useEffect(() => {
     if (exited && entered) {
-      if (classNames !== `${selectedContentAnimation}-view-in`) {
-        setClassNames(`${selectedContentAnimation}-view-in`);
-        setHeaderClasses(`${selectedHeaderAnimation}-header-in`);
+      if (classNames !== `v2-view-in`) {
+        setClassNames(`${state.contentAnimation.id}-view-in`);
+        setHeaderClasses(`${state.headerAnimation.id}-header-in`);
       } else {
-        setClassNames(`${selectedContentAnimation}-view-out`);
-        setHeaderClasses(`${selectedHeaderAnimation}-header-out`);
+        setClassNames(`${state.contentAnimation.id}-view-out`);
+        setHeaderClasses(`${state.headerAnimation.id}-header-out`);
       }
 
       setExited(false);
       setEntered(false);
     }
-  }, [exited, entered, selectedContentAnimation, selectedHeaderAnimation]);
+  }, [exited, entered, state]);
 
   useEffect(() => {
     if (classNames.includes("in")) {
-      setClassNames(`${selectedContentAnimation}-view-in`);
-      setHeaderClasses(`${selectedHeaderAnimation}-header-in`);
+      setClassNames(`${state.contentAnimation.id}-view-in`);
+      setHeaderClasses(`${state.headerAnimation.id}-header-in`);
     } else {
-      setClassNames(`${selectedContentAnimation}-view-out`);
-      setHeaderClasses(`${selectedHeaderAnimation}-header-out`);
+      setClassNames(`${state.contentAnimation.id}-view-out`);
+      setHeaderClasses(`${state.headerAnimation.id}-header-out`);
     }
-  }, [selectedContentAnimation, selectedHeaderAnimation]);
+  }, [state]);
 
   return (
     <div className={styles.main}>
