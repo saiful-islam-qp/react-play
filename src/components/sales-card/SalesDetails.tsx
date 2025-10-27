@@ -1,69 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SalesCard.module.css";
+import { CardContainer } from "../CardContainer";
+
+import { Sale2Details } from "./Sales2Details";
+import { DonutChart } from "../charts/DonutChart";
 
 interface Props {
   handler?: () => void;
 }
 
 export const SalesDetails: React.FC<Props> = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const openHandler = () => {
+    setIsOpen((prev: boolean) => !prev);
+  };
+
   return (
-    <div className={`${styles.container} ${styles.bgGray}`}>
-      <div className="flex items-center" style={{ position: "relative" }}>
-        <h2 className={styles.title}>Sales Details Breakdown</h2>
-      </div>
-      <div className={styles.content}>
-        <h4 style={{ margin: "4 0" }}>Heading</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vel
-          molestias omnis doloremque dolorum minus nemo facilis asperiores
-          voluptatum animi?
-        </p>
-        <table style={{ width: "100%", marginTop: "24px" }}>
-          <caption>Front-end web developer course 2021</caption>
-          <thead>
-            <tr>
-              <th scope="col">Person</th>
-              <th scope="col">Most interest in</th>
-              <th scope="col">Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Chris</th>
-              <td>HTML tables</td>
-              <td>22</td>
-            </tr>
-            <tr>
-              <th scope="row">Dennis</th>
-              <td>Web accessibility</td>
-              <td>45</td>
-            </tr>
-            <tr>
-              <th scope="row">Sarah</th>
-              <td>JavaScript frameworks</td>
-              <td>29</td>
-            </tr>
-            <tr>
-              <th scope="row">Karen</th>
-              <td>Web performance</td>
-              <td>36</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row" colSpan={2}>
-                Average age
-              </th>
-              <td>33</td>
-            </tr>
-          </tfoot>
-        </table>
-        <div style={{ minHeight: "100px" }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-          doloribus est blanditiis sed fugiat, ducimus dolores recusandae vitae
-          cupiditate nisi!
+    <CardContainer isOpen={isOpen} setIsOpen={openHandler}>
+      {isOpen ? (
+        <Sale2Details />
+      ) : (
+        <div className={`${styles.container} ${styles.bgGray}`}>
+          <h2 className={styles.title}>Sales by country</h2>
+          <div className={styles.content}>
+            <DonutChart handler={openHandler} />
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </CardContainer>
   );
 };

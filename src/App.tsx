@@ -10,7 +10,13 @@ function App() {
   const [selectedHeaderAnimation, setSelectedHeaderAnimation] =
     useState<IOption>({ id: "v2", name: "V2" });
   const [selectedContentAnimation, setSelectedContentAnimation] =
-    useState<IOption>({ id: "fade-zoom", name: "V1. Fade-Zoom" });
+    useState<IOption>({ id: "v2", name: "V3. Slide-Up" });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openHandler = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <>
       <div className="mb-4">
@@ -26,19 +32,23 @@ function App() {
       <div className="flex wrap gap-4">
         <div className="flex-1">
           <CardContainer
-            MainNode={SalesCard}
-            DetailsNode={SalesDetails}
             selectedContentAnimation={selectedContentAnimation.id as string}
             selectedHeaderAnimation={selectedHeaderAnimation.id as string}
-          />
+            isOpen={isOpen}
+            setIsOpen={openHandler}
+          >
+            {isOpen ? <SalesDetails /> : <SalesCard handler={openHandler} />}
+          </CardContainer>
         </div>
         <div className="flex-1">
           <CardContainer
-            MainNode={SalesCard}
-            DetailsNode={SalesDetails}
             selectedContentAnimation={selectedContentAnimation.id as string}
             selectedHeaderAnimation={selectedHeaderAnimation.id as string}
-          />
+            isOpen={isOpen}
+            setIsOpen={openHandler}
+          >
+            {isOpen ? <SalesDetails /> : <SalesCard handler={openHandler} />}
+          </CardContainer>
         </div>
       </div>
     </>

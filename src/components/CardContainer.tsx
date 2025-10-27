@@ -1,23 +1,26 @@
-import React, { useState, useEffect, type ComponentType } from "react";
+import React, { useState, useEffect } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import styles from "./CardContainer.module.css";
 
 interface Props {
-  MainNode: ComponentType<Record<string, unknown>>;
-  DetailsNode: ComponentType<Record<string, unknown>>;
   selectedContentAnimation?: string;
   selectedHeaderAnimation?: string;
+  children?: React.ReactNode;
+  isOpen?: boolean;
+  setIsOpen?: () => void;
+  titles?: string[];
 }
 
 export const CardContainer: React.FC<Props> = ({
-  MainNode,
-  DetailsNode,
   selectedContentAnimation = "fade-zoom",
   selectedHeaderAnimation = "v2",
+  isOpen = false,
+  setIsOpen,
+  children,
+  titles = [],
 }) => {
-  const [state, setState] = React.useState(true);
   const [classNames, setClassNames] = useState(
     `${selectedContentAnimation}-view-in`
   );
@@ -66,7 +69,7 @@ export const CardContainer: React.FC<Props> = ({
     <div className={styles.main}>
       <SwitchTransition mode="out-in">
         <CSSTransition
-          key={!state ? "header-visible" : "header-hidden"}
+          key={isOpen ? "header-visible" : "header-hidden"}
           nodeRef={headerRef}
           addEndListener={(done) => {
             if (nodeRef.current) {
@@ -79,28 +82,31 @@ export const CardContainer: React.FC<Props> = ({
           <div
             ref={headerRef}
             className={styles.headerContainer}
-            style={{ padding: !state ? "8px 16px" : "0px" }}
+            style={{ padding: isOpen ? "8px 16px" : "0px" }}
           >
-            {!state ? (
+            {isOpen ? (
               <div className="flex items-center gap-4">
                 <FontAwesomeIcon
                   icon={faChevronCircleLeft}
                   size="lg"
-                  onClick={() => setState((s) => !s)}
+                  onClick={setIsOpen}
                   style={{ width: "20px", height: "20px", cursor: "pointer" }}
                 />
-
-                <h4>Sales by region</h4>
-                <h4>Asia 2021</h4>
+                <div>
+                  {titles.map((title) => (
+                    <span key={title} className="m-0">
+                      {title}
+                    </span>
+                  ))}
+                </div>
               </div>
             ) : null}
           </div>
         </CSSTransition>
       </SwitchTransition>
-
       <SwitchTransition mode="out-in">
         <CSSTransition
-          key={state ? "card" : "details"}
+          key={isOpen ? "details" : "card"}
           nodeRef={nodeRef}
           classNames={classNames}
           addEndListener={(done) => {
@@ -116,14 +122,10 @@ export const CardContainer: React.FC<Props> = ({
             ref={nodeRef}
             className={styles.container}
             style={{
-              padding: !state ? "40px 16px 16px 40px" : "0px",
+              padding: isOpen ? "40px 16px 16px 40px" : "0px",
             }}
           >
-            {state ? (
-              <MainNode handler={() => setState((s) => !s)} />
-            ) : (
-              <DetailsNode handler={() => setState((s) => !s)} />
-            )}
+            {children}
           </div>
         </CSSTransition>
       </SwitchTransition>
