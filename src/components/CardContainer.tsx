@@ -36,7 +36,7 @@ export const CardContainer: React.FC<Props> = ({
 
   useEffect(() => {
     if (exited && entered) {
-      if (classNames !== `v2-view-in`) {
+      if (classNames !== `${state.contentAnimation.id}-view-in`) {
         setClassNames(`${state.contentAnimation.id}-view-in`);
         setHeaderClasses(`${state.headerAnimation.id}-header-in`);
       } else {
