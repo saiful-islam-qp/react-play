@@ -13,6 +13,7 @@ const contentAnimationOptions = [
   { id: "v1", name: "V2. Scale-In-Out" },
   { id: "v2", name: "V3. Slide-Up" },
   { id: "v3", name: "V4. Slide-Left" },
+  { id: "scale-fade", name: "V5. Scale-Fade" },
 ];
 
 export const AnimationSelector: React.FC = () => {
