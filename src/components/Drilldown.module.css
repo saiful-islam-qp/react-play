@@ -6,7 +6,6 @@
   position: relative;
   border-radius: var(--border-radius);
   overflow: hidden;
-  /* box-shadow: var(--box-shadow); */
   border: 1px solid var(--border-color);
   position: relative;
 }

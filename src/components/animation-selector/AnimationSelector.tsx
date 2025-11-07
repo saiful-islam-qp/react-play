@@ -3,17 +3,17 @@ import { SelectBox, type IOption } from "../select/Select";
 import { useAnimationState } from "../../context/AnimationContext";
 
 const headerAnimationOptions = [
-  { id: "v1", name: "V1" },
-  { id: "v2", name: "V2" },
-  { id: "v3", name: "V3" },
+  { id: "v1", name: "Scale" },
+  { id: "v2", name: "Slide-Up-Down" },
+  { id: "v3", name: "Slide-Left-Right" },
 ];
 
 const contentAnimationOptions = [
-  { id: "fade-zoom", name: "V1. Fade-Zoom" },
-  { id: "v1", name: "V2. Scale-In-Out" },
-  { id: "v2", name: "V3. Slide-Up" },
-  { id: "v3", name: "V4. Slide-Left" },
-  { id: "scale-fade", name: "V5. Scale-Fade" },
+  { id: "fade-zoom", name: "Fade-Zoom" },
+  { id: "v1", name: "Scale" },
+  { id: "v2", name: "Slide-Up-Down" },
+  { id: "v3", name: "Slide-Left-Right" },
+  { id: "scale-fade", name: "Scale-Fade" },
 ];
 
 export const AnimationSelector: React.FC = () => {
@@ -27,9 +27,9 @@ export const AnimationSelector: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center wrap gap-4 mb-4">
+    <div className="flex items-center wrap gap-4 mb-4 px-4">
       <div className="flex items-center gap-4">
-        <p className="m-0">Header Animation</p>
+        <p className="m-0 font-medium">Header Animation</p>
         <SelectBox
           options={headerAnimationOptions}
           selected={state.headerAnimation}
@@ -38,7 +38,7 @@ export const AnimationSelector: React.FC = () => {
         />
       </div>
       <div className="flex items-center gap-4">
-        <p className="m-0">Content Animation</p>
+        <p className="m-0 font-medium">Content Animation</p>
         <SelectBox
           options={contentAnimationOptions}
           selected={state.contentAnimation}

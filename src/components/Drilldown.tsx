@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import styles from "./CardContainer.module.css";
+import styles from "./Drilldown.module.css";
 import { useAnimationState } from "../context/AnimationContext";
+import { clsx } from "clsx";
 
-interface Props {
-  children?: React.ReactNode;
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen?: boolean;
-  setIsOpen?: () => void;
-  titles?: string[];
+  children?: React.ReactNode;
+  header?: (ref: React.RefObject<HTMLDivElement | null>) => React.JSX.Element;
+  contentOffset?: number | string;
+  contentOffsetFactor?: number;
+  contentAnimation?:
+    | "wu-fade-zoom"
+    | "wu-scale-left"
+    | "wu-slide-up-down"
+    | "wu-slide-left-right"
+    | "wu-scale-fade";
+  headerAnimation?:
+    | "wu-scale-left"
+    | "wu-slide-up-down"
+    | "wu-slide-left-right";
+  dir?: "ltr" | "rtl";
 }
 
-export const CardContainer: React.FC<Props> = ({
-  isOpen = false,
-  setIsOpen,
+export const Drilldown: React.FC<IProps> = ({
+  className,
   children,
-  titles = [],
+  isOpen = false,
+  contentOffset = 48,
+  contentOffsetFactor = 4,
+  header,
+  contentAnimation = "wu-fade-zoom",
+  headerAnimation = "wu-slide-up-down",
+  dir = "ltr",
 }) => {
   const { state } = useAnimationState();
   const [classNames, setClassNames] = useState(`v2-view-in`);
@@ -73,29 +89,7 @@ export const CardContainer: React.FC<Props> = ({
           classNames={headerClasses}
           unmountOnExit
         >
-          <div
-            ref={headerRef}
-            className={styles.headerContainer}
-            style={{ padding: isOpen ? "8px 16px" : "0px" }}
-          >
-            {isOpen ? (
-              <div className="flex items-center gap-4">
-                <FontAwesomeIcon
-                  icon={faChevronCircleLeft}
-                  size="lg"
-                  onClick={setIsOpen}
-                  style={{ width: "20px", height: "20px", cursor: "pointer" }}
-                />
-                <div className="flex items-center gap-4">
-                  {titles.map((title) => (
-                    <span key={title} className="m-0">
-                      {title}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-          </div>
+          {header ? header(headerRef) : null}
         </CSSTransition>
       </SwitchTransition>
       <SwitchTransition mode="out-in">
@@ -114,9 +108,11 @@ export const CardContainer: React.FC<Props> = ({
         >
           <div
             ref={nodeRef}
-            className={styles.container}
+            className={clsx(styles.container, className)}
             style={{
-              padding: isOpen ? "40px 16px 16px 40px" : "0px",
+              padding: isOpen
+                ? getOffsetValue(contentOffset, contentOffsetFactor, dir)
+                : "0px",
             }}
           >
             {children}
@@ -126,3 +122,21 @@ export const CardContainer: React.FC<Props> = ({
     </div>
   );
 };
+
+function getOffsetValue(
+  offset: number | string,
+  factor: number,
+  dir: "ltr" | "rtl"
+): string {
+  if (typeof offset === "number") {
+    if (dir === "rtl") {
+      return `${offset}px ${offset / 2}px ${offset / factor}px ${
+        offset / factor
+      }px`;
+    }
+    return `${offset}px ${offset / factor}px ${offset / factor}px ${
+      offset / 2
+    }px`;
+  }
+  return offset;
+}
