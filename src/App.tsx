@@ -1,7 +1,14 @@
-import "./App.css";
+import { lazy, Suspense } from "react";
 import { AnimationSelector } from "./components/animation-selector/AnimationSelector";
 import { SalesCard } from "./components/sales-card/SalesCard";
 import { SideBar } from "./components/sidebar/Sidebar";
+import "./App.css";
+
+const CodePreviewLazy = lazy(() =>
+  import("./components/code-preview/CodePreview").then((module) => ({
+    default: module.CodePreview,
+  }))
+);
 
 function App() {
   return (
@@ -36,12 +43,12 @@ function App() {
             <SalesCard />
           </div>
           <div className="p-4">
-            <h2 className="text-lg font-bold mt-8 mb-2" id="usage">
-              Usages
-            </h2>
-            <pre className="bg-white dark:bg-(--main-bg-color) p-4 rounded-md overflow-x-auto text-sm border border-(--border-color)">
-              <code>
-                {`import { Drilldown } from "./components/Drilldown";
+            <Suspense fallback={<div className="text-sm">Loading...</div>}>
+              <h2 className="text-lg font-bold mt-8 mb-2" id="usage">
+                Usages
+              </h2>
+              <CodePreviewLazy
+                code={`import { Drilldown } from "./components/Drilldown";
 import { ChevronLeftIcon } from "lucide-react";
 
 export const SalesCard: React.FC = () => {
@@ -93,8 +100,8 @@ export const SalesCard: React.FC = () => {
     </Drilldown>
   );
 };`}
-              </code>
-            </pre>
+              />
+            </Suspense>
           </div>
         </div>
         <div className="hidden lg:block lg:col-span-2">
