@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --main-bg-color: #242424;
+  --main-bg-color: rgba(36, 36, 36, 1);
   --primary-text-color: #f0f0f0;
   --secondary-text-color: #aaaaaa;
   --secondary-bg-color: #eeeeee;
@@ -65,7 +65,7 @@ table tbody td {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --main-bg-color: #f9f9f9;
+    --main-bg-color: rgba(249, 249, 249, 1);
     --primary-text-color: #213547;
     --secondary-text-color: #666666;
     --secondary-bg-color: #ebebeb;

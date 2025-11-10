@@ -8,7 +8,7 @@ function App() {
     <div className="container mx-auto md:p-4">
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-4">
         <div className="col-span-4">
-          <div className="mb-4 sticky top-0 z-20 p-4 bg-(--main-bg-color)">
+          <div className="mb-4 sticky top-0 z-20 p-4 bg-(--main-bg-color)/80 backdrop-blur-md">
             <h1 className="m-0 font-semibold">Drill Down</h1>
             <p className="m-0">
               The Drilldown component presents hierarchical or progressive
@@ -32,8 +32,7 @@ function App() {
               <li>Mobile-friendly stacked navigation</li>
             </ul>
           </div>
-          <div className="grid grid-cols md:grid-cols-2 gap-4 px-4">
-            <SalesCard />
+          <div className=" px-4">
             <SalesCard />
           </div>
           <div className="p-4">
