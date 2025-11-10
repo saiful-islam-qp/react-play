@@ -30,8 +30,6 @@ export const Drilldown: React.FC<IProps> = ({
   contentOffset = 48,
   contentOffsetFactor = 4,
   header,
-  contentAnimation = "wu-fade-zoom",
-  headerAnimation = "wu-slide-up-down",
   dir = "ltr",
 }) => {
   const { state } = useAnimationState();
