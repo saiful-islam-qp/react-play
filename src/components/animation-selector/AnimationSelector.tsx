@@ -27,7 +27,7 @@ export const AnimationSelector: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center wrap gap-4 mb-4 px-4">
+    <div className="flex items-center wrap gap-4 mt-4">
       <div className="flex items-center gap-4">
         <p className="m-0 font-medium">Header Animation</p>
         <SelectBox
