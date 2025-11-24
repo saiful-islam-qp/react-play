@@ -33,7 +33,11 @@ export const SalesDetails: React.FC = () => {
               <ChevronLeftIcon size={16} />
               {titles.map((t) => (
                 <React.Fragment key={t}>
-                  {<h3 className="text-md font-medium text-gray-800">{t}</h3>}
+                  {
+                    <h3 className="text-sm font-medium text-(--primary-text-color)">
+                      {t}
+                    </h3>
+                  }
                 </React.Fragment>
               ))}
             </>
