@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "node ./husky/install.mjs"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,scss,md,mdx}": [

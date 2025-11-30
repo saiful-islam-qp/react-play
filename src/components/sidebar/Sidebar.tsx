@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export const SideBar: React.FC = () => {
   return (
@@ -13,5 +13,5 @@ export const SideBar: React.FC = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react'
 
 interface Props {}
 
 const Example1Main: React.FC<Props> = ({}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [titles, setTitles] = useState(['Sales by region']);
+  const [isOpen, setIsOpen] = useState(false)
+  const [titles, setTitles] = useState(['Sales by region'])
 
   const toggle = (data?: unknown): void => {
     if (data && typeof data === 'string') {
-      setTitles([...titles, data]);
-      setIsOpen(true);
+      setTitles([...titles, data])
+      setIsOpen(true)
     } else {
-      setTitles(['Sales by region']);
-      setIsOpen(false);
+      setTitles(['Sales by region'])
+      setIsOpen(false)
     }
-  };
-  return <div></div>;
-};
+  }
+  return <div></div>
+}
 
-export default Example1Main;
+export default Example1Main

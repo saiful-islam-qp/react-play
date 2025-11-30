@@ -1,30 +1,30 @@
-import React from 'react';
-import { SelectBox, type IOption } from '../select/Select';
-import { useAnimationState } from '../../context/AnimationContext';
+import React from 'react'
+import {SelectBox, type IOption} from '../select/Select'
+import {useAnimationState} from '../../context/AnimationContext'
 
 const headerAnimationOptions = [
-  { id: 'v1', name: 'Scale' },
-  { id: 'v2', name: 'Slide-Up-Down' },
-  { id: 'v3', name: 'Slide-Left-Right' },
-];
+  {id: 'v1', name: 'Scale'},
+  {id: 'v2', name: 'Slide-Up-Down'},
+  {id: 'v3', name: 'Slide-Left-Right'},
+]
 
 const contentAnimationOptions = [
-  { id: 'fade-zoom', name: 'Fade-Zoom' },
-  { id: 'v1', name: 'Scale' },
-  { id: 'v2', name: 'Slide-Up-Down' },
-  { id: 'v3', name: 'Slide-Left-Right' },
-  { id: 'scale-fade', name: 'Scale-Fade' },
-];
+  {id: 'fade-zoom', name: 'Fade-Zoom'},
+  {id: 'v1', name: 'Scale'},
+  {id: 'v2', name: 'Slide-Up-Down'},
+  {id: 'v3', name: 'Slide-Left-Right'},
+  {id: 'scale-fade', name: 'Scale-Fade'},
+]
 
 export const AnimationSelector: React.FC = () => {
-  const { state, dispatch } = useAnimationState();
+  const {state, dispatch} = useAnimationState()
 
   const setSelectedHeaderAnimation = (option: IOption) => {
-    dispatch({ type: 'SET_HEADER_ANIMATION', payload: option });
-  };
+    dispatch({type: 'SET_HEADER_ANIMATION', payload: option})
+  }
   const setSelectedContentAnimation = (option: IOption) => {
-    dispatch({ type: 'SET_CONTENT_ANIMATION', payload: option });
-  };
+    dispatch({type: 'SET_CONTENT_ANIMATION', payload: option})
+  }
 
   return (
     <div className="flex items-center wrap gap-4 mt-4">
@@ -47,5 +47,5 @@ export const AnimationSelector: React.FC = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}

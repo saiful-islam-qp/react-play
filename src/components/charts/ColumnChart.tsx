@@ -1,24 +1,29 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 interface Props {
-  type?: string;
-  categories?: string[];
-  series?: Highcharts.SeriesOptionsType[];
-  handler?: (data: unknown) => void;
+  type?: string
+  categories?: string[]
+  series?: Highcharts.SeriesOptionsType[]
+  handler?: (data: unknown) => void
 }
 
-export function ColumnChart({ type = 'column', categories = [], series = [], handler }: Props) {
+export function ColumnChart({
+  type = 'column',
+  categories = [],
+  series = [],
+  handler,
+}: Props) {
   const options = {
     chart: {
       type: type,
-      style: { fontFamily: 'Fira Sans, sans-serif' },
+      style: {fontFamily: 'Fira Sans, sans-serif'},
       backgroundColor: 'transparent',
     },
-    title: { text: undefined },
+    title: {text: undefined},
     xAxis: {
       categories: categories,
-      title: { text: undefined },
+      title: {text: undefined},
       gridLineWidth: 0,
       lineWidth: 0,
     },
@@ -53,9 +58,12 @@ export function ColumnChart({ type = 'column', categories = [], series = [], han
         cursor: 'pointer',
         point: {
           events: {
-            click: function (this: Highcharts.Point, event: Highcharts.PointClickEventObject) {
-              event.preventDefault();
-              if (handler) handler(`${this.category}  ${this.series.name}`);
+            click: function (
+              this: Highcharts.Point,
+              event: Highcharts.PointClickEventObject,
+            ) {
+              event.preventDefault()
+              if (handler) handler(`${this.category}  ${this.series.name}`)
             },
           },
         },
@@ -75,11 +83,11 @@ export function ColumnChart({ type = 'column', categories = [], series = [], han
     //     data: [1393, 1031, 4695, 745],
     //   },
     // ],
-  };
+  }
 
   return (
     <div>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 interface Props {
-  handler?: (data: unknown) => void;
+  handler?: (data: unknown) => void
 }
 
-export function DonutChart({ handler }: Props) {
+export function DonutChart({handler}: Props) {
   const options: Highcharts.Options = {
     chart: {
       type: 'pie',
-      style: { fontFamily: 'Fira Sans, sans-serif' },
+      style: {fontFamily: 'Fira Sans, sans-serif'},
       backgroundColor: 'transparent',
     },
     accessibility: {
@@ -17,7 +17,7 @@ export function DonutChart({ handler }: Props) {
         valueSuffix: '%',
       },
     },
-    title: { text: undefined },
+    title: {text: undefined},
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>',
     },
@@ -57,10 +57,10 @@ export function DonutChart({ handler }: Props) {
         point: {
           events: {
             click: function (this: Highcharts.Point, event) {
-              event.preventDefault();
-              console.log('Clicked', this.name);
+              event.preventDefault()
+              console.log('Clicked', this.name)
 
-              if (handler) handler(this.name);
+              if (handler) handler(this.name)
             },
           },
         },
@@ -73,15 +73,15 @@ export function DonutChart({ handler }: Props) {
         name: 'Country share',
         innerSize: '75%',
         data: [
-          { name: 'Japan', y: 23.9 },
-          { name: 'India', y: 12.6 },
-          { name: 'China', y: 37.0 },
-          { name: 'Bangladesh', y: 5.1 },
-          { name: 'South Korea', y: 30.4 },
+          {name: 'Japan', y: 23.9},
+          {name: 'India', y: 12.6},
+          {name: 'China', y: 37.0},
+          {name: 'Bangladesh', y: 5.1},
+          {name: 'South Korea', y: 30.4},
         ],
       },
     ],
-  };
+  }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <HighchartsReact highcharts={Highcharts} options={options} />
 }

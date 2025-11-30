@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import styles from './SalesCard.module.css';
-import { ColumnChart } from '../charts/ColumnChart';
-import { SalesDetails } from './SalesDetails';
-import { Drilldown } from '../Drilldown';
-import { ChevronLeftIcon } from 'lucide-react';
+import React, {useState} from 'react'
+import styles from './SalesCard.module.css'
+import {ColumnChart} from '../charts/ColumnChart'
+import {SalesDetails} from './SalesDetails'
+import {Drilldown} from '../Drilldown'
+import {ChevronLeftIcon} from 'lucide-react'
 
 export const SalesCard: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [titles, setTitles] = useState(['Sales by region']);
+  const [isOpen, setIsOpen] = useState(false)
+  const [titles, setTitles] = useState(['Sales by region'])
 
   const toggle = (data?: unknown): void => {
     if (data && typeof data === 'string') {
-      setTitles([...titles, data]);
-      setIsOpen(true);
+      setTitles([...titles, data])
+      setIsOpen(true)
     } else {
-      setTitles(['Sales by region']);
-      setIsOpen(false);
+      setTitles(['Sales by region'])
+      setIsOpen(false)
     }
-  };
+  }
 
   return (
     <Drilldown
       isOpen={isOpen}
-      header={(ref) => (
+      header={ref => (
         <div
           ref={ref}
           onClick={toggle}
@@ -31,9 +31,13 @@ export const SalesCard: React.FC = () => {
           {isOpen && (
             <>
               <ChevronLeftIcon size={16} />
-              {titles.map((t) => (
+              {titles.map(t => (
                 <React.Fragment key={t}>
-                  {<h3 className="text-sm font-medium text-(--primary-text-color)">{t}</h3>}
+                  {
+                    <h3 className="text-sm font-medium text-(--primary-text-color)">
+                      {t}
+                    </h3>
+                  }
                 </React.Fragment>
               ))}
             </>
@@ -52,5 +56,5 @@ export const SalesCard: React.FC = () => {
         </div>
       )}
     </Drilldown>
-  );
-};
+  )
+}

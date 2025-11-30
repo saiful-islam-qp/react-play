@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './SalesCard.module.css';
-import { LineChart } from '../charts/LineChart';
+import React from 'react'
+import styles from './SalesCard.module.css'
+import {LineChart} from '../charts/LineChart'
 
 interface Props {}
 
@@ -12,5 +12,5 @@ export const Sale2Details: React.FC<Props> = ({}) => {
         <LineChart />
       </div>
     </div>
-  );
-};
+  )
+}
