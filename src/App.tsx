@@ -1,13 +1,13 @@
-import { lazy, Suspense } from "react";
-import { AnimationSelector } from "./components/animation-selector/AnimationSelector";
-import { SalesCard } from "./components/sales-card/SalesCard";
-import { SideBar } from "./components/sidebar/Sidebar";
-import "./App.css";
+import { lazy, Suspense } from 'react';
+import { AnimationSelector } from './components/animation-selector/AnimationSelector';
+import { SalesCard } from './components/sales-card/SalesCard';
+import { SideBar } from './components/sidebar/Sidebar';
+import './App.css';
 
 const CodePreviewLazy = lazy(() =>
-  import("./components/code-preview/CodePreview").then((module) => ({
+  import('./components/code-preview/CodePreview').then((module) => ({
     default: module.CodePreview,
-  }))
+  })),
 );
 
 function App() {
@@ -18,24 +18,17 @@ function App() {
           <div className="mb-4 sticky top-0 z-20 p-4 bg-(--main-bg-color)/80 backdrop-blur-md rounded-b-lg">
             <h1 className="m-0 font-semibold">Drill Down</h1>
             <p className="m-0">
-              The Drilldown component presents hierarchical or progressive
-              detail views within a confined container using animated
-              transitions.
+              The Drilldown component presents hierarchical or progressive detail views within a
+              confined container using animated transitions.
             </p>
             <AnimationSelector />
           </div>
           <div className="p-4" id="overview">
             <h2 className="text-lg font-bold">When To Use</h2>
             <ul className="mb-4 list-disc list-inside">
-              <li>
-                Exploring hierarchical datasets (regions → countries → cities)
-              </li>
-              <li>
-                Progressive disclosure of details (overview → details → metrics)
-              </li>
-              <li>
-                Replacing separate modal/page navigation with inline transitions
-              </li>
+              <li>Exploring hierarchical datasets (regions → countries → cities)</li>
+              <li>Progressive disclosure of details (overview → details → metrics)</li>
+              <li>Replacing separate modal/page navigation with inline transitions</li>
               <li>Mobile-friendly stacked navigation</li>
             </ul>
           </div>

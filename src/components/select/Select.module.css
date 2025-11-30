@@ -37,7 +37,9 @@
   font-size: 14px;
   line-height: 16px;
   margin: 4px 0;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .headless_ui_option[data-selected] {

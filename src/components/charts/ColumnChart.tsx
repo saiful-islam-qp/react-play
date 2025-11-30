@@ -1,20 +1,23 @@
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 interface Props {
+  type?: string;
+  categories?: string[];
+  series?: Highcharts.SeriesOptionsType[];
   handler?: (data: unknown) => void;
 }
 
-export function ColumnChart({ handler }: Props) {
-  const options: Highcharts.Options = {
+export function ColumnChart({ type = 'column', categories = [], series = [], handler }: Props) {
+  const options = {
     chart: {
-      type: "column",
-      style: { fontFamily: "Fira Sans, sans-serif" },
-      backgroundColor: "transparent",
+      type: type,
+      style: { fontFamily: 'Fira Sans, sans-serif' },
+      backgroundColor: 'transparent',
     },
     title: { text: undefined },
     xAxis: {
-      categories: ["Africa", "America", "Asia", "Europe"],
+      categories: categories,
       title: { text: undefined },
       gridLineWidth: 0,
       lineWidth: 0,
@@ -22,16 +25,16 @@ export function ColumnChart({ handler }: Props) {
     yAxis: {
       min: 0,
       title: {
-        text: "Sales (millions)",
-        align: "high",
+        text: 'Sales (millions)',
+        align: 'high',
       },
       labels: {
-        overflow: "justify",
+        overflow: 'justify',
       },
       gridLineWidth: 1,
     },
     tooltip: {
-      valueSuffix: " millions",
+      valueSuffix: ' millions',
     },
     plotOptions: {
       column: {
@@ -39,18 +42,18 @@ export function ColumnChart({ handler }: Props) {
         dataLabels: {
           enabled: true,
           style: {
-            fontSize: "12px",
-            color: "#282828",
-            fontWeight: "400",
+            fontSize: '12px',
+            color: '#282828',
+            fontWeight: '400',
           },
         },
         groupPadding: 0.125,
       },
       series: {
-        cursor: "pointer",
+        cursor: 'pointer',
         point: {
           events: {
-            click: function (this: Highcharts.Point, event) {
+            click: function (this: Highcharts.Point, event: Highcharts.PointClickEventObject) {
               event.preventDefault();
               if (handler) handler(`${this.category}  ${this.series.name}`);
             },
@@ -61,23 +64,17 @@ export function ColumnChart({ handler }: Props) {
     credits: {
       enabled: false,
     },
-    series: [
-      {
-        type: "column",
-        name: "Year 2023",
-        data: [632, 727, 3202, 721],
-      },
-      {
-        type: "column",
-        name: "Year 2024",
-        data: [814, 841, 3714, 726],
-      },
-      {
-        type: "column",
-        name: "Year 2025",
-        data: [1393, 1031, 4695, 745],
-      },
-    ],
+    series: series,
+    // [
+    //   {
+    //     name: "Year 2024",
+    //     data: [814, 841, 3714, 726],
+    //   },
+    //   {
+    //     name: "Year 2025",
+    //     data: [1393, 1031, 4695, 745],
+    //   },
+    // ],
   };
 
   return (

@@ -1,14 +1,12 @@
-import { AnimationStateContext } from "./AnimationContext";
-import { useReducer } from "react";
-import { initialState, animationReducer } from "../reducer/animationReducer";
+import { AnimationStateContext } from './AnimationContext';
+import { useReducer } from 'react';
+import { initialState, animationReducer } from '../reducer/animationReducer';
 
 interface IAnimationContextProviderProps {
   children: React.ReactNode;
 }
 
-const AnimationContextProvider = ({
-  children,
-}: IAnimationContextProviderProps) => {
+const AnimationContextProvider = ({ children }: IAnimationContextProviderProps) => {
   const [state, dispatch] = useReducer(animationReducer, initialState);
 
   return (

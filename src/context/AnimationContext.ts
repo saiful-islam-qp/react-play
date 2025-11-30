@@ -1,5 +1,5 @@
-import { createContext, useContext, type Dispatch } from "react";
-import type { IAnimation, IAnimationAction } from "../types/IAnimation";
+import { createContext, useContext, type Dispatch } from 'react';
+import type { IAnimation, IAnimationAction } from '../types/IAnimation';
 
 // Create the context types
 type AnimationContextType = {
@@ -8,17 +8,13 @@ type AnimationContextType = {
 };
 
 // Create the context
-export const AnimationStateContext = createContext<AnimationContextType | null>(
-  null
-);
+export const AnimationStateContext = createContext<AnimationContextType | null>(null);
 
 // Custom hook to use the global state
 export const useAnimationState = (): AnimationContextType => {
   const context = useContext(AnimationStateContext);
   if (!context) {
-    throw new Error(
-      "useAnimationState must be used within a AnimationContextProvider"
-    );
+    throw new Error('useAnimationState must be used within a AnimationContextProvider');
   }
   return context;
 };
