@@ -2,9 +2,7 @@ import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-interface Props {}
-
-export const LineChart: React.FC<Props> = () => {
+export const LineChart: React.FC = () => {
   const options: Highcharts.Options = {
     chart: {
       type: 'spline',

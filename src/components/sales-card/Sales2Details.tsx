@@ -2,9 +2,7 @@ import React from 'react'
 import styles from './SalesCard.module.css'
 import {LineChart} from '../charts/LineChart'
 
-interface Props {}
-
-export const Sale2Details: React.FC<Props> = ({}) => {
+export const Sale2Details: React.FC = () => {
   return (
     <div className={`${styles.container}`}>
       <h2 className={styles.title}>Sales trend by category</h2>
