@@ -73,16 +73,6 @@ export function ColumnChart({
       enabled: false,
     },
     series: series,
-    // [
-    //   {
-    //     name: "Year 2024",
-    //     data: [814, 841, 3714, 726],
-    //   },
-    //   {
-    //     name: "Year 2025",
-    //     data: [1393, 1031, 4695, 745],
-    //   },
-    // ],
   }
 
   return (

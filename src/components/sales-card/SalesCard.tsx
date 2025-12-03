@@ -51,7 +51,27 @@ export const SalesCard: React.FC = () => {
         <div className={`${styles.container}`}>
           <h2 className={styles.title}>Sales by region</h2>
           <div className={styles.content}>
-            <ColumnChart handler={toggle} />
+            <ColumnChart
+              handler={toggle}
+              categories={['Africa', 'America', 'Asia', 'Europe']}
+              series={[
+                {
+                  type: 'column',
+                  name: 'Year 2023',
+                  data: [632, 727, 3202, 721],
+                },
+                {
+                  type: 'column',
+                  name: 'Year 2024',
+                  data: [814, 841, 3714, 726],
+                },
+                {
+                  type: 'column',
+                  name: 'Year 2025',
+                  data: [1393, 1031, 4695, 745],
+                },
+              ]}
+            />
           </div>
         </div>
       )}
