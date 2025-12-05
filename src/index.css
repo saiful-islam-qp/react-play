@@ -471,5 +471,4 @@ table tbody td {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE & Edge */
   scrollbar-width: none; /* Firefox */
- 
 }
