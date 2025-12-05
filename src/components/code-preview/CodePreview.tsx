@@ -12,7 +12,7 @@ export const CodePreview: React.FC<Props> = ({code}) => {
     const highlight = async () => {
       const htmlOutput = await codeToHtml(code, {
         lang: 'typescript',
-        theme: 'github-dark-dimmed',
+        theme: 'github-light',
       })
       setHtml(htmlOutput)
     }

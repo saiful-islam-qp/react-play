@@ -3,6 +3,7 @@ import {AnimationSelector} from './components/animation-selector/AnimationSelect
 import {SalesCard} from './components/sales-card/SalesCard'
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
+import {ManyTitles} from './components/with-many-titles/ManyTitles'
 
 const CodePreviewLazy = lazy(() =>
   import('./components/code-preview/CodePreview').then(module => ({
@@ -39,8 +40,22 @@ function App() {
               <li>Mobile-friendly stacked navigation</li>
             </ul>
           </div>
-          <div className=" px-4">
+          <div className="px-4 mb-4">
+            <h2 className="text-lg font-bold mb-2" id="basic-example">
+              Basic Example
+            </h2>
             <SalesCard />
+          </div>
+          <div className="p-4">
+            <h2 className="text-lg font-bold" id="with-many-titles">
+              With many titles
+            </h2>
+            <p className="mb-2">
+              Header is on developer to customize. Here is an example with many
+              titles. Click on any bar to see the drilldown with many titles in
+              action.
+            </p>
+            <ManyTitles />
           </div>
           <div className="p-4">
             <Suspense fallback={<div className="text-sm">Loading...</div>}>
@@ -72,17 +87,21 @@ export const SalesCard: React.FC = () => {
         <div
           ref={ref}
           onClick={toggle}
-          className="absolute top-3 left-4 z-10 flex items-center gap-4 cursor-pointer"
+          className="absolute top-4 left-4 right-4 z-10 overflow-hidden"
         >
           {isOpen && (
-            <>
+            <div className="flex items-center gap-4 w-full overflow-x-auto no-scrollbar flex items-center gap-4 w-full snap-x snap-mandatory scroll-smooth">
               <ChevronLeftIcon size={16} />
-              {titles.map((t) => (
+              {titles.map(t => (
                 <React.Fragment key={t}>
-                  {<h3 className="text-md font-medium text-gray-800">{t}</h3>}
+                  {
+                    <h3 className="text-sm font-medium cursor-pointer whitespace-nowrap snap-start shrink-0 text-(--primary-text-color)">
+                      {t}
+                    </h3>
+                  }
                 </React.Fragment>
               ))}
-            </>
+            </div>
           )}
         </div>
       )}

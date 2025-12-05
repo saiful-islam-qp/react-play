@@ -463,3 +463,13 @@ table tbody td {
     opacity 450ms ease,
     transform 400ms ease;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+ 
+}

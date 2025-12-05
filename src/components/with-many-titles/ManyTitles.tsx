@@ -1,20 +1,38 @@
 import React, {useState} from 'react'
-import styles from './SalesCard.module.css'
+import styles from '../sales-card/SalesCard.module.css'
 import {ColumnChart} from '../charts/ColumnChart'
-import {SalesDetails} from './SalesDetails'
+import {SalesDetails} from '../sales-card/SalesDetails'
 import {Drilldown} from '../Drilldown'
 import {ChevronLeftIcon} from 'lucide-react'
 
-export const SalesCard: React.FC = () => {
+export const ManyTitles: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [titles, setTitles] = useState(['Sales by region'])
+  const [titles, setTitles] = useState([
+    'Sales by region',
+    'Sales',
+    'Details',
+    'lorem ipsum dolor sit amet consectetur adipiscing elit',
+    'Another level lorem ipsum dolor sit amet consectetur adipiscing elit',
+    'Last level lorem ipsum dolor sit amet consectetur adipiscing elit',
+    'Another level',
+    'Last level',
+  ])
 
   const toggle = (data?: unknown): void => {
     if (data && typeof data === 'string') {
       setTitles([...titles, data])
       setIsOpen(true)
     } else {
-      setTitles(['Sales by region'])
+      setTitles([
+        'Sales by region',
+        'Sales',
+        'Details',
+        'lorem ipsum dolor sit amet consectetur adipiscing elit',
+        'Another level lorem ipsum dolor sit amet consectetur adipiscing elit',
+        'Last level lorem ipsum dolor sit amet consectetur adipiscing elit',
+        'Another level',
+        'Last level',
+      ])
       setIsOpen(false)
     }
   }
