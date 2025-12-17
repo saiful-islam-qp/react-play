@@ -1,15 +1,15 @@
-import {lazy, Suspense} from 'react'
+// import {lazy, Suspense} from 'react'
 import {AnimationSelector} from './components/animation-selector/AnimationSelector'
 import {SalesCard} from './components/sales-card/SalesCard'
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
-import {ManyTitles} from './components/with-many-titles/ManyTitles'
+// import {ManyTitles} from './components/with-many-titles/ManyTitles'
 
-const CodePreviewLazy = lazy(() =>
-  import('./components/code-preview/CodePreview').then(module => ({
-    default: module.CodePreview,
-  })),
-)
+// const CodePreviewLazy = lazy(() =>
+//   import('./components/code-preview/CodePreview').then(module => ({
+//     default: module.CodePreview,
+//   })),
+// )
 
 function App() {
   return (
@@ -44,9 +44,11 @@ function App() {
             <h2 className="text-lg font-bold mb-2" id="basic-example">
               Basic Example
             </h2>
-            <SalesCard />
+            <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-500/10">
+              <SalesCard />
+            </div>
           </div>
-          <div className="p-4">
+          {/* <div className="p-4">
             <h2 className="text-lg font-bold" id="with-many-titles">
               With many titles
             </h2>
@@ -56,7 +58,8 @@ function App() {
               action.
             </p>
             <ManyTitles />
-          </div>
+          </div> */}
+          {/* 
           <div className="p-4">
             <Suspense fallback={<div className="text-sm">Loading...</div>}>
               <h2 className="text-lg font-bold mt-8 mb-2" id="usage">
@@ -122,6 +125,7 @@ export const SalesCard: React.FC = () => {
               />
             </Suspense>
           </div>
+          */}
         </div>
         <div className="hidden lg:block lg:col-span-2">
           <SideBar />

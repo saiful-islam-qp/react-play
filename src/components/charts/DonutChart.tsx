@@ -58,8 +58,6 @@ export function DonutChart({handler}: Props) {
           events: {
             click: function (this: Highcharts.Point, event) {
               event.preventDefault()
-              console.log('Clicked', this.name)
-
               if (handler) handler(this.name)
             },
           },
@@ -83,5 +81,13 @@ export function DonutChart({handler}: Props) {
     ],
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div style={{height: '100%', width: '100%'}}>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        containerProps={{style: {height: '100%', width: '100%'}}}
+      />
+    </div>
+  )
 }

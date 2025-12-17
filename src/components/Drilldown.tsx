@@ -128,6 +128,7 @@ function getOffsetValue(
       return `${offset}px ${offset / 2}px ${offset / factor}px ${offset / factor}px`
     }
     return `${offset}px ${offset / factor}px ${offset / factor}px ${offset / 2}px`
+    // return `${offset}px 0px 0px 0px`
   }
   return offset
 }

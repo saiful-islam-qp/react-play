@@ -106,5 +106,13 @@ export const LineChart: React.FC = () => {
     },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div style={{height: '100%', width: '100%'}}>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        containerProps={{style: {height: '100%', width: '100%'}}}
+      />
+    </div>
+  )
 }

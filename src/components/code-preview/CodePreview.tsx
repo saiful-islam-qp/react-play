@@ -18,6 +18,6 @@ export const CodePreview: React.FC<Props> = ({code}) => {
     }
 
     highlight()
-  }, [])
+  }, [code])
   return <div dangerouslySetInnerHTML={{__html: html}} />
 }

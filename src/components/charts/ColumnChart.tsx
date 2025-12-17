@@ -76,8 +76,12 @@ export function ColumnChart({
   }
 
   return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+    <div style={{height: '100%', width: '100%'}}>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        containerProps={{style: {height: '100%', width: '100%'}}}
+      />
     </div>
   )
 }
