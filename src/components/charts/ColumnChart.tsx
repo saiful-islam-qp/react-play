@@ -63,7 +63,7 @@ export function ColumnChart({
               event: Highcharts.PointClickEventObject,
             ) {
               event.preventDefault()
-              if (handler) handler(`${this.category}  ${this.series.name}`)
+              if (handler) handler(`${this.category}: ${this.series.name}`)
             },
           },
         },

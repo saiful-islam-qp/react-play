@@ -3,7 +3,7 @@ import styles from './SalesCard.module.css'
 import {ColumnChart} from '../charts/ColumnChart'
 import {SalesDetails} from './SalesDetails'
 import {WuDrilldown} from '../WuDrilldown'
-import {ChevronLeftIcon} from 'lucide-react'
+import {ChevronRightIcon} from 'lucide-react'
 
 type TitleType = {
   text: string
@@ -43,20 +43,18 @@ export const SalesCard: React.FC = () => {
       {isOpen ? (
         <Fragment>
           <div className="overflow-hidden">
-            <div className="h-10 flex items-center gap-4 w-full overflow-x-auto no-scrollbar flex items-center gap-4 w-full snap-x snap-mandatory scroll-smooth">
-              <ChevronLeftIcon size={16} />
+            <div className="h-10 flex items-center w-full overflow-x-auto no-scrollbar flex items-center gap-1 w-full snap-x snap-mandatory scroll-smooth">
               {titles.map((title, index) => (
                 <React.Fragment key={title.text}>
-                  {
-                    <h6
-                      onClick={() =>
-                        titleHandler(title.callback && title.callback(), index)
-                      }
-                      className="text-sm font-medium cursor-pointer whitespace-nowrap snap-start shrink-0 text-(--primary-text-color)"
-                    >
-                      {title.text}
-                    </h6>
-                  }
+                  <h6
+                    onClick={() =>
+                      titleHandler(title.callback && title.callback(), index)
+                    }
+                    className="text-sm font-medium cursor-pointer whitespace-nowrap snap-start shrink-0 text-(--primary-text-color)"
+                  >
+                    {title.text}
+                  </h6>
+                  {index < titles.length - 1 && <ChevronRightIcon size={16} />}
                 </React.Fragment>
               ))}
             </div>

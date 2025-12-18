@@ -3,6 +3,8 @@ import {AnimationSelector} from './components/animation-selector/AnimationSelect
 import {SalesCard} from './components/sales-card/SalesCard'
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
+// import {Drilldown} from './components/DxDrillDown'
+import DrillDownExample from './components/DrillDownExample'
 // import {ManyTitles} from './components/with-many-titles/ManyTitles'
 
 // const CodePreviewLazy = lazy(() =>
@@ -126,6 +128,7 @@ export const SalesCard: React.FC = () => {
             </Suspense>
           </div>
           */}
+          <DrillDownExample />
         </div>
         <div className="hidden lg:block lg:col-span-2">
           <SideBar />

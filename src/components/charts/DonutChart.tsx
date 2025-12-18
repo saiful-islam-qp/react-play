@@ -58,7 +58,7 @@ export function DonutChart({handler}: Props) {
           events: {
             click: function (this: Highcharts.Point, event) {
               event.preventDefault()
-              if (handler) handler(this.name)
+              if (handler) handler(`${this.series.name}: ${this.name}`)
             },
           },
         },
@@ -68,7 +68,7 @@ export function DonutChart({handler}: Props) {
     series: [
       {
         type: 'pie',
-        name: 'Country share',
+        name: 'Sales by country',
         innerSize: '75%',
         data: [
           {name: 'Japan', y: 23.9},
