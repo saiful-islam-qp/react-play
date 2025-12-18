@@ -128,7 +128,9 @@ export const SalesCard: React.FC = () => {
             </Suspense>
           </div>
           */}
-          <DrillDownExample />
+          <div className="p-4">
+            <DrillDownExample />
+          </div>
         </div>
         <div className="hidden lg:block lg:col-span-2">
           <SideBar />

@@ -1,64 +1,51 @@
 import React from 'react'
 import {DxDrilldown, type DrilldownItem} from './DxDrillDown'
+import {ColumnChart} from './charts/ColumnChart'
+import {DonutChart} from './charts/DonutChart'
+import {LineChart} from './charts/LineChart'
 
 const items: Record<`level-${number}`, DrilldownItem> = {
   'level-1': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
-      <div className="p-4 bg-blue-300 rounded-lg h-full">
-        <div className="mb-4">Level 1 Content</div>
-        <button
-          className="px-4 py-2 bg-white rounded-lg"
-          onClick={e => {
-            e.stopPropagation()
-            goNext('level-2')
-          }}
-        >
-          Go Next
-        </button>
+      <div className="p-4 rounded-lg h-full bg-white">
+        <ColumnChart
+          handler={() => goNext('level-2')}
+          categories={['Africa', 'America', 'Asia', 'Europe']}
+          series={[
+            {
+              type: 'column',
+              name: 'Year 2023',
+              data: [632, 727, 3202, 721],
+            },
+            {
+              type: 'column',
+              name: 'Year 2024',
+              data: [814, 841, 3714, 726],
+            },
+            {
+              type: 'column',
+              name: 'Year 2025',
+              data: [1393, 1031, 4695, 745],
+            },
+          ]}
+        />
       </div>
     ),
   },
   'level-2': {
     nodeRef: React.createRef<HTMLDivElement>(),
-    component: ({goBack, goNext}) => (
-      <div className="p-4 bg-blue-300 rounded-lg h-full">
-        <div className="mb-4">Level 2 Content</div>
-        <button
-          className="mr-2 px-4 py-2 bg-white rounded-lg"
-          onClick={e => {
-            e.stopPropagation()
-            goBack('level-1')
-          }}
-        >
-          Go Back
-        </button>
-        <button
-          className="px-4 py-2 bg-white rounded-lg"
-          onClick={e => {
-            e.stopPropagation()
-            goNext('level-3')
-          }}
-        >
-          Go Next
-        </button>
+    component: ({goNext}) => (
+      <div className="p-4 rounded-lg h-full bg-white">
+        <DonutChart handler={() => goNext('level-3')} />
       </div>
     ),
   },
   'level-3': {
     nodeRef: React.createRef<HTMLDivElement>(),
-    component: ({goBack}) => (
-      <div className="p-4 bg-blue-300 rounded-lg h-full">
-        <div className="mb-4">Level 3 Content</div>
-        <button
-          className="mr-2 px-4 py-2 bg-white rounded-lg"
-          onClick={e => {
-            e.stopPropagation()
-            goBack('level-2')
-          }}
-        >
-          Go Back
-        </button>
+    component: (
+      <div className="p-4 rounded-lg h-full bg-white">
+        <LineChart />
       </div>
     ),
   },
@@ -66,7 +53,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
 
 const DrillDownExample: React.FC = () => {
   return (
-    <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-500/10">
+    <div className="h-[390px] p-2 border border-gray-200 rounded-xl bg-gray-100">
       <DxDrilldown items={items} initial="level-1" />
     </div>
   )
