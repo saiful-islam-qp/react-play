@@ -1,8 +1,10 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import type {DrilldownTitle} from '../DxDrillDown'
+import React from 'react'
 
 interface Props {
-  handler?: (data: unknown) => void
+  handler?: (id: `level-${number}`, data?: DrilldownTitle) => void
 }
 
 export function DonutChart({handler}: Props) {
@@ -58,7 +60,12 @@ export function DonutChart({handler}: Props) {
           events: {
             click: function (this: Highcharts.Point, event) {
               event.preventDefault()
-              if (handler) handler(`${this.series.name}: ${this.name}`)
+              if (handler)
+                handler(`level-3`, {
+                  id: 'level-3',
+                  title: `${this.series.name}: ${this.name}`,
+                  nodeRef: React.createRef<HTMLHeadingElement | null>(),
+                })
             },
           },
         },

@@ -9,8 +9,9 @@ const items: Record<`level-${number}`, DrilldownItem> = {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
       <div className="p-4 rounded-lg h-full bg-white">
+        <h2 className="text-sm font-medium mb-4">Sales by region</h2>
         <ColumnChart
-          handler={() => goNext('level-2')}
+          handler={goNext}
           categories={['Africa', 'America', 'Asia', 'Europe']}
           series={[
             {
@@ -37,15 +38,51 @@ const items: Record<`level-${number}`, DrilldownItem> = {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
       <div className="p-4 rounded-lg h-full bg-white">
-        <DonutChart handler={() => goNext('level-3')} />
+        <DonutChart handler={goNext} />
       </div>
     ),
   },
   'level-3': {
     nodeRef: React.createRef<HTMLDivElement>(),
+    component: ({goNext}) => (
+      <div className="p-4 rounded-lg h-full bg-white">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={() =>
+            goNext('level-4', {
+              id: 'level-4',
+              title: 'Detailed Sales Data',
+              nodeRef: React.createRef<HTMLHeadingElement>(),
+            })
+          }
+        >
+          Next
+        </button>
+        <LineChart />
+      </div>
+    ),
+  },
+  'level-4': {
+    nodeRef: React.createRef<HTMLDivElement>(),
     component: (
       <div className="p-4 rounded-lg h-full bg-white">
-        <LineChart />
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae
+          suscipit error repellat asperiores ipsum, pariatur voluptatum
+          voluptates ab nihil quas voluptatem qui sequi libero laboriosam
+          dignissimos facere beatae. Quasi veniam quo sed aut odio iste expedita
+          at esse. Aliquid, pariatur adipisci. Doloribus illo qui laborum odit
+          pariatur, dolor rerum necessitatibus similique iste eius ut veniam
+          nisi voluptatum aliquid nam, in iure sed hic officia recusandae? Animi
+          aliquam ut praesentium voluptate similique ratione repellendus rem
+          quos quisquam suscipit repudiandae illum, maxime voluptates eius
+          deleniti blanditiis recusandae placeat nesciunt ipsam reiciendis cum
+          voluptatem. Assumenda, eaque ullam quas natus nulla deleniti mollitia
+          cupiditate sed tenetur. Id quas, exercitationem asperiores libero
+          quidem et quam sed culpa, maiores quo corrupti eos repellat. Fugit
+          suscipit facilis cum! Iste nihil natus adipisci ullam, animi quia rem
+          fugiat corrupti ut mollitia libero? Dicta saepe aliquid enim odit eum?
+        </div>
       </div>
     ),
   },
@@ -53,8 +90,16 @@ const items: Record<`level-${number}`, DrilldownItem> = {
 
 const DrillDownExample: React.FC = () => {
   return (
-    <div className="h-[390px] p-2 border border-gray-200 rounded-xl bg-gray-100">
-      <DxDrilldown items={items} initial="level-1" />
+    <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-100">
+      <DxDrilldown
+        items={items}
+        initial="level-1"
+        baseTitle={{
+          id: 'level-1',
+          title: 'Overall Sales Data',
+          nodeRef: React.createRef<HTMLHeadingElement>(),
+        }}
+      />
     </div>
   )
 }

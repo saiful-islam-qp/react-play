@@ -232,11 +232,11 @@ table tbody td {
 }
 
 /* VERSION:2 | header IN and OUT transitions */
-.v2-header-in-enter {
+.v2-header-enter {
   transform: translateY(-10px);
   opacity: 0;
 }
-.v2-header-in-enter-active {
+.v2-header-enter-active {
   transform: translateY(0);
   opacity: 1;
   transform-origin: 0 0;
@@ -245,18 +245,17 @@ table tbody td {
     opacity 400ms ease;
 }
 
-.v2-header-out-exit {
+/* .v2-header-exit {
   transform: translateY(0);
   opacity: 1;
 }
-.v2-header-out-exit-active {
-  transform: translateY(-10px);
+.v2-header-exit-active {
   opacity: 0;
   transform-origin: 0 0;
   transition:
-    transform 600ms ease,
-    opacity 600ms ease;
-}
+    transform 500ms ease,
+    opacity 500ms ease;
+} */
 
 /* VERSION: 3 | View Fade with Slide left */
 .v3-view-in-enter {
@@ -307,11 +306,11 @@ table tbody td {
 }
 
 /* VERSION:3 | header IN and OUT transitions */
-.v3-header-in-enter {
+.v3-header-enter {
   transform: translateX(10px);
   opacity: 0;
 }
-.v3-header-in-enter-active {
+.v3-header-enter-active {
   transform: translateX(0);
   opacity: 1;
   transform-origin: 0 0;
@@ -319,12 +318,11 @@ table tbody td {
     transform 400ms ease,
     opacity 400ms ease;
 }
-
-.v3-header-out-exit {
+.v3-header-exit {
   transform: translateX(0);
   opacity: 1;
 }
-.v3-header-out-exit-active {
+.v3-header-exit-active {
   transform: translateX(10px);
   opacity: 0;
   transform-origin: 0 0;

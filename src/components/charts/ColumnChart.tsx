@@ -1,11 +1,13 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import type {DrilldownTitle} from '../DxDrillDown'
+import React from 'react'
 
 interface Props {
   type?: string
   categories?: string[]
   series?: Highcharts.SeriesOptionsType[]
-  handler?: (data: unknown) => void
+  handler?: (id: `level-${number}`, data?: DrilldownTitle) => void
 }
 
 export function ColumnChart({
@@ -63,7 +65,12 @@ export function ColumnChart({
               event: Highcharts.PointClickEventObject,
             ) {
               event.preventDefault()
-              if (handler) handler(`${this.category}: ${this.series.name}`)
+              if (handler)
+                handler(`level-2`, {
+                  id: `level-2`,
+                  title: `${this.category}: ${this.series.name}`,
+                  nodeRef: React.createRef<HTMLHeadingElement | null>(),
+                })
             },
           },
         },
