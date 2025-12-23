@@ -1,6 +1,5 @@
 // import {lazy, Suspense} from 'react'
 import {AnimationSelector} from './components/animation-selector/AnimationSelector'
-import {SalesCard} from './components/sales-card/SalesCard'
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
 // import {Drilldown} from './components/DxDrillDown'
@@ -42,14 +41,14 @@ function App() {
               <li>Mobile-friendly stacked navigation</li>
             </ul>
           </div>
-          <div className="px-4 mb-4">
+          {/* <div className="px-4 mb-4">
             <h2 className="text-lg font-bold mb-2" id="basic-example">
               Basic Example
             </h2>
             <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-500/10">
               <SalesCard />
             </div>
-          </div>
+          </div> */}
           {/* <div className="p-4">
             <h2 className="text-lg font-bold" id="with-many-titles">
               With many titles

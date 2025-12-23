@@ -1,10 +1,7 @@
-import {ChevronRightIcon} from 'lucide-react'
 import React, {useEffect} from 'react'
-import {
-  CSSTransition,
-  SwitchTransition,
-  TransitionGroup,
-} from 'react-transition-group'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
+import {DxDrilldownTitles} from './DxDrilldownTitles'
+import {useAnimationState} from '../context/AnimationContext'
 
 export type DrilldownTitle = {
   id: `level-${number}`
@@ -29,30 +26,27 @@ interface IProps {
 }
 
 export const DxDrilldown: React.FC<IProps> = ({items, initial, baseTitle}) => {
+  const {state} = useAnimationState()
   const [open, setOpen] = React.useState(initial)
   const [pendingOpen, setPendingOpen] = React.useState<
     `level-${number}` | null
   >(null)
-  const [animationClass, setAnimationClass] =
-    React.useState('fade-zoom-view-in')
+  const [animationClass, setAnimationClass] = React.useState(
+    state.contentAnimation.id + '-view-in',
+  )
   const [titles, setTitles] = React.useState<DrilldownTitle[]>(
     baseTitle ? [baseTitle] : [],
   )
 
-  const showHeaderRef = React.useRef(null)
-  const hideHeaderRef = React.useRef(null)
-  const headerNodeRef = open !== initial ? showHeaderRef : hideHeaderRef
-  const headerContainerRef = React.useRef<HTMLDivElement | null>(null)
-
   const goNext = (id: `level-${number}`, data?: DrilldownTitle) => {
-    setAnimationClass(() => 'fade-zoom-view-in')
+    setAnimationClass(() => state.contentAnimation.id + '-view-in')
 
     if (data) setTitles([...titles, data])
     setPendingOpen(id)
   }
 
   const goBack = (id: `level-${number}`) => {
-    setAnimationClass(() => 'fade-zoom-view-out')
+    setAnimationClass(() => state.contentAnimation.id + '-view-out')
     setPendingOpen(id)
   }
 
@@ -63,9 +57,13 @@ export const DxDrilldown: React.FC<IProps> = ({items, initial, baseTitle}) => {
     return item.component
   }
 
-  const handleTitleClick = (e: React.MouseEvent<HTMLHeadingElement>) => {
-    const id = (e.currentTarget.getAttribute('data-id') ||
-      '') as `level-${number}`
+  const handleTitleClick = (
+    e: React.MouseEvent<HTMLHeadingElement>,
+    levelId?: `level-${number}`,
+  ) => {
+    const id = levelId
+      ? levelId
+      : ((e.currentTarget.getAttribute('data-id') || '') as `level-${number}`)
 
     if (id && id !== open) {
       const titleIndex = titles.findIndex(title => title.id === id)
@@ -83,73 +81,29 @@ export const DxDrilldown: React.FC<IProps> = ({items, initial, baseTitle}) => {
     }
   }, [animationClass, pendingOpen])
 
-  const testHandler = () => {
-    if (!headerContainerRef.current) return
-
-    const headerElements = headerContainerRef.current.getElementsByTagName('h6')
-    console.log([...headerElements])
-  }
-
   return (
-    <div className="h-full">
-      <div ref={headerContainerRef} className="bg-red-300">
-        <SwitchTransition mode="out-in">
-          <CSSTransition
-            key={
-              open !== initial
-                ? 'show-drilldown-header'
-                : 'hide-drilldown-header'
-            }
-            nodeRef={headerNodeRef}
-            timeout={500}
-            classNames="v2-header"
-            onEnter={testHandler}
-            unmountOnExit
-          >
-            <div ref={headerNodeRef}>
-              {open !== initial && (
-                <TransitionGroup className="text-gray-600 text-xs font-medium text-sm h-8 flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1">
-                  {titles.map((title, index) => (
-                    <CSSTransition
-                      key={title.id}
-                      nodeRef={title.nodeRef}
-                      timeout={500}
-                      classNames="v3-header"
-                      onEnter={testHandler}
-                      onExited={testHandler}
-                      mountOnEnter
-                      unmountOnExit
-                    >
-                      <h6
-                        data-id={title.id}
-                        onClick={handleTitleClick}
-                        className="flex items-center gap-1 cursor-pointer select-none"
-                        ref={title.nodeRef}
-                      >
-                        {index > 0 && <ChevronRightIcon className="w-3 h-3" />}
-                        {title.title}{' '}
-                      </h6>
-                    </CSSTransition>
-                  ))}
-                </TransitionGroup>
-              )}
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-      </div>
+    <div className="h-full relative">
+      <DxDrilldownTitles
+        titles={titles}
+        open={open}
+        initial={initial}
+        handleTitleClick={handleTitleClick}
+      />
 
       <SwitchTransition mode="out-in">
         <CSSTransition
           key={open}
           nodeRef={items[open].nodeRef}
-          timeout={500}
+          timeout={405}
           classNames={animationClass}
           unmountOnExit
         >
           <div
             ref={items[open].nodeRef}
-            className="relative"
-            style={{height: open !== initial ? 'calc(100% - 32px)' : '100%'}}
+            className="relative h-full"
+            style={{
+              paddingTop: open !== initial ? '32px' : 0,
+            }}
           >
             {getContent(items[open])}
           </div>

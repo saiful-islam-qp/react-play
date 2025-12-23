@@ -10,27 +10,29 @@ const items: Record<`level-${number}`, DrilldownItem> = {
     component: ({goNext}) => (
       <div className="p-4 rounded-lg h-full bg-white">
         <h2 className="text-sm font-medium mb-4">Sales by region</h2>
-        <ColumnChart
-          handler={goNext}
-          categories={['Africa', 'America', 'Asia', 'Europe']}
-          series={[
-            {
-              type: 'column',
-              name: 'Year 2023',
-              data: [632, 727, 3202, 721],
-            },
-            {
-              type: 'column',
-              name: 'Year 2024',
-              data: [814, 841, 3714, 726],
-            },
-            {
-              type: 'column',
-              name: 'Year 2025',
-              data: [1393, 1031, 4695, 745],
-            },
-          ]}
-        />
+        <div style={{height: 'calc(100% - 32px)'}}>
+          <ColumnChart
+            handler={goNext}
+            categories={['Africa', 'America', 'Asia', 'Europe']}
+            series={[
+              {
+                type: 'column',
+                name: 'Year 2023',
+                data: [632, 727, 3202, 721],
+              },
+              {
+                type: 'column',
+                name: 'Year 2024',
+                data: [814, 841, 3714, 726],
+              },
+              {
+                type: 'column',
+                name: 'Year 2025',
+                data: [1393, 1031, 4695, 745],
+              },
+            ]}
+          />
+        </div>
       </div>
     ),
   },
@@ -45,9 +47,10 @@ const items: Record<`level-${number}`, DrilldownItem> = {
   'level-3': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
-      <div className="p-4 rounded-lg h-full bg-white">
+      <div className="p-4 rounded-lg h-full bg-white relative">
+        <LineChart />
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="wu-bg-gray-300 wu-font-medium wu-z-50 wu-border wu-border-gray-300 hover:wu-bg-gray-300 hover:text-black ml-auto text-black absolute right-1 bottom-1 wu-px-4 wu-py-2 wu-rounded"
           onClick={() =>
             goNext('level-4', {
               id: 'level-4',
@@ -58,7 +61,6 @@ const items: Record<`level-${number}`, DrilldownItem> = {
         >
           Next
         </button>
-        <LineChart />
       </div>
     ),
   },
@@ -66,7 +68,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: (
       <div className="p-4 rounded-lg h-full bg-white">
-        <div>
+        <div className="h-full overflow-y-auto">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae
           suscipit error repellat asperiores ipsum, pariatur voluptatum
           voluptates ab nihil quas voluptatem qui sequi libero laboriosam
@@ -90,7 +92,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
 
 const DrillDownExample: React.FC = () => {
   return (
-    <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-100">
+    <div className="h-[400px] max-w-[700px] p-2 border border-gray-200 rounded-xl bg-gray-100">
       <DxDrilldown
         items={items}
         initial="level-1"

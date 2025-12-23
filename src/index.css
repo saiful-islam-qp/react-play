@@ -90,8 +90,8 @@ table tbody td {
   opacity: 1;
   transform: scale(1);
   transition:
-    opacity 500ms ease,
-    transform 400ms ease;
+    opacity 400ms ease,
+    transform 300ms ease;
 }
 .fade-zoom-view-in-exit {
   opacity: 1;
@@ -101,8 +101,8 @@ table tbody td {
   opacity: 0;
   transform: scale(1.1);
   transition:
-    opacity 450ms ease,
-    transform 400ms ease;
+    opacity 350ms ease,
+    transform 300ms ease;
 }
 
 .fade-zoom-view-out-enter {
@@ -113,8 +113,8 @@ table tbody td {
   opacity: 1;
   transform: scale(1);
   transition:
-    opacity 500ms ease,
-    transform 400ms ease;
+    opacity 400ms ease,
+    transform 300ms ease;
 }
 .fade-zoom-view-out-exit {
   opacity: 1;
@@ -124,8 +124,8 @@ table tbody td {
   opacity: 0;
   transform: scale(0.7);
   transition:
-    opacity 450ms ease,
-    transform 400ms ease;
+    opacity 350ms ease,
+    transform 300ms ease;
 }
 
 /* Test View In and Out Transitions  */
@@ -315,20 +315,14 @@ table tbody td {
   opacity: 1;
   transform-origin: 0 0;
   transition:
-    transform 400ms ease,
-    opacity 400ms ease;
+    transform 650ms ease,
+    opacity 600ms ease;
 }
 .v3-header-exit {
-  transform: translateX(0);
   opacity: 1;
 }
 .v3-header-exit-active {
-  transform: translateX(10px);
   opacity: 0;
-  transform-origin: 0 0;
-  transition:
-    transform 500ms ease,
-    opacity 500ms ease;
 }
 
 /* Fira Sans Font Weights */

@@ -2,7 +2,7 @@ import {type IAnimation, type IAnimationAction} from '../types/IAnimation'
 
 export const initialState: IAnimation = {
   headerAnimation: {id: 'v2', name: 'Slide-Up-Down'},
-  contentAnimation: {id: 'v2', name: 'Slide-Up-Down'},
+  contentAnimation: {id: 'scale-fade', name: 'Scale-Fade'},
 }
 
 export const animationReducer = (
