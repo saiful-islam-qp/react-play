@@ -39,7 +39,7 @@ export const DxDrilldownTitles: React.FC<IProps> = ({
           Trigger={
             <span
               className={clsx(
-                'wm-more-vert transition-all cursor-pointer hover:bg-gray-300 shrink-0 rounded mr-0.5',
+                'wm-more-vert transition-all duration-400 cursor-pointer hover:bg-gray-300 shrink-0 rounded mr-0.5',
                 {
                   'text-[0px]': titles.length <= 2,
                   'text-lg': titles.length > 2,
