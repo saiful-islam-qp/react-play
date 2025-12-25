@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 import {DxDrilldownTitles} from './DxDrilldownTitles'
 import {useAnimationState} from '../context/AnimationContext'
+import clsx from 'clsx'
 
 export type DrilldownTitle = {
   id: `level-${number}`
@@ -100,10 +101,9 @@ export const DxDrilldown: React.FC<IProps> = ({items, initial, baseTitle}) => {
         >
           <div
             ref={items[open].nodeRef}
-            className="relative h-full"
-            style={{
-              paddingTop: open !== initial ? '32px' : 0,
-            }}
+            className={clsx('relative h-full', {
+              'pt-10': open !== initial,
+            })}
           >
             {getContent(items[open])}
           </div>

@@ -24,55 +24,54 @@ export const DxDrilldownTitles: React.FC<IProps> = ({
   const headerContainerRef = React.useRef<HTMLDivElement | null>(null)
 
   return (
-    <div>
-      <div
-        ref={headerContainerRef}
-        className={clsx(
-          'absolute z-50 top-0 left-0 flex items-center origin-left w-full transition-all duration-300 delay-300',
-          {
-            'translate-x-[0px] opacity-100': open !== initial,
-            'translate-x-1 opacity-0 left-0': open === initial,
-          },
-        )}
+    <div
+      ref={headerContainerRef}
+      className={clsx(
+        'absolute z-50 top-0 left-0 flex px-4 transform items-center origin-left w-full transition-all duration-300 delay-300',
+        {
+          'translate-x-[0px] opacity-100': open !== initial,
+          'translate-x-1 opacity-0 left-0': open === initial,
+        },
+        'wu-drilldown-titles',
+      )}
+    >
+      <WuMenu
+        Trigger={
+          <span
+            className={clsx(
+              'wm-more-vert transition-all duration-400 cursor-pointer hover:bg-gray-300 shrink-0 rounded mr-0.5',
+              {
+                'text-[0px]': titles.length <= 2,
+                'text-lg': titles.length > 2,
+              },
+            )}
+          ></span>
+        }
       >
-        <WuMenu
-          Trigger={
-            <span
-              className={clsx(
-                'wm-more-vert transition-all duration-400 cursor-pointer hover:bg-gray-300 shrink-0 rounded mr-0.5',
-                {
-                  'text-[0px]': titles.length <= 2,
-                  'text-lg': titles.length > 2,
-                },
-              )}
-            ></span>
-          }
-        >
-          {titles.map(title => (
-            <WuMenuItem
-              key={title.id}
-              onSelect={e =>
-                handleTitleClick(
-                  e as unknown as React.MouseEvent<
-                    HTMLHeadingElement,
-                    MouseEvent
-                  >,
-                  title.id,
-                )
-              }
-            >
-              {title.title}
-            </WuMenuItem>
-          ))}
-        </WuMenu>
+        {titles.map(title => (
+          <WuMenuItem
+            key={title.id}
+            onSelect={e =>
+              handleTitleClick(
+                e as unknown as React.MouseEvent<
+                  HTMLHeadingElement,
+                  MouseEvent
+                >,
+                title.id,
+              )
+            }
+          >
+            {title.title}
+          </WuMenuItem>
+        ))}
+      </WuMenu>
 
-        <TransitionGroup
-          data-node="header-content"
-          className="text-gray-600 text-xs font-medium text-sm h-8 flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth"
-        >
-          {getTitleElement(titles, handleTitleClick)}
-        </TransitionGroup>
-      </div>
+      <TransitionGroup
+        data-node="header-content"
+        className="text-gray-600 text-sm font-normal h-10 flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth"
+      >
+        {getTitleElement(titles, handleTitleClick)}
+      </TransitionGroup>
     </div>
   )
 }

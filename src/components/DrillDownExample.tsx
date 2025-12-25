@@ -8,7 +8,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
   'level-1': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
-      <div className="p-4 rounded-lg h-full bg-white">
+      <div className="p-4 h-full bg-white">
         <h2 className="text-sm font-medium mb-4">Sales by region</h2>
         <div style={{height: 'calc(100% - 32px)'}}>
           <ColumnChart
@@ -39,7 +39,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
   'level-2': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
-      <div className="p-4 rounded-lg h-full bg-white">
+      <div className="p-4 h-full bg-white">
         <DonutChart handler={goNext} />
       </div>
     ),
@@ -47,7 +47,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
   'level-3': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: ({goNext}) => (
-      <div className="p-4 rounded-lg h-full bg-white relative">
+      <div className="p-4 h-full bg-white relative">
         <LineChart />
         <button
           className="wu-bg-gray-300 wu-font-medium wu-z-50 wu-border wu-border-gray-300 hover:wu-bg-gray-300 hover:text-black ml-auto text-black absolute right-1 bottom-1 wu-px-4 wu-py-2 wu-rounded"
@@ -67,7 +67,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
   'level-4': {
     nodeRef: React.createRef<HTMLDivElement>(),
     component: (
-      <div className="p-4 rounded-lg h-full bg-white">
+      <div className="p-4 h-full bg-white">
         <div className="h-full overflow-y-auto">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae
           suscipit error repellat asperiores ipsum, pariatur voluptatum
@@ -92,7 +92,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
 
 const DrillDownExample: React.FC = () => {
   return (
-    <div className="h-[400px] max-w-[700px] p-2 border border-gray-200 rounded-xl bg-gray-100">
+    <div className="h-[400px] max-w-[700px] border rounded border-gray-300 bg-gray-100">
       <DxDrilldown
         items={items}
         initial="level-1"
