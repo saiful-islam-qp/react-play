@@ -44,7 +44,7 @@ function App() {
           </div>
           <div className="p-4" id="basic-example">
             <h2 className="text-lg font-bold mb-2">Basic Example</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <MoDrilldownExample />
               <ExamplePost />
             </div>
