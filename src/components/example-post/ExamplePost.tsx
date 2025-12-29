@@ -17,7 +17,6 @@ export const ExamplePost: React.FC = () => {
     const fetchData = async () => {
       const response = await fetch('https://jsonplaceholder.typicode.com/posts')
       const data: IPost[] = await response.json()
-      console.log(data)
       setData(data)
     }
     fetchData()
@@ -28,7 +27,7 @@ export const ExamplePost: React.FC = () => {
       'level-1': {
         component: ({goNext}) => (
           <div className="h-full bg-white flex flex-col overflow-auto">
-            <h2 className="text-sm font-medium px-4 py-2 bg-gray-200 sticky top-0">
+            <h2 className="text-base border-b font-medium px-4 py-2 bg-white sticky top-0">
               Posts
             </h2>
             <div className="flex-1">
@@ -69,7 +68,7 @@ export const ExamplePost: React.FC = () => {
   }, [data, postId])
 
   return (
-    <div className="h-[350px] border rounded border-gray-300 bg-gray-100">
+    <div className="h-[350px] border rounded-lg overflow-hidden bg-white border-gray-300">
       <MoDrilldown
         items={items}
         initial="level-1"

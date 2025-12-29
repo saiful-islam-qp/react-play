@@ -1,9 +1,8 @@
 import React from 'react'
 import type {DrilldownTitle} from './MoDrilldown'
 import clsx from 'clsx'
-import classnames from 'classnames'
 import {ChevronRightIcon} from 'lucide-react'
-import {WuMenu, WuMenuItem} from '@npm-questionpro/wick-ui-lib'
+import {WuButton, WuMenu, WuMenuItem} from '@npm-questionpro/wick-ui-lib'
 import {AnimatePresence, domAnimation, LazyMotion} from 'motion/react'
 import * as m from 'motion/react-m'
 
@@ -15,6 +14,8 @@ interface IProps {
     e: React.MouseEvent<HTMLHeadingElement, MouseEvent>,
     levelId?: `level-${number}`,
   ) => void
+  headerClasses?: string
+  headerStyles?: React.CSSProperties
 }
 
 export const MoDrilldownTitles: React.FC<IProps> = ({
@@ -22,25 +23,28 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
   currentLevel,
   initial,
   handleTitleClick,
+  headerClasses,
+  headerStyles,
 }) => {
   return (
     <div
       className={clsx(
-        'absolute z-50 top-0 left-0 flex px-4 transform items-center origin-left w-full transition-all duration-300',
+        'absolute z-50 h-10 top-0 left-0 flex gap-x-1 px-4 transform items-center origin-left w-full transition-[transform_opacity] duration-300',
         {
           'translate-y-0 opacity-100 delay-300': currentLevel !== initial,
           'translate-y-1 opacity-0 delay-0': currentLevel === initial,
         },
-        'wu-drilldown-titles',
+        headerClasses,
       )}
+      style={headerStyles}
     >
       <WuMenu
         Trigger={
-          <span
-            className={clsx(
-              'wm-more-vert text-base cursor-pointer hover:bg-gray-200 shrink-0 rounded mr-0.5',
-            )}
-          ></span>
+          <WuButton
+            variant="iconOnly"
+            className="w-6 h-6 shrink-0 p-0"
+            Icon={<span className={clsx('wm-arrow-drop-down w-5 h-5')}></span>}
+          />
         }
       >
         {titles.map(title => (
@@ -61,7 +65,7 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
         ))}
       </WuMenu>
 
-      <div className="relative h-10 flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth">
+      <div className="relative h-full flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="popLayout">
             {getTitleElement(titles).map((title, index) => (
@@ -75,13 +79,15 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
                 <h6
                   data-id={title.id}
                   onClick={handleTitleClick}
-                  className={classnames(
-                    'flex text-sm items-center gap-1',
+                  className={clsx(
+                    'flex text-sm font-medium items-center gap-1',
                     index === 2 ||
                       index === 1 ||
                       title.id === ('level-dots' as `level-${number}`)
-                      ? 'cursor-default font-bold text-gray-900'
-                      : 'cursor-pointer',
+                      ? 'cursor-default text-gray-600'
+                      : 'cursor-pointer text-[#1B87E6] hover:text-[#145DBF]/70',
+                    title.id === ('level-dots' as `level-${number}`) &&
+                      'text-[#1B87E6]',
                   )}
                 >
                   {index !== 0 && <ChevronRightIcon className="w-3 h-3" />}

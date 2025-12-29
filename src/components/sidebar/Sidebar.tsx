@@ -18,10 +18,10 @@ const HashLinks = [
   //   href: '#fixed-height-example',
   //   name: 'Fixed Height Example',
   // },
-  // {
-  //   href: '#usage',
-  //   name: 'Usage',
-  // },
+  {
+    href: '#usage',
+    name: 'Usage',
+  },
 ]
 
 export const SideBar: React.FC = () => {

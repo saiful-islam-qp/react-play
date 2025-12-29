@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {AnimatePresence} from 'motion/react'
 import {LazyMotion, domAnimation} from 'motion/react'
 import * as m from 'motion/react-m'
-import {MoDrilldownTitles} from './moDrilldownTitles'
+import {MoDrilldownTitles} from './MoDrilldownTitles'
 import {clsx} from 'clsx'
 
 export type DrilldownTitle = {
@@ -24,6 +24,8 @@ interface IProps {
   initial: `level-${number}`
   baseTitle?: DrilldownTitle
   mode?: 'popLayout' | 'wait' | undefined
+  headerClasses?: string
+  headerStyles?: React.CSSProperties
 }
 
 export const MoDrilldown: React.FC<IProps> = ({
@@ -31,6 +33,8 @@ export const MoDrilldown: React.FC<IProps> = ({
   initial,
   baseTitle,
   mode = 'wait',
+  headerClasses = '',
+  headerStyles = {},
 }) => {
   const [titles, setTitles] = useState<DrilldownTitle[]>(
     baseTitle ? [baseTitle] : [],
@@ -91,7 +95,13 @@ export const MoDrilldown: React.FC<IProps> = ({
   }
 
   const renderContent = () => {
-    const item = items[currentLevel]
+    const item = items[currentLevel] ? items[currentLevel] : null
+    if (!item)
+      return (
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+          <p className="text-gray-500">No content available.</p>
+        </div>
+      )
     const content =
       typeof item.component === 'function'
         ? item.component({goNext, goBack})
@@ -125,6 +135,8 @@ export const MoDrilldown: React.FC<IProps> = ({
         currentLevel={currentLevel}
         initial={initial}
         handleTitleClick={handleTitleClick}
+        headerClasses={headerClasses}
+        headerStyles={headerStyles}
       />
       <LazyMotion features={domAnimation}>
         <AnimatePresence initial={false} custom={direction} mode={mode}>

@@ -6,7 +6,7 @@ import {LineChart} from '../charts/LineChart'
 
 export const MoDrilldownExample: React.FC = () => {
   return (
-    <div className="h-[350px] border rounded border-gray-300 bg-gray-100">
+    <div className="h-[350px] border rounded-lg bg-white overflow-hidden border-gray-300">
       <MoDrilldown
         items={createItems()}
         initial="level-1"
@@ -53,13 +53,9 @@ const createItems = () => {
       ),
     },
     'level-2': {
-      component: ({goNext, goBack}) => (
+      component: ({goNext}) => (
         <div className="p-4 h-full bg-white">
           <div className="flex flex-col h-full">
-            <button className="self-start" onClick={() => goBack('level-1')}>
-              Back
-            </button>
-
             <div className="flex-1">
               <DonutChart handler={goNext} />
             </div>
@@ -68,11 +64,13 @@ const createItems = () => {
       ),
     },
     'level-3': {
-      component: ({goNext, goBack}) => (
+      component: ({goNext}) => (
         <div className="p-4 h-full bg-white relative">
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between">
-              <button onClick={() => goBack('level-2')}>Back</button>
+            <div className="flex-1">
+              <LineChart />
+            </div>
+            <div className="flex items-center justify-end">
               <button
                 onClick={() =>
                   goNext('level-4', {
@@ -83,44 +81,6 @@ const createItems = () => {
               >
                 Next
               </button>
-            </div>
-            <div className="flex-1">
-              <LineChart />
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    'level-4': {
-      component: ({goBack}) => (
-        <div className="p-4 h-full bg-white">
-          <div className="h-full overflow-y-auto">
-            <div className="flex flex-col h-full">
-              <button className="self-start" onClick={() => goBack('level-3')}>
-                Back
-              </button>
-              <div className="flex-1">
-                <div>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Repudiandae suscipit error repellat asperiores ipsum, pariatur
-                  voluptatum voluptates ab nihil quas voluptatem qui sequi
-                  libero laboriosam dignissimos facere beatae. Quasi veniam quo
-                  sed aut odio iste expedita at esse. Aliquid, pariatur
-                  adipisci. Doloribus illo qui laborum odit pariatur, dolor
-                  rerum necessitatibus similique iste eius ut veniam nisi
-                  voluptatum aliquid nam, in iure sed hic officia recusandae?
-                  Animi aliquam ut praesentium voluptate similique ratione
-                  repellendus rem quos quisquam suscipit repudiandae illum,
-                  maxime voluptates eius deleniti blanditiis recusandae placeat
-                  nesciunt ipsam reiciendis cum voluptatem. Assumenda, eaque
-                  ullam quas natus nulla deleniti mollitia cupiditate sed
-                  tenetur. Id quas, exercitationem asperiores libero quidem et
-                  quam sed culpa, maiores quo corrupti eos repellat. Fugit
-                  suscipit facilis cum! Iste nihil natus adipisci ullam, animi
-                  quia rem fugiat corrupti ut mollitia libero? Dicta saepe
-                  aliquid enim odit eum?
-                </div>
-              </div>
             </div>
           </div>
         </div>
