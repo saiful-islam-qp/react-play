@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --main-bg-color: rgba(36, 36, 36, 1);
@@ -12,6 +14,7 @@
 
   font-family: 'Fira Sans', monospace;
   font-optical-sizing: auto;
+  font-size: 14px;
   font-weight: 400;
   font-style: normal;
 

@@ -3,7 +3,9 @@ import {AnimationSelector} from './components/animation-selector/AnimationSelect
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
 // import {Drilldown} from './components/DxDrillDown'
-import DrillDownExample from './components/DrillDownExample'
+// import DrillDownExample from './components/DrillDownExample'
+import {MoDrilldownExample} from './components/drilldown-motion/MoDrilldownExample'
+import {ExamplePost} from './components/example-post/ExamplePost'
 // import {ManyTitles} from './components/with-many-titles/ManyTitles'
 
 // const CodePreviewLazy = lazy(() =>
@@ -15,8 +17,8 @@ import DrillDownExample from './components/DrillDownExample'
 function App() {
   return (
     <div className="container mx-auto md:p-4">
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4">
-        <div className="col-span-4">
+      <div className="grid grid-cols-1 lg:grid-cols-8 gap-4">
+        <div className="col-span-6">
           <div className="mb-4 sticky top-0 z-20 p-4 bg-(--main-bg-color)/80 backdrop-blur-md rounded-b-lg">
             <h1 className="m-0 font-semibold">Drill Down</h1>
             <p className="m-0">
@@ -41,25 +43,14 @@ function App() {
               <li>Mobile-friendly stacked navigation</li>
             </ul>
           </div>
-          {/* <div className="px-4 mb-4">
-            <h2 className="text-lg font-bold mb-2" id="basic-example">
-              Basic Example
-            </h2>
-            <div className="h-[400px] p-2 border border-gray-200 rounded-xl bg-gray-500/10">
-              <SalesCard />
+          <div className="grid grid-cols-2">
+            <div className="p-4">
+              <MoDrilldownExample />
             </div>
-          </div> */}
-          {/* <div className="p-4">
-            <h2 className="text-lg font-bold" id="with-many-titles">
-              With many titles
-            </h2>
-            <p className="mb-2">
-              Header is on developer to customize. Here is an example with many
-              titles. Click on any bar to see the drilldown with many titles in
-              action.
-            </p>
-            <ManyTitles />
-          </div> */}
+            <div className="p-4">
+              <ExamplePost />
+            </div>
+          </div>
           {/* 
           <div className="p-4">
             <Suspense fallback={<div className="text-sm">Loading...</div>}>
@@ -127,9 +118,6 @@ export const SalesCard: React.FC = () => {
             </Suspense>
           </div>
           */}
-          <div className="p-4">
-            <DrillDownExample />
-          </div>
         </div>
         <div className="hidden lg:block lg:col-span-2">
           <SideBar />

@@ -92,7 +92,7 @@ const items: Record<`level-${number}`, DrilldownItem> = {
 
 const DrillDownExample: React.FC = () => {
   return (
-    <div className="h-[400px] max-w-[700px] border rounded border-gray-300 bg-gray-100">
+    <div className="h-[400px] border rounded border-gray-300 bg-gray-100">
       <DxDrilldown
         items={items}
         initial="level-1"
