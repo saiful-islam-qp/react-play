@@ -1,12 +1,8 @@
-// import {lazy, Suspense} from 'react'
+import {lazy, Suspense} from 'react'
 import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
-// import {Drilldown} from './components/DxDrillDown'
-// import DrillDownExample from './components/DrillDownExample'
 import {MoDrilldownExample} from './components/drilldown-motion/MoDrilldownExample'
 import {ExamplePost} from './components/example-post/ExamplePost'
-import {lazy, Suspense} from 'react'
-// import {ManyTitles} from './components/with-many-titles/ManyTitles'
 
 const CodePreviewLazy = lazy(() =>
   import('./components/code-preview/CodePreview').then(module => ({
@@ -49,6 +45,11 @@ function App() {
               <ExamplePost />
             </div>
           </div>
+          {/* <div className="p-4" id="example-post">
+            <h2 className="text-lg font-bold mt-8 mb-2" id="example-post">
+              Example: Post Viewer
+            </h2>
+          </div> */}
 
           <div className="p-4">
             <Suspense fallback={<div className="text-sm">Loading...</div>}>

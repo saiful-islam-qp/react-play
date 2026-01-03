@@ -26,29 +26,31 @@ export const ExamplePost: React.FC = () => {
     return {
       'level-1': {
         component: ({goNext}) => (
-          <div className="h-full bg-white flex flex-col overflow-auto">
-            <h2 className="text-base border-b font-medium px-4 py-2 bg-white sticky top-0">
-              Posts
-            </h2>
-            <div className="flex-1">
-              {data.map(post => (
-                <div
-                  key={post.id}
-                  className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
-                  onClick={() => {
-                    goNext('level-2', {
-                      id: 'level-2',
-                      title: post.title,
-                    })
-                    setPostId(post.id)
-                  }}
-                >
-                  <h3 className="text-sm font-semibold">{post.title}</h3>
-                  <p className="text-xs text-gray-600">
-                    {post.body.substring(0, 50)}...
-                  </p>
-                </div>
-              ))}
+          <div className="h-full bg-white overflow-auto">
+            <div className="flex flex-col h-full">
+              <h2 className="text-base border-b font-medium px-4 py-2 bg-white sticky top-0">
+                Posts
+              </h2>
+              <div className="flex-1">
+                {data.map(post => (
+                  <div
+                    key={post.id}
+                    className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
+                    onClick={() => {
+                      goNext('level-2', {
+                        id: 'level-2',
+                        title: post.title,
+                      })
+                      setPostId(post.id)
+                    }}
+                  >
+                    <h3 className="text-sm font-semibold">{post.title}</h3>
+                    <p className="text-xs text-gray-600">
+                      {post.body.substring(0, 50)}...
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ),
@@ -77,6 +79,7 @@ export const ExamplePost: React.FC = () => {
           title: 'Post',
         }}
         mode="popLayout"
+        variant="slideLeft"
       />
     </div>
   )

@@ -10,6 +10,8 @@ export type DrilldownTitle = {
   title: string
 }
 
+export type variant = 'default' | 'slideRight' | 'slideLeft' | 'fadeZoom'
+
 export interface DrilldownContext {
   goNext: (id: `level-${number}`, data?: DrilldownTitle) => void
   goBack: (id: `level-${number}`, data?: DrilldownTitle) => void
@@ -26,6 +28,7 @@ interface IProps {
   mode?: 'popLayout' | 'wait' | undefined
   headerClasses?: string
   headerStyles?: React.CSSProperties
+  variant?: variant
 }
 
 export const MoDrilldown: React.FC<IProps> = ({
@@ -35,6 +38,7 @@ export const MoDrilldown: React.FC<IProps> = ({
   mode = 'wait',
   headerClasses = '',
   headerStyles = {},
+  variant = 'default',
 }) => {
   const [titles, setTitles] = useState<DrilldownTitle[]>(
     baseTitle ? [baseTitle] : [],
@@ -76,24 +80,6 @@ export const MoDrilldown: React.FC<IProps> = ({
     }
   }
 
-  const variants = {
-    enter: (direction: number) => ({
-      scale: direction > 0 ? 0.825 : 1.1,
-      opacity: 0,
-      zIndex: 0,
-    }),
-    center: {
-      scale: 1,
-      opacity: 1,
-      zIndex: 1,
-    },
-    exit: (direction: number) => ({
-      scale: direction > 0 ? 1.1 : 0.825,
-      opacity: 0,
-      zIndex: 0,
-    }),
-  }
-
   const renderContent = () => {
     const item = items[currentLevel] ? items[currentLevel] : null
     if (!item)
@@ -111,7 +97,7 @@ export const MoDrilldown: React.FC<IProps> = ({
       <m.div
         key={currentLevel}
         custom={direction}
-        variants={variants}
+        variants={getVariant(variant)}
         initial="enter"
         animate="center"
         exit="exit"
@@ -119,7 +105,7 @@ export const MoDrilldown: React.FC<IProps> = ({
           opacity: {duration: 0.325, ease: 'easeInOut'},
           scale: {duration: 0.275, ease: 'easeInOut'},
         }}
-        className={clsx('absolute inset-0 w-full h-full', {
+        className={clsx('w-full h-full', {
           'pt-10': currentLevel !== initial,
         })}
       >
@@ -145,4 +131,90 @@ export const MoDrilldown: React.FC<IProps> = ({
       </LazyMotion>
     </div>
   )
+}
+
+const getVariant = (variant: variant) => {
+  switch (variant) {
+    case 'slideRight':
+      return variantSlideRight
+    case 'slideLeft':
+      return variantSlideLeft
+    case 'fadeZoom':
+      return variantFadeZoom
+    case 'default':
+    default:
+      return variantDefault
+  }
+}
+
+const variantDefault = {
+  enter: (direction: number) => ({
+    scale: direction > 0 ? 0.825 : 1.1,
+    opacity: 0,
+    zIndex: 0,
+  }),
+  center: {
+    scale: 1,
+    opacity: 1,
+    zIndex: 1,
+  },
+  exit: (direction: number) => ({
+    scale: direction > 0 ? 1.1 : 0.825,
+    opacity: 0,
+    zIndex: 0,
+  }),
+}
+
+const variantSlideRight = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? -15 : 15,
+    opacity: 0,
+    zIndex: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    zIndex: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? 15 : -15,
+    opacity: 0,
+    zIndex: 0,
+  }),
+}
+
+const variantSlideLeft = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 15 : -15,
+    opacity: 0,
+    zIndex: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    zIndex: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -15 : 15,
+    opacity: 0,
+    zIndex: 0,
+  }),
+}
+
+const variantFadeZoom = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    zIndex: 0,
+    scale: direction > 0 ? 0.925 : 1.1,
+  }),
+  center: {
+    opacity: 1,
+    zIndex: 1,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    zIndex: 0,
+    scale: 1,
+  },
 }
