@@ -1,7 +1,8 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import type {DrilldownTitle} from '../DxDrillDown'
-import React from 'react'
+import {useLayoutEffect} from 'react'
+import {CHART_COLORS} from '../../constants'
 
 interface Props {
   type?: string
@@ -16,12 +17,15 @@ export function ColumnChart({
   series = [],
   handler,
 }: Props) {
+  useLayoutEffect(() => {}, [])
   const options = {
     chart: {
       type: type,
       style: {fontFamily: 'Fira Sans, sans-serif'},
       backgroundColor: 'transparent',
     },
+    colors: CHART_COLORS,
+
     title: {text: undefined},
     xAxis: {
       categories: categories,
@@ -49,10 +53,12 @@ export function ColumnChart({
         dataLabels: {
           enabled: true,
           style: {
-            fontSize: '12px',
+            fontSize: '10px',
             color: '#282828',
             fontWeight: '400',
           },
+          align: 'center',
+          y: 25,
         },
         groupPadding: 0.125,
       },
@@ -69,12 +75,12 @@ export function ColumnChart({
                 handler(`level-2`, {
                   id: `level-2`,
                   title: `${this.category}: ${this.series.name}`,
-                  nodeRef: React.createRef<HTMLHeadingElement | null>(),
                 })
             },
           },
         },
       },
+      dataLabels: [{enabled: true, inside: true}],
     },
     credits: {
       enabled: false,

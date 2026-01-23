@@ -3,6 +3,7 @@ import {SideBar} from './components/sidebar/Sidebar'
 import './App.css'
 import {MoDrilldownExample} from './components/drilldown-motion/MoDrilldownExample'
 import {ExamplePost} from './components/example-post/ExamplePost'
+import Chart from './components/charts/AmChart'
 
 const CodePreviewLazy = lazy(() =>
   import('./components/code-preview/CodePreview').then(module => ({
@@ -43,14 +44,9 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <MoDrilldownExample />
               <ExamplePost />
+              <Chart />
             </div>
           </div>
-          {/* <div className="p-4" id="example-post">
-            <h2 className="text-lg font-bold mt-8 mb-2" id="example-post">
-              Example: Post Viewer
-            </h2>
-          </div> */}
-
           <div className="p-4">
             <Suspense fallback={<div className="text-sm">Loading...</div>}>
               <h2 className="text-lg font-bold mt-8 mb-2" id="usage">

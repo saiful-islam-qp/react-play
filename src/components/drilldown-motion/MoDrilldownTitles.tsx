@@ -15,7 +15,6 @@ interface IProps {
     levelId?: `level-${number}`,
   ) => void
   headerClasses?: string
-  headerStyles?: React.CSSProperties
 }
 
 export const MoDrilldownTitles: React.FC<IProps> = ({
@@ -24,19 +23,20 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
   initial,
   handleTitleClick,
   headerClasses,
-  headerStyles,
 }) => {
   return (
     <div
       className={clsx(
-        'absolute z-50 h-10 top-0 left-0 flex gap-x-1 px-4 transform items-center origin-left w-full transition-[transform_opacity] duration-300',
+        'absolute top-0 left-0 flex gap-x-1 px-4 items-center origin-left w-full transition',
         {
-          'translate-y-0 opacity-100 delay-300': currentLevel !== initial,
-          'translate-y-1 opacity-0 delay-0': currentLevel === initial,
+          'translate-y-0 opacity-100 z-50 delay-200': currentLevel !== initial,
+          'translate-y-1 opacity-0 z-0 delay-0': currentLevel === initial,
         },
         headerClasses,
       )}
-      style={headerStyles}
+      style={{
+        height: currentLevel !== initial ? `40px` : '-40px',
+      }}
     >
       <WuMenu
         Trigger={
@@ -74,7 +74,7 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
                 initial={{y: 8, opacity: 0, zIndex: 0}}
                 animate={{y: 0, opacity: 1, zIndex: 50}}
                 exit={{y: -8, opacity: 0, zIndex: 0}}
-                transition={{duration: 0.3}}
+                transition={{duration: 0.4, ease: 'easeInOut'}}
               >
                 <h6
                   data-id={title.id}

@@ -7,7 +7,7 @@ import clsx from 'clsx'
 export type DrilldownTitle = {
   id: `level-${number}`
   title: string
-  nodeRef: React.RefObject<HTMLHeadingElement | null>
+  // nodeRef: React.RefObject<HTMLHeadingElement | null>
 }
 
 export interface DrilldownContext {

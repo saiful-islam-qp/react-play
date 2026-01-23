@@ -64,7 +64,6 @@ export function DonutChart({handler}: Props) {
                 handler(`level-3`, {
                   id: 'level-3',
                   title: `${this.series.name}: ${this.name}`,
-                  nodeRef: React.createRef<HTMLHeadingElement | null>(),
                 })
             },
           },

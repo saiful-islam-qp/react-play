@@ -79,7 +79,6 @@ export const ExamplePost: React.FC = () => {
           title: 'Post',
         }}
         mode="popLayout"
-        variant="slideLeft"
       />
     </div>
   )

@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {AnimatePresence} from 'motion/react'
-import {LazyMotion, domAnimation} from 'motion/react'
-import * as m from 'motion/react-m'
+import {motion} from 'motion/react'
 import {MoDrilldownTitles} from './MoDrilldownTitles'
 import {clsx} from 'clsx'
 
@@ -27,7 +26,6 @@ interface IProps {
   baseTitle?: DrilldownTitle
   mode?: 'popLayout' | 'wait' | undefined
   headerClasses?: string
-  headerStyles?: React.CSSProperties
   variant?: variant
 }
 
@@ -37,7 +35,6 @@ export const MoDrilldown: React.FC<IProps> = ({
   baseTitle,
   mode = 'wait',
   headerClasses = '',
-  headerStyles = {},
   variant = 'default',
 }) => {
   const [titles, setTitles] = useState<DrilldownTitle[]>(
@@ -48,6 +45,8 @@ export const MoDrilldown: React.FC<IProps> = ({
   const [[currentLevel, direction], setLevel] = useState<
     [`level-${number}`, number]
   >([initial, 1])
+
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   const goNext = (id: `level-${number}`, data?: DrilldownTitle) => {
     if (data) setTitles([...titles, data])
@@ -94,7 +93,8 @@ export const MoDrilldown: React.FC<IProps> = ({
         : item.component
 
     return (
-      <m.div
+      <motion.div
+        layout
         key={currentLevel}
         custom={direction}
         variants={getVariant(variant)}
@@ -103,32 +103,34 @@ export const MoDrilldown: React.FC<IProps> = ({
         exit="exit"
         transition={{
           opacity: {duration: 0.325, ease: 'easeInOut'},
-          scale: {duration: 0.275, ease: 'easeInOut'},
+          width: {duration: 0.675, ease: 'easeInOut'},
         }}
         className={clsx('w-full h-full', {
           'pt-10': currentLevel !== initial,
         })}
       >
         {content}
-      </m.div>
+      </motion.div>
     )
   }
 
   return (
-    <div className="h-full relative overflow-hidden w-full flex flex-col">
+    <div
+      ref={containerRef}
+      className="w-full h-full relative overflow-hidden flex flex-col"
+    >
       <MoDrilldownTitles
         titles={titles}
         currentLevel={currentLevel}
         initial={initial}
         handleTitleClick={handleTitleClick}
         headerClasses={headerClasses}
-        headerStyles={headerStyles}
       />
-      <LazyMotion features={domAnimation}>
-        <AnimatePresence initial={false} custom={direction} mode={mode}>
-          {renderContent()}
-        </AnimatePresence>
-      </LazyMotion>
+      {/* <LazyMotion features={domAnimation}> */}
+      <AnimatePresence custom={direction} mode={mode}>
+        {renderContent()}
+      </AnimatePresence>
+      {/* </LazyMotion> */}
     </div>
   )
 }
