@@ -1,33 +1,34 @@
 import React from 'react'
-import {MoDrilldown, type DrilldownItem} from './MoDrilldown'
 import {DonutChart} from '../charts/DonutChart'
 import {LineChart} from '../charts/LineChart'
-import Chart from '../charts/AmChart'
+import EChartColumn from '../charts/EChartColumn'
+import {WuDrilldown, type IWuDrilldownItem} from '@npm-questionpro/wick-ui-lib'
 
 export const MoDrilldownExample: React.FC = () => {
   return (
     <div className="h-[350px] border rounded-lg bg-white overflow-hidden border-gray-300">
-      <MoDrilldown
+      <WuDrilldown
+        initial="LEVEL_1"
+        baseTitle={{id: 'LEVEL_1', title: 'Overall Sales Data'}}
+        variant="slideRight"
+        headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
+        offsetHeight={48}
         items={createItems()}
-        initial="level-1"
-        baseTitle={{
-          id: 'level-1',
-          title: 'Overall Sales Data',
-        }}
-        mode="popLayout"
       />
     </div>
   )
 }
 
 const createItems = () => {
-  const items: Record<`level-${number}`, DrilldownItem> = {
-    'level-1': {
+  const items: Record<`LEVEL_${number}`, IWuDrilldownItem> = {
+    LEVEL_1: {
       component: ({goNext}) => (
-        <div className="p-4 h-full bg-white flex flex-col">
-          <h2 className="text-sm font-medium mb-4">Sales by region</h2>
-          <div className="flex-1">
-            {/* <EChartColumn
+        <div className="h-full bg-white flex flex-col">
+          <h2 className="text-sm font-medium bg-gray-50 border-b px-4 h-12 flex items-center">
+            Sales by region
+          </h2>
+          <div className="flex-1 p-4">
+            <EChartColumn
               handler={goNext}
               categories={['Africa', 'America', 'Asia', 'Europe']}
               series={[
@@ -42,17 +43,16 @@ const createItems = () => {
                   data: [1393, 1031, 4695, 745],
                 },
               ]}
-            /> */}
-            <Chart handler={goNext} />
+            />
+            {/* <Chart handler={goNext} /> */}
           </div>
         </div>
       ),
     },
-    'level-2': {
+    LEVEL_2: {
       component: ({goNext}) => (
         <div className="p-4 h-full bg-white">
           <div className="flex flex-col h-full">
-            <h2 className="text-md font-medium mb-4">Country</h2>
             <div className="flex-1">
               <DonutChart handler={goNext} />
             </div>
@@ -60,30 +60,30 @@ const createItems = () => {
         </div>
       ),
     },
-    'level-3': {
-      component: ({goNext}) => (
+    LEVEL_3: {
+      component: () => (
         <div className="p-4 h-full bg-white relative">
           <div className="flex flex-col h-full">
             <div className="flex-1">
               <LineChart />
             </div>
-            <div className="flex items-center justify-end">
+            {/* <div className="flex items-center justify-end">
               <button
                 onClick={() =>
-                  goNext('level-4', {
-                    id: 'level-4',
+                  goNext('LEVEL_4', {
+                    id: 'LEVEL_4',
                     title: 'Detailed Sales Data',
                   })
                 }
               >
                 Next
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       ),
     },
-    'level-4': {
+    LEVEL_4: {
       component: () => (
         <div className="p-4 h-full bg-white flex flex-col">
           <h2 className="text-sm font-medium mb-4">Detailed Sales Data</h2>

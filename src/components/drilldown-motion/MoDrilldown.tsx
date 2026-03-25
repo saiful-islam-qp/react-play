@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {AnimatePresence} from 'motion/react'
-import {motion} from 'motion/react'
+import {AnimatePresence, domAnimation, LazyMotion} from 'motion/react'
+import * as m from 'motion/react-m'
 import {MoDrilldownTitles} from './MoDrilldownTitles'
 import {clsx} from 'clsx'
 
@@ -27,6 +27,7 @@ interface IProps {
   mode?: 'popLayout' | 'wait' | undefined
   headerClasses?: string
   variant?: variant
+  dir?: 'ltr' | 'rtl'
 }
 
 export const MoDrilldown: React.FC<IProps> = ({
@@ -36,6 +37,7 @@ export const MoDrilldown: React.FC<IProps> = ({
   mode = 'wait',
   headerClasses = '',
   variant = 'default',
+  dir = 'ltr',
 }) => {
   const [titles, setTitles] = useState<DrilldownTitle[]>(
     baseTitle ? [baseTitle] : [],
@@ -45,8 +47,6 @@ export const MoDrilldown: React.FC<IProps> = ({
   const [[currentLevel, direction], setLevel] = useState<
     [`level-${number}`, number]
   >([initial, 1])
-
-  const containerRef = React.useRef<HTMLDivElement>(null)
 
   const goNext = (id: `level-${number}`, data?: DrilldownTitle) => {
     if (data) setTitles([...titles, data])
@@ -93,7 +93,7 @@ export const MoDrilldown: React.FC<IProps> = ({
         : item.component
 
     return (
-      <motion.div
+      <m.div
         layout
         key={currentLevel}
         custom={direction}
@@ -108,15 +108,16 @@ export const MoDrilldown: React.FC<IProps> = ({
         className={clsx('w-full h-full', {
           'pt-10': currentLevel !== initial,
         })}
+        dir={dir}
       >
         {content}
-      </motion.div>
+      </m.div>
     )
   }
 
   return (
     <div
-      ref={containerRef}
+      dir={dir}
       className="w-full h-full relative overflow-hidden flex flex-col"
     >
       <MoDrilldownTitles
@@ -125,12 +126,13 @@ export const MoDrilldown: React.FC<IProps> = ({
         initial={initial}
         handleTitleClick={handleTitleClick}
         headerClasses={headerClasses}
+        dir={dir}
       />
-      {/* <LazyMotion features={domAnimation}> */}
-      <AnimatePresence custom={direction} mode={mode}>
-        {renderContent()}
-      </AnimatePresence>
-      {/* </LazyMotion> */}
+      <LazyMotion features={domAnimation}>
+        <AnimatePresence custom={direction} mode={mode}>
+          {renderContent()}
+        </AnimatePresence>
+      </LazyMotion>
     </div>
   )
 }

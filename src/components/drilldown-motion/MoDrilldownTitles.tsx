@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import type {DrilldownTitle} from './MoDrilldown'
 import clsx from 'clsx'
-import {ChevronRightIcon} from 'lucide-react'
 import {WuButton, WuMenu, WuMenuItem} from '@npm-questionpro/wick-ui-lib'
 import {AnimatePresence, domAnimation, LazyMotion} from 'motion/react'
 import * as m from 'motion/react-m'
@@ -15,6 +14,7 @@ interface IProps {
     levelId?: `level-${number}`,
   ) => void
   headerClasses?: string
+  dir: 'ltr' | 'rtl'
 }
 
 export const MoDrilldownTitles: React.FC<IProps> = ({
@@ -23,7 +23,22 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
   initial,
   handleTitleClick,
   headerClasses,
+  dir,
 }) => {
+  const animation = useMemo(() => {
+    return dir === 'rtl'
+      ? {
+          initial: {x: 8, opacity: 0, zIndex: 0},
+          animate: {x: 0, opacity: 1, zIndex: 50},
+          exit: {x: -8, opacity: 0, zIndex: 0},
+        }
+      : {
+          initial: {x: -8, opacity: 0, zIndex: 0},
+          animate: {x: 0, opacity: 1, zIndex: 50},
+          exit: {x: 8, opacity: 0, zIndex: 0},
+        }
+  }, [dir])
+
   return (
     <div
       className={clsx(
@@ -37,6 +52,7 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
       style={{
         height: currentLevel !== initial ? `40px` : '-40px',
       }}
+      dir={dir}
     >
       <WuMenu
         Trigger={
@@ -65,15 +81,15 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
         ))}
       </WuMenu>
 
-      <div className="relative h-full flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth">
+      <div className="w-full relative h-full flex items-center flex-nowrap whitespace-nowrap text-nowrap gap-1 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth">
         <LazyMotion features={domAnimation}>
           <AnimatePresence initial={false} mode="popLayout">
             {getTitleElement(titles).map((title, index) => (
               <m.div
                 key={title.id}
-                initial={{y: 8, opacity: 0, zIndex: 0}}
-                animate={{y: 0, opacity: 1, zIndex: 50}}
-                exit={{y: -8, opacity: 0, zIndex: 0}}
+                initial={animation.initial}
+                animate={animation.animate}
+                exit={animation.exit}
                 transition={{duration: 0.4, ease: 'easeInOut'}}
               >
                 <h6
@@ -86,11 +102,16 @@ export const MoDrilldownTitles: React.FC<IProps> = ({
                       title.id === ('level-dots' as `level-${number}`)
                       ? 'cursor-default text-gray-600'
                       : 'cursor-pointer text-[#1B87E6] hover:text-[#145DBF]/70',
-                    title.id === ('level-dots' as `level-${number}`) &&
-                      'text-[#1B87E6]',
                   )}
                 >
-                  {index !== 0 && <ChevronRightIcon className="w-3 h-3" />}
+                  {index !== 0 && (
+                    <span
+                      className={clsx(
+                        'wm-chevron-right wu-text-[20px] wu-font-light',
+                        dir === 'rtl' && 'wu-rotate-180',
+                      )}
+                    />
+                  )}
                   {title.title}
                 </h6>
               </m.div>

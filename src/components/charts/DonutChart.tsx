@@ -1,10 +1,13 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import type {DrilldownTitle} from '../DxDrillDown'
-import React from 'react'
+import {CHART_COLORS} from '../../constants'
+import type {IWuDrilldownTitle} from '@npm-questionpro/wick-ui-lib'
 
 interface Props {
-  handler?: (id: `level-${number}`, data?: DrilldownTitle) => void
+  handler?: (
+    id: `LEVEL_${number}`,
+    data?: IWuDrilldownTitle | undefined,
+  ) => void
 }
 
 export function DonutChart({handler}: Props) {
@@ -14,6 +17,7 @@ export function DonutChart({handler}: Props) {
       style: {fontFamily: 'Fira Sans, sans-serif'},
       backgroundColor: 'transparent',
     },
+    colors: CHART_COLORS,
     accessibility: {
       point: {
         valueSuffix: '%',
@@ -61,8 +65,8 @@ export function DonutChart({handler}: Props) {
             click: function (this: Highcharts.Point, event) {
               event.preventDefault()
               if (handler)
-                handler(`level-3`, {
-                  id: 'level-3',
+                handler(`LEVEL_3`, {
+                  id: 'LEVEL_3',
                   title: `${this.series.name}: ${this.name}`,
                 })
             },

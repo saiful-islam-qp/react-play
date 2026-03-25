@@ -3,10 +3,10 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import {CHART_COLORS} from '../../constants'
-import type {DrilldownTitle} from '../DxDrillDown'
+import type {IWuDrilldownTitle} from '@npm-questionpro/wick-ui-lib'
 
 interface IProps {
-  handler: (id: `level-${number}`, data?: DrilldownTitle) => void
+  handler: (id: `LEVEL_${number}`, data?: IWuDrilldownTitle | undefined) => void
 }
 
 function Chart({handler}: IProps) {
@@ -149,8 +149,8 @@ function Chart({handler}: IProps) {
       const value = dataContext.category
 
       if (handler) {
-        handler(`level-2`, {
-          id: `level-2`,
+        handler(`LEVEL_2`, {
+          id: `LEVEL_2`,
           title: `${seriesName}: ${value}`,
         })
       }
@@ -175,8 +175,8 @@ function Chart({handler}: IProps) {
       const seriesName = series2.get('name')
       const value = dataContext.category
       if (handler) {
-        handler(`level-2`, {
-          id: `level-2`,
+        handler(`LEVEL_2`, {
+          id: `LEVEL_2`,
           title: `${seriesName}: ${value}`,
         })
       }
