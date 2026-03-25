@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo} from 'react'
-import {MoDrilldown, type DrilldownItem} from '../drilldown-motion/MoDrilldown'
 import Comments from './Comments'
+import {WuDrilldown, type IWuDrilldownItem} from '@npm-questionpro/wick-ui-lib'
 
 interface IPost {
   userId: number
@@ -22,9 +22,9 @@ export const ExamplePost: React.FC = () => {
     fetchData()
   }, [])
 
-  const items: Record<`level-${number}`, DrilldownItem> = useMemo(() => {
+  const items: Record<`LEVEL_${number}`, IWuDrilldownItem> = useMemo(() => {
     return {
-      'level-1': {
+      LEVEL_1: {
         component: ({goNext}) => (
           <div className="h-full bg-white overflow-auto">
             <div className="flex flex-col h-full">
@@ -37,8 +37,8 @@ export const ExamplePost: React.FC = () => {
                     key={post.id}
                     className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
                     onClick={() => {
-                      goNext('level-2', {
-                        id: 'level-2',
+                      goNext('LEVEL_2', {
+                        id: 'LEVEL_2',
                         title: post.title,
                       })
                       setPostId(post.id)
@@ -55,7 +55,7 @@ export const ExamplePost: React.FC = () => {
           </div>
         ),
       },
-      'level-2': {
+      LEVEL_2: {
         component: () => (
           <div className="h-full bg-white overflow-auto">
             <div className="flex flex-col h-full">
@@ -71,11 +71,11 @@ export const ExamplePost: React.FC = () => {
 
   return (
     <div className="h-[350px] border rounded-lg overflow-hidden bg-white border-gray-300">
-      <MoDrilldown
+      <WuDrilldown
         items={items}
-        initial="level-1"
+        initial="LEVEL_1"
         baseTitle={{
-          id: 'level-1',
+          id: 'LEVEL_1',
           title: 'Post',
         }}
         mode="popLayout"
