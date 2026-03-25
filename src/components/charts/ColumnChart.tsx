@@ -1,14 +1,14 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import type {DrilldownTitle} from '../DxDrillDown'
 import {useLayoutEffect} from 'react'
 import {CHART_COLORS} from '../../constants'
+import type {IWuDrilldownTitle} from '@npm-questionpro/wick-ui-lib'
 
 interface Props {
   type?: string
   categories?: string[]
   series?: Highcharts.SeriesOptionsType[]
-  handler?: (id: `level-${number}`, data?: DrilldownTitle) => void
+  handler?: (id: `LEVEL_${number}`, data?: IWuDrilldownTitle) => void
 }
 
 export function ColumnChart({
@@ -72,8 +72,8 @@ export function ColumnChart({
             ) {
               event.preventDefault()
               if (handler)
-                handler(`level-2`, {
-                  id: `level-2`,
+                handler(`LEVEL_2`, {
+                  id: `LEVEL_2`,
                   title: `${this.category}: ${this.series.name}`,
                 })
             },
