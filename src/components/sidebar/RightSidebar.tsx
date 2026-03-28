@@ -10,21 +10,21 @@ const HashLinks = [
     href: '#basic-example',
     name: 'Basic Example',
   },
-  // {
-  //   href: '#with-many-titles',
-  //   name: 'With many titles',
-  // },
-  // {
-  //   href: '#fixed-height-example',
-  //   name: 'Fixed Height Example',
-  // },
+  {
+    href: '#with-many-titles',
+    name: 'With many titles',
+  },
+  {
+    href: '#fixed-height-example',
+    name: 'Fixed Height Example',
+  },
   {
     href: '#usage',
     name: 'Usage',
   },
 ]
 
-export const SideBar: React.FC = () => {
+export const RightSideBar: React.FC = () => {
   const [isClicked, setIsClicked] = React.useState(HashLinks[0].href)
 
   const handleClick = (

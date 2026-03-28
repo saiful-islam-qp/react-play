@@ -10,36 +10,37 @@ const CodePreviewLazy = lazy(() =>
 
 function Home() {
   return (
-    <div>
-      <div id="overview">
-        <h2 className="text-lg font-bold">When To Use</h2>
-        <ul className="mb-4 list-disc list-inside">
-          <li>
-            Exploring hierarchical datasets (regions → countries → cities)
-          </li>
-          <li>
-            Progressive disclosure of details (overview → details → metrics)
-          </li>
-          <li>
-            Replacing separate modal/page navigation with inline transitions
-          </li>
-          <li>Mobile-friendly stacked navigation</li>
-        </ul>
-      </div>
-      <div id="basic-example">
-        <h2 className="text-lg font-bold mb-2">Basic Example</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <MoDrilldownExample />
-          <ExamplePost />
+    <div className="grid grid-cols-1 lg:grid-cols-8 gap-4 px-4">
+      <div className="col-span-6 p-4">
+        <div id="overview">
+          <h2 className="text-lg font-bold">When To Use</h2>
+          <ul className="mb-4 list-disc list-inside">
+            <li>
+              Exploring hierarchical datasets (regions → countries → cities)
+            </li>
+            <li>
+              Progressive disclosure of details (overview → details → metrics)
+            </li>
+            <li>
+              Replacing separate modal/page navigation with inline transitions
+            </li>
+            <li>Mobile-friendly stacked navigation</li>
+          </ul>
         </div>
-      </div>
-      <div>
-        <Suspense fallback={<div className="text-sm">Loading...</div>}>
-          <h2 className="text-lg font-bold mt-8 mb-2" id="usage">
-            Usages
-          </h2>
-          <CodePreviewLazy
-            code={`import React, {useEffect, useMemo} from 'react'
+        <div id="basic-example">
+          <h2 className="text-lg font-bold mb-2">Basic Example</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <MoDrilldownExample />
+            <ExamplePost />
+          </div>
+        </div>
+        <div>
+          <Suspense fallback={<div className="text-sm">Loading...</div>}>
+            <h2 className="text-lg font-bold mt-8 mb-2" id="usage">
+              Usages
+            </h2>
+            <CodePreviewLazy
+              code={`import React, {useEffect, useMemo} from 'react'
 import {MoDrilldown, type DrilldownItem} from '../drilldown-motion/MoDrilldown'
 import Comments from './Comments'
 
@@ -124,9 +125,13 @@ export const ExamplePost: React.FC = () => {
   )
 }
 `}
-          />
-        </Suspense>
+            />
+          </Suspense>
+        </div>
       </div>
+      {/* <div className="hidden lg:block lg:col-span-2">
+        <RightSideBar />
+      </div> */}
     </div>
   )
 }

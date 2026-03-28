@@ -7,6 +7,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="*" element={<div className="p-4">Page Not Found</div>} />
       </Route>
     </Routes>
   )

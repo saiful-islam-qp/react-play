@@ -1,19 +1,15 @@
 import {Outlet} from 'react-router'
-import {SideBar} from './components/sidebar/Sidebar'
+import {LeftSidebar} from './components/sidebar/LeftSidebar'
 
 const Layout = () => {
   return (
-    <div>
-      <div className="sticky top-0 z-20 flex items-center px-4 h-[48px] bg-(--main-bg-color)/80 backdrop-blur-md rounded-b-lg">
-        <h1 className="font-semibold">Drill Down</h1>
+    <div className="flex">
+      <div className="hidden lg:block">
+        <LeftSidebar />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-8 gap-4 px-4">
-        <div className="col-span-6">
-          <Outlet />
-        </div>
-        <div className="hidden lg:block lg:col-span-2">
-          <SideBar />
-        </div>
+      <div className="flex-1 lg:ml-64">
+        <div className="sticky top-0 z-20 flex items-center px-4 h-[48px] bg-white border-b border-slate-200"></div>
+        <Outlet />
       </div>
     </div>
   )
