@@ -34,11 +34,11 @@ const Comments: React.FC<IProps> = ({id}) => {
   }, [id])
 
   return (
-    <div>
-      <h2 className="text-sm font-medium sticky top-0 bg-white px-4 py-2">
+    <div className="px-4">
+      <h2 className="text-base font-medium sticky top-0 bg-white pb-1 border-b">
         Comments
       </h2>
-      <div className="space-y-4 overflow-auto h-full px-4 py-2">
+      <div className="space-y-4 overflow-auto h-full py-2">
         {isLoading && <p>Loading comments...</p>}
         {comments.map(comment => (
           <div key={comment.id} className="border-b pb-2">

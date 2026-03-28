@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {NavLink, useLocation} from 'react-router'
+import {NavLink} from 'react-router'
 import clsx from 'clsx'
 import type {NavSection} from '../../constants/navigation'
 import {navigation} from '../../constants/navigation'
@@ -10,7 +10,6 @@ export const LeftSidebar: React.FC = () => {
     'Core Concepts',
   ])
   const [searchQuery, setSearchQuery] = useState('')
-  const location = useLocation()
 
   const toggleSection = (title: string) => {
     setExpandedSections(prev =>
@@ -26,10 +25,6 @@ export const LeftSidebar: React.FC = () => {
       ),
     }))
     .filter(section => section.links.length > 0)
-
-  const isLinkActive = (href: string) => {
-    return location.pathname === href
-  }
 
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-200 bg-white overflow-y-auto">
@@ -87,17 +82,24 @@ export const LeftSidebar: React.FC = () => {
                   <ul className="mt-2 ml-2 space-y-1">
                     {section.links.map(link => (
                       <li key={link.href}>
-                        <a
-                          href={link.href}
-                          className={clsx(
-                            'block px-3 py-2 text-sm rounded-md transition duration-150',
-                            isLinkActive(link.href)
-                              ? 'bg-blue-50 text-blue-600 font-medium'
-                              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
-                          )}
+                        <NavLink
+                          key={link.href}
+                          to={link.href}
+                          className="block"
                         >
-                          {link.name}
-                        </a>
+                          {({isActive}) => (
+                            <span
+                              className={clsx(
+                                'block px-3 py-2 text-sm rounded-md transition duration-150',
+                                isActive
+                                  ? 'bg-blue-50 text-blue-600 font-medium'
+                                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
+                              )}
+                            >
+                              {link.name}
+                            </span>
+                          )}
+                        </NavLink>
                       </li>
                     ))}
                   </ul>

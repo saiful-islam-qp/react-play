@@ -1,6 +1,7 @@
 import {lazy, Suspense} from 'react'
 import {MoDrilldownExample} from '../components/drilldown-motion/MoDrilldownExample'
 import {ExamplePost} from '../components/example-post/ExamplePost'
+import {RightSideBar} from '../components/sidebar/RightSidebar'
 
 const CodePreviewLazy = lazy(() =>
   import('../components/code-preview/CodePreview').then(module => ({
@@ -30,8 +31,14 @@ function Home() {
         <div id="basic-example">
           <h2 className="text-lg font-bold mb-2">Basic Example</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <MoDrilldownExample />
-            <ExamplePost />
+            <div>
+              <h2 className="text-sm font-medium mb-1">Drilldown</h2>
+              <MoDrilldownExample />
+            </div>
+            <div>
+              <h2 className="text-sm font-medium mb-1">Slide Effect</h2>
+              <ExamplePost />
+            </div>
           </div>
         </div>
         <div>
@@ -40,86 +47,35 @@ function Home() {
               Usages
             </h2>
             <CodePreviewLazy
-              code={`import React, {useEffect, useMemo} from 'react'
-import {MoDrilldown, type DrilldownItem} from '../drilldown-motion/MoDrilldown'
-import Comments from './Comments'
+              code={`import React from 'react'
+import EDonutChart from '../charts/EDonutChart'
+import EChartColumn from '../charts/EChartColumn'
+import {
+  WuDrilldown,
+  type IWuDrilldownContext,
+} from '@npm-questionpro/wick-ui-lib'
 
-interface IPost {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
-
-export const ExamplePost: React.FC = () => {
-  const [data, setData] = React.useState<IPost[]>([])
-  const [postId, setPostId] = React.useState<number | null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-      const data: IPost[] = await response.json()
-      setData(data)
-    }
-    fetchData()
-  }, [])
-
-  const items: Record<'level-1' | 'level-2 | ... | level-n', DrilldownItem> = useMemo(() => {
-    return {
-      'level-1': {
-        component: ({goNext}) => (
-          <div className="h-full bg-white flex flex-col overflow-auto">
-            <h2 className="text-base border-b font-medium px-4 py-2 bg-white sticky top-0">
-              Posts
-            </h2>
-            <div className="flex-1">
-              {data.map(post => (
-                <div
-                  key={post.id}
-                  className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
-                  onClick={() => {
-                    goNext('level-2', {
-                      id: 'level-2',
-                      title: post.title,
-                    })
-                    setPostId(post.id)
-                  }}
-                >
-                  <h3 className="text-sm font-semibold">{post.title}</h3>
-                  <p className="text-xs text-gray-600">
-                    {post.body.substring(0, 50)}...
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ),
-      },
-      'level-2': {
-        component: () => (
-          <div className="h-full bg-white overflow-auto">
-            <div className="flex flex-col h-full">
-              <div className="flex-1">
-                <Comments id={postId!} />
-              </div>
-            </div>
-          </div>
-        ),
-      },
-    }
-  }, [data, postId])
-
+export const MoDrilldownExample: React.FC = () => {
   return (
-    <div className="h-[350px] border rounded-lg overflow-hidden bg-white border-gray-300">
-      <MoDrilldown
-        items={items}
-        initial="level-1"
-        baseTitle={{
-          id: 'level-1',
-          title: 'Post',
+    <div className="h-[350px] border rounded-lg bg-white overflow-hidden border-gray-300">
+      <WuDrilldown
+        initial="LEVEL_1"
+        baseTitle={{id: 'LEVEL_1', title: 'Overall Sales Data'}}
+        headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
+        offsetHeight={42}
+        items={{
+          LEVEL_1: {
+            component: (ctx: IWuDrilldownContext) => <SalesByRegion {...ctx} />,
+          },
+          LEVEL_2: {
+            component: (ctx: IWuDrilldownContext) => (
+              <SalesByCategory {...ctx} />
+            ),
+          },
+          LEVEL_3: {
+            component: () => <SalesByProduct />,
+          },
         }}
-        mode="popLayout"
-        headerClasses="border-b border-gray-200 h-10 bg-gray-100"
       />
     </div>
   )
@@ -129,9 +85,24 @@ export const ExamplePost: React.FC = () => {
           </Suspense>
         </div>
       </div>
-      {/* <div className="hidden lg:block lg:col-span-2">
-        <RightSideBar />
-      </div> */}
+      <div className="hidden lg:block lg:col-span-2">
+        <RightSideBar
+          hashLinks={[
+            {
+              href: '#overview',
+              name: 'Overview',
+            },
+            {
+              href: '#basic-example',
+              name: 'Basic Example',
+            },
+            {
+              href: '#usage',
+              name: 'Usage',
+            },
+          ]}
+        />
+      </div>
     </div>
   )
 }

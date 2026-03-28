@@ -13,32 +13,23 @@ export const navigation: NavSection[] = [
   {
     title: 'Getting Started',
     links: [
+      {name: 'WHY? 3 Reasons', href: '/docs/reason'},
       {name: 'Installation', href: '/docs/installation'},
-      {name: 'Editor Setup', href: '/docs/editor-setup'},
-      {
-        name: 'Using with Preprocessors',
-        href: '/docs/using-with-preprocessors',
-      },
-      {name: 'Utility-First Fundamentals', href: '/docs/utility-first'},
-      {name: 'Adding Custom Styles', href: '/docs/adding-custom-styles'},
-      {name: 'Functions & Directives', href: '/docs/functions-and-directives'},
     ],
   },
   {
-    title: 'Core Concepts',
+    title: 'How to',
     links: [
-      {name: 'How Tailwind Works', href: '/docs/how-tailwind-works'},
+      {name: 'What are levels', href: '/docs/what-are-levels'},
+      {name: 'Initial level', href: '/docs/initial-level'},
       {
-        name: 'Hover, Focus & Active States',
-        href: '/docs/hover-focus-and-other-states',
+        name: 'Base title',
+        href: '/docs/base-title',
       },
-      {name: 'Responsive Design', href: '/docs/responsive-design'},
-      {name: 'Dark Mode', href: '/docs/dark-mode'},
       {
-        name: 'Optimizing for Production',
-        href: '/docs/optimizing-for-production',
+        name: 'Header customization',
+        href: '/docs/header-customization',
       },
-      {name: 'Browser Support', href: '/docs/browser-support'},
     ],
   },
 ]

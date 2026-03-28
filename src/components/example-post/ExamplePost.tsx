@@ -27,30 +27,28 @@ export const ExamplePost: React.FC = () => {
       LEVEL_1: {
         component: ({goNext}) => (
           <div className="h-full bg-white overflow-auto">
-            <div className="flex flex-col h-full">
-              <h2 className="text-base border-b font-medium px-4 py-2 bg-white sticky top-0">
-                Posts
-              </h2>
-              <div className="flex-1">
-                {data.map(post => (
-                  <div
-                    key={post.id}
-                    className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
-                    onClick={() => {
-                      goNext('LEVEL_2', {
-                        id: 'LEVEL_2',
-                        title: post.title,
-                      })
-                      setPostId(post.id)
-                    }}
-                  >
-                    <h3 className="text-sm font-semibold">{post.title}</h3>
-                    <p className="text-xs text-gray-600">
-                      {post.body.substring(0, 50)}...
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <h2 className="sticky top-0 shrink-0 font-medium bg-gray-50 border-b px-4 h-[42px] flex items-center">
+              Posts
+            </h2>
+            <div className="h-full">
+              {data.map(post => (
+                <div
+                  key={post.id}
+                  className="px-4 py-2 border-b last:border-b-0 cursor-pointer hover:bg-gray-50"
+                  onClick={() => {
+                    goNext('LEVEL_2', {
+                      id: 'LEVEL_2',
+                      title: post.title,
+                    })
+                    setPostId(post.id)
+                  }}
+                >
+                  <h3 className="text-sm font-semibold">{post.title}</h3>
+                  <p className="text-xs text-gray-600">
+                    {post.body.substring(0, 50)}...
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         ),
@@ -58,10 +56,8 @@ export const ExamplePost: React.FC = () => {
       LEVEL_2: {
         component: () => (
           <div className="h-full bg-white overflow-auto">
-            <div className="flex flex-col h-full">
-              <div className="flex-1">
-                <Comments id={postId!} />
-              </div>
+            <div className="h-full">
+              <Comments id={postId!} />
             </div>
           </div>
         ),
@@ -78,7 +74,9 @@ export const ExamplePost: React.FC = () => {
           id: 'LEVEL_1',
           title: 'Post',
         }}
+        offsetHeight={40}
         mode="popLayout"
+        variant="slideLeft"
       />
     </div>
   )

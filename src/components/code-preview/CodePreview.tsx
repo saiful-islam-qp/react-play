@@ -19,5 +19,10 @@ export const CodePreview: React.FC<Props> = ({code}) => {
 
     highlight()
   }, [code])
-  return <div dangerouslySetInnerHTML={{__html: html}} />
+  return (
+    <div
+      className="border border-border-color rounded-lg overflow-x-auto code-preview"
+      dangerouslySetInnerHTML={{__html: html}}
+    />
+  )
 }
