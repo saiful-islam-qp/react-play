@@ -1,10 +1,19 @@
 import React, {useState} from 'react'
 import {NavLink} from 'react-router'
+import {X} from 'lucide-react'
 import clsx from 'clsx'
 import type {NavSection} from '../../constants/navigation'
 import {navigation} from '../../constants/navigation'
 
-export const LeftSidebar: React.FC = () => {
+interface LeftSidebarProps {
+  isOpen?: boolean
+  onClose?: () => void
+}
+
+export const LeftSidebar: React.FC<LeftSidebarProps> = ({
+  isOpen = false,
+  onClose,
+}) => {
   const [expandedSections, setExpandedSections] = useState<string[]>([
     'Getting Started',
     'Core Concepts',
@@ -27,14 +36,30 @@ export const LeftSidebar: React.FC = () => {
     .filter(section => section.links.length > 0)
 
   return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-200 bg-white overflow-y-auto">
-      <div className="sticky top-0 z-10 bg-white border-b border-slate-200 h-[48px] flex items-center px-4">
+    <aside
+      className={clsx(
+        'fixed left-0 top-0 z-40 h-screen w-64 border-r border-slate-200 bg-white overflow-y-auto',
+        'transform transition-transform duration-300 ease-in-out',
+        'lg:translate-x-0',
+        isOpen ? 'translate-x-0' : '-translate-x-full',
+      )}
+    >
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white border-b border-slate-200 h-[48px] flex items-center justify-between px-4">
         <NavLink to="/" className="text-2xl font-bold text-slate-700">
           Drilldown
         </NavLink>
+        {/* Close button — mobile only */}
+        <button
+          className="lg:hidden flex items-center justify-center w-7 h-7 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          onClick={onClose}
+          aria-label="Close sidebar"
+        >
+          <X size={16} />
+        </button>
       </div>
 
-      {/* Search Bar */}
+      {/* Search */}
       <div className="px-6 py-4 border-b border-slate-200">
         <div className="relative">
           <input
@@ -55,7 +80,7 @@ export const LeftSidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Sections */}
+      {/* Navigation */}
       <nav className="px-4 py-4">
         {filteredNavigation.length > 0 ? (
           <div className="space-y-6">
@@ -68,7 +93,7 @@ export const LeftSidebar: React.FC = () => {
                   <span>{section.title}</span>
                   <span
                     className={clsx(
-                      'text-slate-400 transition-transform',
+                      'text-slate-400 transition-transform duration-200',
                       expandedSections.includes(section.title)
                         ? 'rotate-90'
                         : '',
@@ -83,9 +108,9 @@ export const LeftSidebar: React.FC = () => {
                     {section.links.map(link => (
                       <li key={link.href}>
                         <NavLink
-                          key={link.href}
                           to={link.href}
                           className="block"
+                          onClick={onClose}
                         >
                           {({isActive}) => (
                             <span

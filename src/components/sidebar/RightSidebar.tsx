@@ -21,8 +21,16 @@ export const RightSideBar: React.FC<IProps> = ({hashLinks}) => {
   }
 
   return (
-    <div className="sticky top-20 border-l border-gray-300 pl-4">
-      <p className="mb-2 font-medium uppercase tracking-wider">On this page</p>
+    <div
+      className="sticky top-20 pl-4"
+      style={{borderLeft: '1px solid var(--border-color)'}}
+    >
+      <p
+        className="mb-2 text-xs font-semibold uppercase tracking-wider"
+        style={{color: 'var(--secondary-text-color)'}}
+      >
+        On this page
+      </p>
       <ul className="text-sm flex flex-col gap-1">
         {hashLinks?.map(link => (
           <li key={link.href}>

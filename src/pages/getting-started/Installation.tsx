@@ -1,10 +1,54 @@
 import {lazy, Suspense, useState} from 'react'
-import {Check, Copy, Code} from 'lucide-react'
+import {Check, Copy} from 'lucide-react'
+
 const CodePreviewLazy = lazy(() =>
   import('../../components/code-preview/CodePreview').then(module => ({
     default: module.CodePreview,
   })),
 )
+
+const usageCode = `import {
+  WuDrilldown,
+  type IWuDrilldownContext,
+} from '@npm-questionpro/wick-ui-lib'
+
+export const SalesDrilldown = () => (
+  <div className="h-[350px] border rounded-lg overflow-hidden">
+    <WuDrilldown
+      initial="LEVEL_1"
+      baseTitle={{ id: 'LEVEL_1', title: 'Overall Sales' }}
+      offsetHeight={42}
+      items={{
+        LEVEL_1: {
+          component: ({ goNext }: IWuDrilldownContext) => (
+            <RegionChart onBarClick={(label) => goNext('LEVEL_2', label)} />
+          ),
+        },
+        LEVEL_2: {
+          component: ({ goNext }: IWuDrilldownContext) => (
+            <CategoryChart onSliceClick={(label) => goNext('LEVEL_3', label)} />
+          ),
+        },
+        LEVEL_3: {
+          component: () => <ProductTable />,
+        },
+      }}
+    />
+  </div>
+)`
+
+const exports = [
+  {
+    name: 'WuDrilldown',
+    kind: 'component',
+    description: 'The drilldown container',
+  },
+  {
+    name: 'IWuDrilldownContext',
+    kind: 'type',
+    description: 'Context injected into each level component',
+  },
+]
 
 const Installation = () => {
   const [copied, setCopied] = useState(false)
@@ -23,190 +67,158 @@ const Installation = () => {
       style={{backgroundColor: 'var(--main-bg-color)'}}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-16 text-center">
+        {/* Header */}
+        <div className="mb-12">
           <h1
-            className="text-4xl font-bold mb-6"
+            className="text-4xl font-bold mb-4"
             style={{color: 'var(--primary-text-color)'}}
           >
-            Install WuDrilldown
+            Installation
           </h1>
           <p
-            className="text-lg md:text-xl"
+            className="text-lg leading-relaxed"
             style={{color: 'var(--secondary-text-color)'}}
           >
-            Add interactive drilldown components to your React application in
-            seconds
+            Add the drilldown component to your React project with a single
+            command.
           </p>
         </div>
 
-        {/* Installation Command Section */}
-        <div className="mb-16">
-          <div className="mb-4 flex items-center gap-2">
-            <Code size={20} style={{color: 'var(--highlight-color)'}} />
-            <h2
-              className="text-2xl font-semibold"
-              style={{color: 'var(--primary-text-color)'}}
-            >
-              Installation Command
-            </h2>
-          </div>
-
+        {/* Install command */}
+        <div className="mb-12">
+          <h2
+            className="text-base font-semibold mb-3"
+            style={{color: 'var(--primary-text-color)'}}
+          >
+            npm
+          </h2>
           <div
-            className="p-6 rounded-lg border transition-all"
+            className="flex items-center justify-between gap-4 px-4 py-3 rounded-lg border font-mono text-sm"
             style={{
-              backgroundColor: 'rgba(100, 108, 255, 0.05)',
               borderColor: 'var(--border-color)',
+              backgroundColor: 'rgba(100,108,255,0.05)',
             }}
           >
-            <div className="flex items-center justify-between gap-4">
-              <code
-                className="text-sm md:text-base font-mono flex-1"
-                style={{color: 'var(--highlight-color)'}}
-              >
-                npm install @npm-questionpro/wick-ui-lib@latest
-              </code>
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all hover:opacity-80"
-                style={{
-                  backgroundColor: 'var(--highlight-color)',
-                  color: 'white',
-                }}
-              >
-                {copied ? (
-                  <>
-                    <Check size={18} />
-                    <span className="text-sm font-medium">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={18} />
-                    <span className="text-sm font-medium">Copy</span>
-                  </>
-                )}
-              </button>
-            </div>
+            <span style={{color: 'var(--highlight-color)'}}>
+              npm install @npm-questionpro/wick-ui-lib@latest
+            </span>
+            <button
+              onClick={handleCopy}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition-opacity hover:opacity-80 flex-shrink-0"
+              style={{
+                backgroundColor: 'var(--highlight-color)',
+                color: 'white',
+              }}
+            >
+              {copied ? (
+                <>
+                  <Check size={13} /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy size={13} /> Copy
+                </>
+              )}
+            </button>
           </div>
         </div>
 
-        {/* Basic Usage Section */}
-        <div className="mb-16">
+        {/* What's exported */}
+        <div className="mb-12">
           <h2
-            className="text-2xl font-semibold mb-6"
+            className="text-base font-semibold mb-3"
             style={{color: 'var(--primary-text-color)'}}
           >
-            Basic Usage
+            What's inside
           </h2>
-
-          <Suspense fallback={<div className="text-sm">Loading...</div>}>
-            <CodePreviewLazy
-              code={`import React from 'react'
-          import EDonutChart from '../charts/EDonutChart'
-          import EChartColumn from '../charts/EChartColumn'
-          import {
-            WuDrilldown,
-            type IWuDrilldownContext,
-          } from '@npm-questionpro/wick-ui-lib'
-          
-          export const MoDrilldownExample: React.FC = () => {
-            return (
-              <div className="h-[350px] border rounded-lg bg-white overflow-hidden border-gray-300">
-                <WuDrilldown
-                  initial="LEVEL_1"
-                  baseTitle={{id: 'LEVEL_1', title: 'Overall Sales Data'}}
-                  headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
-                  offsetHeight={42}
-                  items={{
-                    LEVEL_1: {
-                      component: (ctx: IWuDrilldownContext) => <SalesByRegion {...ctx} />,
-                    },
-                    LEVEL_2: {
-                      component: (ctx: IWuDrilldownContext) => (
-                        <SalesByCategory {...ctx} />
-                      ),
-                    },
-                    LEVEL_3: {
-                      component: () => <SalesByProduct />,
-                    },
+          <div
+            className="rounded-lg border overflow-hidden"
+            style={{borderColor: 'var(--border-color)'}}
+          >
+            <table className="w-full text-sm">
+              <thead>
+                <tr
+                  style={{
+                    backgroundColor: 'rgba(100,108,255,0.08)',
+                    borderBottom: '1px solid var(--border-color)',
                   }}
-                />
-              </div>
-            )
-          }
-          `}
-            />
+                >
+                  {['Export', 'Kind', 'Description'].map(h => (
+                    <th
+                      key={h}
+                      className="px-4 py-3 text-left font-semibold"
+                      style={{color: 'var(--primary-text-color)'}}
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {exports.map((exp, i) => (
+                  <tr
+                    key={exp.name}
+                    style={{
+                      borderTop:
+                        i > 0 ? '1px solid var(--border-color)' : undefined,
+                    }}
+                  >
+                    <td className="px-4 py-3">
+                      <code
+                        className="px-1.5 py-0.5 rounded text-xs"
+                        style={{
+                          backgroundColor: 'rgba(100,108,255,0.12)',
+                          color: 'var(--highlight-color)',
+                        }}
+                      >
+                        {exp.name}
+                      </code>
+                    </td>
+                    <td
+                      className="px-4 py-3 text-xs"
+                      style={{color: 'var(--secondary-text-color)'}}
+                    >
+                      {exp.kind}
+                    </td>
+                    <td
+                      className="px-4 py-3 text-sm"
+                      style={{color: 'var(--secondary-text-color)'}}
+                    >
+                      {exp.description}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Basic usage */}
+        <div className="mb-12">
+          <h2
+            className="text-base font-semibold mb-3"
+            style={{color: 'var(--primary-text-color)'}}
+          >
+            Basic usage
+          </h2>
+          <Suspense fallback={<div className="text-sm">Loading…</div>}>
+            <CodePreviewLazy code={usageCode} />
           </Suspense>
         </div>
 
-        {/* Features Section */}
-        <div>
-          <h2
-            className="text-2xl font-semibold mb-6"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            Key Features
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'Interactive',
-                description:
-                  'Enable users to explore data with intuitive drilldown interactions',
-              },
-              {
-                title: 'Customizable',
-                description:
-                  'Full control over animations and component appearance',
-              },
-              {
-                title: 'Performance',
-                description:
-                  'Optimized for smooth animations and efficient rendering',
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-lg border transition-all hover:border-opacity-100"
-                style={{
-                  backgroundColor: 'white',
-                  borderColor: 'var(--border-color)',
-                }}
-              >
-                <div
-                  className="w-10 h-10 rounded-lg mb-4 flex items-center justify-center"
-                  style={{backgroundColor: 'var(--highlight-color)'}}
-                >
-                  <span className="text-lg font-bold text-white">
-                    {index + 1}
-                  </span>
-                </div>
-                <h3
-                  className="text-lg font-semibold mb-2"
-                  style={{color: 'var(--primary-text-color)'}}
-                >
-                  {feature.title}
-                </h3>
-                <p style={{color: 'var(--secondary-text-color)'}}>
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Footer Info */}
+        {/* Footer */}
         <div
-          className="mt-16 pt-8 border-t"
+          className="pt-8 border-t"
           style={{borderColor: 'var(--border-color)'}}
         >
-          <p
-            className="text-center"
-            style={{color: 'var(--secondary-text-color)'}}
-          >
-            For more examples and detailed documentation, explore the other
-            sections in this guide.
+          <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
+            Next —{' '}
+            <a
+              href="/docs/what-are-levels"
+              style={{color: 'var(--highlight-color)'}}
+            >
+              learn how levels work.
+            </a>
           </p>
         </div>
       </div>

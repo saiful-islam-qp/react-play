@@ -1,56 +1,75 @@
-const Intro = () => {
-  const reasons = [
-    {
-      number: 1,
-      title: 'Data Interactivity vs. Static Reports',
-      description:
-        'The fundamental difference between dashboards and static reports lies in their interactive nature. While both can look visually appealing, dashboards enable true data-level interactivity—not just visual animations. This transforms how users engage with information, moving beyond linear PDF or PowerPoint presentations to non-linear, flexible reporting that adapts to user needs.',
-    },
-    {
-      number: 2,
-      title: 'Increased User Engagement',
-      description:
-        'End users can now truly explore and interact with dashboards, significantly increasing on-screen time and engagement with your toolset. This deeper interaction builds stronger user loyalty. By collecting metrics around dashboard views and time spent, you can demonstrate tangible value—showing that Dashboard 4 received 44 views this week with 452 minutes of active consumption.',
-    },
-    {
-      number: 3,
-      title: 'Row-Level Data Confidence',
-      description:
-        'When users can access the underlying data that generates reports, they gain greater confidence in the summarized insights. By showcasing raw data (like "n=1000" in surveys), along with collection methodology, you build trust in the reports. Drilldown capabilities make it effortless to reveal the data foundation behind every visualization.',
-    },
-  ]
+const reasons = [
+  {
+    number: 1,
+    title: 'Data interactivity vs. static reports',
+    description:
+      'Static PDFs and PowerPoints lock users into a linear path. Drilldowns let users explore data on their own terms — filtering, expanding, and navigating without leaving the screen.',
+  },
+  {
+    number: 2,
+    title: 'Longer, deeper engagement',
+    description:
+      'Users who can interact with data spend more time with it. That time is measurable — dashboard views, session duration, and click paths all become signals you can act on.',
+  },
+  {
+    number: 3,
+    title: 'Trust through transparency',
+    description:
+      'Showing the raw data behind a summary (e.g. n=1000 survey responses) builds confidence in your reports. Drilldown makes that one click away instead of a separate export.',
+  },
+]
 
+const Intro = () => {
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen py-16 px-4 sm:px-6 lg:px-8"
+      style={{backgroundColor: 'var(--main-bg-color)'}}
+    >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-700 mb-4">
-            Why Interactive Dashboards?
+        {/* Header */}
+        <div className="mb-12">
+          <h1
+            className="text-4xl font-bold mb-4"
+            style={{color: 'var(--primary-text-color)'}}
+          >
+            Why interactive drilldown?
           </h1>
-          <p className="text-xl text-gray-600">
-            Discover the three key advantages that make interactive dashboards
-            essential for modern data reporting and user engagement.
+          <p
+            className="text-lg leading-relaxed"
+            style={{color: 'var(--secondary-text-color)'}}
+          >
+            Three reasons teams move from static reporting to drilldown-driven
+            dashboards.
           </p>
         </div>
 
-        {/* Bullet Points */}
-        <div className="space-y-8">
-          {reasons.map(reason => (
-            <div key={reason.number} className="flex gap-6 group">
-              {/* Numbered Bullet */}
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                  {reason.number}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="flex-grow pt-2">
-                <h2 className="text-xl font-semibold text-gray-900 mb-3">
+        {/* Reasons */}
+        <div className="space-y-px">
+          {reasons.map((reason, i) => (
+            <div
+              key={reason.number}
+              className="flex gap-6 py-8"
+              style={{
+                borderTop: i > 0 ? '1px solid var(--border-color)' : undefined,
+              }}
+            >
+              <span
+                className="text-4xl font-bold flex-shrink-0 w-8 text-right leading-none mt-1"
+                style={{color: 'var(--border-color)'}}
+              >
+                {reason.number}
+              </span>
+              <div>
+                <h2
+                  className="text-lg font-semibold mb-2"
+                  style={{color: 'var(--primary-text-color)'}}
+                >
                   {reason.title}
                 </h2>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{color: 'var(--secondary-text-color)'}}
+                >
                   {reason.description}
                 </p>
               </div>
@@ -58,10 +77,19 @@ const Intro = () => {
           ))}
         </div>
 
-        {/* Footer CTA */}
-        <div className="mt-16 pt-12 border-t border-gray-200 text-center">
-          <p className="text-gray-600 text-lg">
-            Ready to transform your reporting experience?
+        {/* Footer */}
+        <div
+          className="mt-4 pt-8 border-t"
+          style={{borderColor: 'var(--border-color)'}}
+        >
+          <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
+            Next —{' '}
+            <a
+              href="/docs/installation"
+              style={{color: 'var(--highlight-color)'}}
+            >
+              install the component and get it running in minutes.
+            </a>
           </p>
         </div>
       </div>
