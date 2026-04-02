@@ -1,6 +1,7 @@
 import {lazy, Suspense} from 'react'
 import {NavLink} from 'react-router'
 import {ArrowRight} from 'lucide-react'
+import {RightSideBar} from '../../components/sidebar/RightSidebar'
 
 const CodePreviewLazy = lazy(() =>
   import('../../components/code-preview/CodePreview').then(module => ({
@@ -96,307 +97,322 @@ export const SalesDrilldown = () => (
 const WhatAreLevels = () => {
   return (
     <div
-      className="min-h-screen py-16 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen"
       style={{backgroundColor: 'var(--main-bg-color)'}}
     >
-      <div className="max-w-4xl mx-auto">
-        {/* ── Header ── */}
-        <div className="mb-16">
-          <h1
-            className="text-4xl font-bold mb-4"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            What are Levels?
-          </h1>
-          <p
-            className="text-lg leading-relaxed"
-            style={{color: 'var(--secondary-text-color)'}}
-          >
-            Levels are the named view-slots that make up a drilldown. Each level
-            maps a string key to a React component. When a user clicks into
-            data, the drilldown transitions to the next level — and the header
-            back button returns them to the previous one.
-          </p>
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-8 gap-4 px-4 sm:px-6 lg:px-8 py-16">
+        {/* Main content */}
+        <div className="lg:col-span-6 space-y-12">
+          {/* Header */}
+          <div>
+            <h1
+              className="text-4xl font-bold mb-4"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              What are Levels?
+            </h1>
+            <p
+              className="text-lg leading-relaxed"
+              style={{color: 'var(--secondary-text-color)'}}
+            >
+              Levels are the named view-slots that make up a drilldown. Each
+              level maps a string key to a React component. When a user clicks
+              into data, the drilldown transitions to the next level — and the
+              header back button returns them to the previous one.
+            </p>
+          </div>
 
-        {/* ── Mental Model ── */}
-        <div className="mb-16">
-          <h2
-            className="text-2xl font-semibold mb-6"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            Mental Model
-          </h2>
+          {/* Mental Model */}
+          <div id="mental-model">
+            <h2
+              className="text-base font-semibold mb-4"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              Mental Model
+            </h2>
+            <div
+              className="p-6 rounded-lg border"
+              style={{
+                backgroundColor: 'rgba(100, 108, 255, 0.05)',
+                borderColor: 'var(--border-color)',
+              }}
+            >
+              <div className="flex flex-wrap items-center gap-2 mb-6">
+                {[
+                  {key: 'LEVEL_1', label: 'Overview'},
+                  {key: 'LEVEL_2', label: 'Category'},
+                  {key: 'LEVEL_3', label: 'Row Detail'},
+                ].map((level, i, arr) => (
+                  <div key={level.key} className="flex items-center gap-2">
+                    <div
+                      className="rounded-lg px-4 py-3 text-center min-w-[110px]"
+                      style={{
+                        backgroundColor: 'var(--main-bg-color)',
+                        border: '1px solid var(--highlight-color)',
+                      }}
+                    >
+                      <div
+                        className="text-xs font-mono mb-1"
+                        style={{color: 'var(--highlight-color)'}}
+                      >
+                        {level.key}
+                      </div>
+                      <div
+                        className="text-sm font-medium"
+                        style={{color: 'var(--primary-text-color)'}}
+                      >
+                        {level.label}
+                      </div>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <div
+                        className="flex flex-col items-center gap-0.5"
+                        style={{color: 'var(--secondary-text-color)'}}
+                      >
+                        <ArrowRight size={18} />
+                        <span className="text-xs font-mono">goNext</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <p
+                className="text-sm"
+                style={{color: 'var(--secondary-text-color)'}}
+              >
+                Clicking a data point calls{' '}
+                <code
+                  className="px-1 py-0.5 rounded text-xs"
+                  style={{
+                    backgroundColor: 'rgba(100,108,255,0.15)',
+                    color: 'var(--highlight-color)',
+                  }}
+                >
+                  goNext('LEVEL_2', title)
+                </code>
+                . The header back button calls{' '}
+                <code
+                  className="px-1 py-0.5 rounded text-xs"
+                  style={{
+                    backgroundColor: 'rgba(100,108,255,0.15)',
+                    color: 'var(--highlight-color)',
+                  }}
+                >
+                  goBack()
+                </code>
+                .
+              </p>
+            </div>
+          </div>
 
-          <div
-            className="p-6 rounded-lg border"
-            style={{
-              backgroundColor: 'rgba(100, 108, 255, 0.05)',
-              borderColor: 'var(--border-color)',
-            }}
-          >
-            {/* Flow diagram */}
-            <div className="flex flex-wrap items-center gap-2 mb-6">
-              {[
-                {key: 'LEVEL_1', label: 'Overview'},
-                {key: 'LEVEL_2', label: 'Category'},
-                {key: 'LEVEL_3', label: 'Row Detail'},
-              ].map((level, i, arr) => (
-                <div key={level.key} className="flex items-center gap-2">
-                  <div
-                    className="rounded-lg px-4 py-3 text-center min-w-[110px]"
+          {/* The items prop */}
+          <div id="items-prop">
+            <h2
+              className="text-base font-semibold mb-2"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              The <code>items</code> Prop
+            </h2>
+            <p
+              className="mb-4 text-sm"
+              style={{color: 'var(--secondary-text-color)'}}
+            >
+              Pass a plain object to <code>items</code> where each key is a
+              level ID and each value has a <code>component</code> factory.
+            </p>
+            <Suspense fallback={<div className="text-sm">Loading…</div>}>
+              <CodePreviewLazy code={itemsCode} />
+            </Suspense>
+          </div>
+
+          {/* Context Object */}
+          <div id="context-object">
+            <h2
+              className="text-base font-semibold mb-2"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              The Context Object
+            </h2>
+            <p
+              className="mb-4 text-sm"
+              style={{color: 'var(--secondary-text-color)'}}
+            >
+              Every component factory receives <code>IWuDrilldownContext</code>{' '}
+              as its argument.
+            </p>
+            <div
+              className="rounded-lg border overflow-hidden"
+              style={{borderColor: 'var(--border-color)'}}
+            >
+              <table className="w-full text-sm">
+                <thead>
+                  <tr
                     style={{
-                      backgroundColor: 'var(--main-bg-color)',
-                      border: '1px solid var(--highlight-color)',
+                      backgroundColor: 'rgba(100,108,255,0.08)',
+                      borderBottom: '1px solid var(--border-color)',
                     }}
                   >
-                    <div
-                      className="text-xs font-mono mb-1"
-                      style={{color: 'var(--highlight-color)'}}
+                    {['Property', 'Type', 'Purpose'].map(h => (
+                      <th
+                        key={h}
+                        className="px-4 py-3 text-left font-semibold"
+                        style={{color: 'var(--primary-text-color)'}}
+                      >
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {contextRows.map((row, i) => (
+                    <tr
+                      key={row.prop}
+                      style={{
+                        borderTop:
+                          i > 0 ? '1px solid var(--border-color)' : undefined,
+                      }}
                     >
-                      {level.key}
-                    </div>
-                    <div
-                      className="text-sm font-medium"
+                      <td className="px-4 py-3">
+                        <code
+                          className="px-1.5 py-0.5 rounded text-xs"
+                          style={{
+                            backgroundColor: 'rgba(100,108,255,0.12)',
+                            color: 'var(--highlight-color)',
+                          }}
+                        >
+                          {row.prop}
+                        </code>
+                      </td>
+                      <td
+                        className="px-4 py-3 font-mono text-xs"
+                        style={{color: 'var(--secondary-text-color)'}}
+                      >
+                        {row.type}
+                      </td>
+                      <td
+                        className="px-4 py-3"
+                        style={{color: 'var(--secondary-text-color)'}}
+                      >
+                        {row.purpose}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Real Example */}
+          <div id="real-example">
+            <h2
+              className="text-base font-semibold mb-2"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              Real Example
+            </h2>
+            <p
+              className="mb-4 text-sm"
+              style={{color: 'var(--secondary-text-color)'}}
+            >
+              A 3-level sales drilldown: region overview → category breakdown →
+              product table.
+            </p>
+            <Suspense fallback={<div className="text-sm">Loading…</div>}>
+              <CodePreviewLazy code={realExampleCode} />
+            </Suspense>
+          </div>
+
+          {/* Key Rules */}
+          <div id="key-rules">
+            <h2
+              className="text-base font-semibold mb-4"
+              style={{color: 'var(--primary-text-color)'}}
+            >
+              Key Rules
+            </h2>
+            <div className="space-y-3">
+              {rules.map(rule => (
+                <div
+                  key={rule.heading}
+                  className="flex gap-4 p-4 rounded-lg border"
+                  style={{
+                    borderColor: 'var(--border-color)',
+                    backgroundColor: 'rgba(100,108,255,0.04)',
+                  }}
+                >
+                  <div
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{
+                      backgroundColor: 'var(--highlight-color)',
+                      marginTop: '6px',
+                    }}
+                  />
+                  <div>
+                    <p
+                      className="font-semibold text-sm mb-1"
                       style={{color: 'var(--primary-text-color)'}}
                     >
-                      {level.label}
-                    </div>
-                  </div>
-                  {i < arr.length - 1 && (
-                    <div
-                      className="flex flex-col items-center gap-0.5"
+                      {rule.heading}
+                    </p>
+                    <p
+                      className="text-sm leading-relaxed"
                       style={{color: 'var(--secondary-text-color)'}}
                     >
-                      <ArrowRight size={18} />
-                      <span className="text-xs font-mono">goNext</span>
-                    </div>
-                  )}
+                      {rule.body}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
+          </div>
 
+          {/* Footer */}
+          <div
+            className="pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4"
+            style={{borderColor: 'var(--border-color)'}}
+          >
             <p
               className="text-sm"
               style={{color: 'var(--secondary-text-color)'}}
             >
-              Clicking a data point calls{' '}
-              <code
-                className="px-1 py-0.5 rounded text-xs"
-                style={{
-                  backgroundColor: 'rgba(100,108,255,0.15)',
-                  color: 'var(--highlight-color)',
-                }}
-              >
-                goNext('LEVEL_2', title)
-              </code>
-              . The header back button calls{' '}
-              <code
-                className="px-1 py-0.5 rounded text-xs"
-                style={{
-                  backgroundColor: 'rgba(100,108,255,0.15)',
-                  color: 'var(--highlight-color)',
-                }}
-              >
-                goBack()
-              </code>
-              .
+              Continue exploring the How to section:
             </p>
-          </div>
-        </div>
-
-        {/* ── The items prop ── */}
-        <div className="mb-16">
-          <h2
-            className="text-2xl font-semibold mb-2"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            The <code className="text-xl">items</code> Prop
-          </h2>
-          <p
-            className="mb-6 text-sm"
-            style={{color: 'var(--secondary-text-color)'}}
-          >
-            Pass a plain object to <code>items</code> where each key is a level
-            ID and each value has a <code>component</code> factory.
-          </p>
-          <Suspense fallback={<div className="text-sm">Loading…</div>}>
-            <CodePreviewLazy code={itemsCode} />
-          </Suspense>
-        </div>
-
-        {/* ── Context Object ── */}
-        <div className="mb-16">
-          <h2
-            className="text-2xl font-semibold mb-2"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            The Context Object
-          </h2>
-          <p
-            className="mb-6 text-sm"
-            style={{color: 'var(--secondary-text-color)'}}
-          >
-            Every component factory receives <code>IWuDrilldownContext</code> as
-            its argument.
-          </p>
-
-          <div
-            className="rounded-lg border overflow-hidden"
-            style={{borderColor: 'var(--border-color)'}}
-          >
-            <table className="w-full text-sm">
-              <thead>
-                <tr
-                  style={{
-                    backgroundColor: 'rgba(100,108,255,0.08)',
-                    borderBottom: '1px solid var(--border-color)',
-                  }}
-                >
-                  {['Property', 'Type', 'Purpose'].map(h => (
-                    <th
-                      key={h}
-                      className="px-4 py-3 text-left font-semibold"
-                      style={{color: 'var(--primary-text-color)'}}
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {contextRows.map((row, i) => (
-                  <tr
-                    key={row.prop}
-                    style={{
-                      borderTop:
-                        i > 0 ? '1px solid var(--border-color)' : undefined,
-                    }}
-                  >
-                    <td className="px-4 py-3">
-                      <code
-                        className="px-1.5 py-0.5 rounded text-xs"
-                        style={{
-                          backgroundColor: 'rgba(100,108,255,0.12)',
-                          color: 'var(--highlight-color)',
-                        }}
-                      >
-                        {row.prop}
-                      </code>
-                    </td>
-                    <td
-                      className="px-4 py-3 font-mono text-xs"
-                      style={{color: 'var(--secondary-text-color)'}}
-                    >
-                      {row.type}
-                    </td>
-                    <td
-                      className="px-4 py-3"
-                      style={{color: 'var(--secondary-text-color)'}}
-                    >
-                      {row.purpose}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* ── Real Example ── */}
-        <div className="mb-16">
-          <h2
-            className="text-2xl font-semibold mb-2"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            Real Example
-          </h2>
-          <p
-            className="mb-6 text-sm"
-            style={{color: 'var(--secondary-text-color)'}}
-          >
-            A 3-level sales drilldown: region overview → category breakdown →
-            product table.
-          </p>
-          <Suspense fallback={<div className="text-sm">Loading…</div>}>
-            <CodePreviewLazy code={realExampleCode} />
-          </Suspense>
-        </div>
-
-        {/* ── Key Rules ── */}
-        <div className="mb-16">
-          <h2
-            className="text-2xl font-semibold mb-6"
-            style={{color: 'var(--primary-text-color)'}}
-          >
-            Key Rules
-          </h2>
-          <div className="space-y-3">
-            {rules.map(rule => (
-              <div
-                key={rule.heading}
-                className="flex gap-4 p-4 rounded-lg border"
+            <div className="flex gap-3">
+              <NavLink
+                to="/docs/initial-level"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-opacity hover:opacity-80"
                 style={{
-                  borderColor: 'var(--border-color)',
-                  backgroundColor: 'rgba(100,108,255,0.04)',
+                  backgroundColor: 'var(--highlight-color)',
+                  color: 'white',
                 }}
               >
-                <div
-                  className="mt-0.5 w-2 h-2 rounded-full flex-shrink-0"
-                  style={{
-                    backgroundColor: 'var(--highlight-color)',
-                    marginTop: '6px',
-                  }}
-                />
-                <div>
-                  <p
-                    className="font-semibold text-sm mb-1"
-                    style={{color: 'var(--primary-text-color)'}}
-                  >
-                    {rule.heading}
-                  </p>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{color: 'var(--secondary-text-color)'}}
-                  >
-                    {rule.body}
-                  </p>
-                </div>
-              </div>
-            ))}
+                Initial level <ArrowRight size={14} />
+              </NavLink>
+              <NavLink
+                to="/docs/base-title"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-opacity hover:opacity-80"
+                style={{
+                  border: '1px solid var(--border-color)',
+                  color: 'var(--primary-text-color)',
+                }}
+              >
+                Base title <ArrowRight size={14} />
+              </NavLink>
+            </div>
           </div>
         </div>
 
-        {/* ── Footer / Next Steps ── */}
-        <div
-          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{borderColor: 'var(--border-color)'}}
-        >
-          <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
-            Continue exploring the How to section:
-          </p>
-          <div className="flex gap-3">
-            <NavLink
-              to="/docs/initial-level"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-opacity hover:opacity-80"
-              style={{
-                backgroundColor: 'var(--highlight-color)',
-                color: 'white',
-              }}
-            >
-              Initial level <ArrowRight size={14} />
-            </NavLink>
-            <NavLink
-              to="/docs/base-title"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-opacity hover:opacity-80"
-              style={{
-                border: '1px solid var(--border-color)',
-                color: 'var(--primary-text-color)',
-              }}
-            >
-              Base title <ArrowRight size={14} />
-            </NavLink>
-          </div>
+        {/* Right sidebar */}
+        <div className="hidden lg:block lg:col-span-2">
+          <RightSideBar
+            hashLinks={[
+              {href: '#mental-model', name: 'Mental Model'},
+              {href: '#items-prop', name: 'The items Prop'},
+              {href: '#context-object', name: 'Context Object'},
+              {href: '#real-example', name: 'Real Example'},
+              {href: '#key-rules', name: 'Key Rules'},
+            ]}
+          />
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export const CodePreview: React.FC<Props> = ({code}) => {
   }, [code])
   return (
     <div
-      className="border border-border-color rounded-lg overflow-x-auto code-preview"
+      className="border border-border-color rounded-lg overflow-hidden"
       dangerouslySetInnerHTML={{__html: html}}
     />
   )
