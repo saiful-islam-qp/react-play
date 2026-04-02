@@ -160,7 +160,7 @@ const InitialLevel = () => {
                       className="px-4 py-3 font-mono text-xs"
                       style={{color: 'var(--secondary-text-color)'}}
                     >
-                      string
+                      {`LEVEL_{number}`}
                     </td>
                     <td className="px-4 py-3">
                       <span

@@ -2,6 +2,11 @@ import {lazy, Suspense} from 'react'
 import {NavLink} from 'react-router'
 import {ArrowRight} from 'lucide-react'
 import {RightSideBar} from '../../components/sidebar/RightSidebar'
+import {
+  WuDrilldown,
+  type IWuDrilldownContext,
+} from '@npm-questionpro/wick-ui-lib'
+import SimpleLevel from '../../components/simple-level/SimpleLevel'
 
 const CodePreviewLazy = lazy(() =>
   import('../../components/code-preview/CodePreview').then(module => ({
@@ -12,18 +17,13 @@ const CodePreviewLazy = lazy(() =>
 const contextRows = [
   {
     prop: 'goNext',
-    type: '(levelId: string, title: string) => void',
+    type: '(id: LEVEL_{number}, title: {id: LEVEL_{number}, title: string}) => void',
     purpose: 'Navigate forward to a named level',
   },
   {
     prop: 'goBack',
     type: '() => void',
     purpose: 'Return to the previous level',
-  },
-  {
-    prop: 'currentLevel',
-    type: 'string',
-    purpose: 'The key of the currently active level',
   },
 ]
 
@@ -75,14 +75,14 @@ export const SalesDrilldown = () => (
         LEVEL_1: {
           component: ({ goNext }: IWuDrilldownContext) => (
             <ColumnChart
-              onBarClick={(label) => goNext('LEVEL_2', label)}
+              onBarClick={() => goNext('LEVEL_2', {id: 'LEVEL_2', title: 'Info where user clicked in level 1'})}
             />
           ),
         },
         LEVEL_2: {
           component: ({ goNext }: IWuDrilldownContext) => (
             <DonutChart
-              onSliceClick={(label) => goNext('LEVEL_3', label)}
+              onSliceClick={() => goNext('LEVEL_3', {id: 'LEVEL_3', title: 'Info where user clicked in level 2'})}
             />
           ),
         },
@@ -188,7 +188,7 @@ const WhatAreLevels = () => {
                     color: 'var(--highlight-color)',
                   }}
                 >
-                  goNext('LEVEL_2', title)
+                  {`goNext('LEVEL_2', { id: 'LEVEL_2', title: 'Info where user clicked' })`}
                 </code>
                 . The header back button calls{' '}
                 <code
@@ -220,9 +220,58 @@ const WhatAreLevels = () => {
               Pass a plain object to <code>items</code> where each key is a
               level ID and each value has a <code>component</code> factory.
             </p>
-            <Suspense fallback={<div className="text-sm">Loading…</div>}>
-              <CodePreviewLazy code={itemsCode} />
-            </Suspense>
+            <div className="grid grid-cols md:grid-cols-2 gap-4">
+              <Suspense fallback={<div className="text-sm">Loading…</div>}>
+                <CodePreviewLazy code={itemsCode} />
+              </Suspense>
+              <div className="h-[350px] md:h-full border rounded-lg bg-white overflow-hidden border-gray-300">
+                <WuDrilldown
+                  initial="LEVEL_1"
+                  baseTitle={{id: 'LEVEL_1', title: 'BASE_TITLE'}}
+                  offsetHeight={42}
+                  items={{
+                    LEVEL_1: {
+                      component: (ctx: IWuDrilldownContext) => (
+                        <SimpleLevel
+                          title="Level 1 title"
+                          content="This is level 1"
+                          goNext={() =>
+                            ctx.goNext(`LEVEL_2`, {
+                              id: `LEVEL_2`,
+                              title: `Where you clicked in Level 1`,
+                            })
+                          }
+                          showHeader
+                        />
+                      ),
+                    },
+                    LEVEL_2: {
+                      component: (ctx: IWuDrilldownContext) => (
+                        <SimpleLevel
+                          title="Level 2"
+                          content="This is level 2"
+                          goNext={() =>
+                            ctx.goNext(`LEVEL_3`, {
+                              id: `LEVEL_3`,
+                              title: `Where you clicked in level 2`,
+                            })
+                          }
+                        />
+                      ),
+                    },
+                    LEVEL_3: {
+                      component: () => (
+                        <SimpleLevel
+                          title="Level 3"
+                          content="This is level 3"
+                          isNextDisabled
+                        />
+                      ),
+                    },
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Context Object */}
