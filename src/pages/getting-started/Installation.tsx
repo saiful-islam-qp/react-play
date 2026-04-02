@@ -1,5 +1,6 @@
 import {lazy, Suspense, useState} from 'react'
 import {Check, Copy} from 'lucide-react'
+import {NavLink} from 'react-router'
 
 const CodePreviewLazy = lazy(() =>
   import('../../components/code-preview/CodePreview').then(module => ({
@@ -213,12 +214,12 @@ const Installation = () => {
         >
           <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
             Next —{' '}
-            <a
-              href="/docs/what-are-levels"
+            <NavLink
+              to="/docs/what-are-levels"
               style={{color: 'var(--highlight-color)'}}
             >
               learn how levels work.
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>

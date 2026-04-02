@@ -1,3 +1,5 @@
+import {NavLink} from 'react-router'
+
 const reasons = [
   {
     number: 1,
@@ -84,12 +86,12 @@ const Intro = () => {
         >
           <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
             Next —{' '}
-            <a
-              href="/docs/installation"
+            <NavLink
+              to="/docs/installation"
               style={{color: 'var(--highlight-color)'}}
             >
               install the component and get it running in minutes.
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>
