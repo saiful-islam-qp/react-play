@@ -367,7 +367,7 @@ function UserListDemo(): JSX.Element {
   }, [selectedUser, setSelectedUser])
 
   return (
-    <div className="h-[440px] border rounded-lg overflow-hidden border-gray-200">
+    <div className="h-[440px] border rounded-lg bg-gray-50 overflow-hidden border-gray-200">
       <WuDrilldown
         initial="LEVEL_1"
         baseTitle={{id: 'LEVEL_1', title: 'Team members'}}
