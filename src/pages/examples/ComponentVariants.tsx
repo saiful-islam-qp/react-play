@@ -202,7 +202,7 @@ const ComponentVariants = () => {
                 Same slideLeft variant — notice the back button and slide
                 direction are mirrored compared to the LTR version above.
               </p>
-              <DrilldownDemo variant="slideLeft" dir="rtl" />
+              <RtlDemo />
             </div>
           </div>
 
@@ -278,3 +278,165 @@ const ComponentVariants = () => {
 }
 
 export default ComponentVariants
+
+// ── Arabic RTL level components ───────────────────────────────────────────────
+
+const arabicRegions = [
+  {name: 'الشرق الأوسط', value: '1,031k'},
+  {name: 'الولايات المتحدة', value: '4,695k'},
+  {name: 'أوروبا', value: '2,245k'},
+  {name: 'أفريقيا', value: '1,393k'},
+]
+
+const arabicCategories = [
+  {name: 'الاستطلاعات', share: '32%', trend: '+5%'},
+  {name: 'تجربة العملاء', share: '26%', trend: '+3%'},
+  {name: 'التحليلات', share: '24%', trend: '+7%'},
+  {name: 'الأتمتة', share: '18%', trend: '+12%'},
+]
+
+const arabicProducts = [
+  {name: 'الاستطلاعات', q: ['900k', '1,100k', '850k', '864k']},
+  {name: 'تجربة العملاء', q: ['220k', '270k', '190k', '161k']},
+  {name: 'إدارة العملاء', q: ['180k', '200k', '170k', '176k']},
+  {name: 'الأتمتة', q: ['200k', '250k', '180k', '184k']},
+]
+
+const ArabicRegionLevel = ({goNext}: IWuDrilldownContext) => (
+  <div dir="rtl" className="w-full h-full bg-white flex flex-col">
+    <div className="px-4 py-3 border-b border-gray-100">
+      <h3 className="text-sm font-semibold text-gray-900">
+        المبيعات حسب المنطقة
+      </h3>
+      <p className="text-xs mt-0.5 text-gray-400">مقارنةً بالعام الماضي</p>
+    </div>
+    <ul className="flex-1 overflow-y-auto divide-y divide-gray-50">
+      {arabicRegions.map(r => (
+        <li key={r.name}>
+          <button
+            onClick={() => goNext('LEVEL_2', {id: 'LEVEL_2', title: r.name})}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:bg-gray-50"
+          >
+            <span
+              className="text-sm font-medium"
+              style={{color: 'var(--highlight-color)'}}
+            >
+              {r.name}
+            </span>
+            <span className="text-sm font-semibold tabular-nums text-gray-700">
+              {r.value}
+            </span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+)
+
+const ArabicCategoryLevel = ({goNext}: IWuDrilldownContext) => (
+  <div dir="rtl" className="w-full h-full bg-white flex flex-col">
+    <div className="px-4 py-3 border-b border-gray-100">
+      <h3 className="text-sm font-semibold text-gray-900">
+        المبيعات حسب الفئة
+      </h3>
+      <p className="text-xs mt-0.5 text-gray-400">الحصة السوقية لكل فئة</p>
+    </div>
+    <ul className="flex-1 overflow-y-auto divide-y divide-gray-50">
+      {arabicCategories.map(c => (
+        <li key={c.name}>
+          <button
+            onClick={() => goNext('LEVEL_3', {id: 'LEVEL_3', title: c.name})}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:bg-gray-50"
+          >
+            <span
+              className="text-sm font-medium"
+              style={{color: 'var(--highlight-color)'}}
+            >
+              {c.name}
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-medium text-emerald-600 tabular-nums">
+                {c.trend}
+              </span>
+              <span className="text-sm font-semibold tabular-nums text-gray-700">
+                {c.share}
+              </span>
+            </div>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+)
+
+const arabicQuarters = [
+  'المنتج',
+  'الربع الأول',
+  'الربع الثاني',
+  'الربع الثالث',
+  'الربع الرابع',
+]
+
+const ArabicProductLevel = () => (
+  <div dir="rtl" className="w-full h-full bg-white overflow-auto">
+    <table className="w-full table-auto border-collapse">
+      <thead className="sticky top-0 bg-white border-b border-gray-100">
+        <tr>
+          {arabicQuarters.map(h => (
+            <th
+              key={h}
+              className="px-4 py-2.5 text-xs font-semibold text-gray-500 text-right whitespace-nowrap"
+            >
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-50">
+        {arabicProducts.map(p => (
+          <tr key={p.name} className="hover:bg-gray-50">
+            <td className="px-4 py-3 text-sm font-medium text-gray-900 text-right">
+              {p.name}
+            </td>
+            {p.q.map((v, i) => (
+              <td
+                key={i}
+                className="px-4 py-3 text-sm tabular-nums text-gray-600 text-right"
+              >
+                {v}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
+
+const RtlDemo = () => (
+  <div className="h-[340px] border rounded-lg bg-white overflow-hidden border-gray-200">
+    <WuDrilldown
+      initial="LEVEL_1"
+      baseTitle={{id: 'LEVEL_1', title: 'المبيعات حسب المنطقة'}}
+      headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
+      offsetHeight={48}
+      variant="slideLeft"
+      dir="rtl"
+      items={{
+        LEVEL_1: {
+          component: (ctx: IWuDrilldownContext) => (
+            <ArabicRegionLevel {...ctx} />
+          ),
+        },
+        LEVEL_2: {
+          component: (ctx: IWuDrilldownContext) => (
+            <ArabicCategoryLevel {...ctx} />
+          ),
+        },
+        LEVEL_3: {
+          component: () => <ArabicProductLevel />,
+        },
+      }}
+    />
+  </div>
+)

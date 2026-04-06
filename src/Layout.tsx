@@ -39,7 +39,9 @@ const Layout = () => {
           </NavLink>
         </div>
 
-        <Outlet />
+        <div className="container md:mx-auto">
+          <Outlet />
+        </div>
       </div>
     </div>
   )
