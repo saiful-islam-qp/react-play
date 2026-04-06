@@ -112,13 +112,13 @@ const BaseTitle = () => {
                   {[
                     {
                       key: 'id',
-                      type: 'string',
+                      type: 'LEVEL_${number}',
                       description:
                         'Must match initial — identifies the root level',
                     },
                     {
                       key: 'title',
-                      type: 'string',
+                      type: '{id: LEVEL_${number}, {id: LEVEL_${number}, title: string}}',
                       description:
                         'The label shown in deeper levels as the back-navigation reference',
                     },
@@ -188,7 +188,7 @@ const BaseTitle = () => {
                   role: 'Controls which view renders first',
                 },
                 {
-                  prop: 'baseTitle={{ id: "LEVEL_1" }}',
+                  prop: 'baseTitle={{ id: "LEVEL_1", title: "Base Title" }}',
                   role: 'Controls the navigation title for that view',
                 },
               ].map((row, i) => (

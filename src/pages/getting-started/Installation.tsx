@@ -215,10 +215,10 @@ const Installation = () => {
           <p className="text-sm" style={{color: 'var(--secondary-text-color)'}}>
             Next —{' '}
             <NavLink
-              to="/docs/what-are-levels"
+              to="/examples/component-variants"
               style={{color: 'var(--highlight-color)'}}
             >
-              learn how levels work.
+              Checkout Examples.
             </NavLink>
           </p>
         </div>

@@ -7,6 +7,8 @@ import WhatAreLevels from './pages/how-to/WhatAreLevels'
 import InitialLevel from './pages/how-to/InitialLevel'
 import BaseTitle from './pages/how-to/BaseTitle'
 import HeaderCustomization from './pages/how-to/HeaderCustomization'
+import ComponentVariants from './pages/examples/ComponentVariants'
+import Scopes from './pages/examples/Scopes'
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,10 @@ const AppRoutes = () => {
             path="header-customization"
             element={<HeaderCustomization />}
           />
+        </Route>
+        <Route path="examples">
+          <Route path="component-variants" element={<ComponentVariants />} />
+          <Route path="scopes" element={<Scopes />} />
         </Route>
         <Route path="*" element={<div className="p-4">Page Not Found</div>} />
       </Route>

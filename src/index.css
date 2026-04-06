@@ -7,7 +7,7 @@
   --primary-text-color: #f0f0f0;
   --secondary-text-color: #aaaaaa;
   --secondary-bg-color: #eeeeee;
-  --highlight-color: #646cff;
+  --highlight-color: #1d94fd;
   --border-radius: 10px;
   --border-color: rgb(91, 91, 91);
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -72,7 +72,7 @@ table tbody td {
     --primary-text-color: #213547;
     --secondary-text-color: #666666;
     --secondary-bg-color: #ebebeb;
-    --highlight-color: #646cff;
+    --highlight-color: #1d94fd;
     --border-radius: 10px;
     --border-color: rgb(222, 222, 222);
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

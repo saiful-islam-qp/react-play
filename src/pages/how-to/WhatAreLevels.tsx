@@ -17,7 +17,7 @@ const CodePreviewLazy = lazy(() =>
 const contextRows = [
   {
     prop: 'goNext',
-    type: '(id: LEVEL_{number}, title: {id: LEVEL_{number}, title: string}) => void',
+    type: '(id: LEVEL_${number}, title: {id: LEVEL_${number}, title: string}) => void',
     purpose: 'Navigate forward to a named level',
   },
   {

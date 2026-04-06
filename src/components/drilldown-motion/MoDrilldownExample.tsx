@@ -32,7 +32,7 @@ export const MoDrilldownExample: React.FC = () => {
   )
 }
 
-const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
+export const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
   return (
     <div className="h-full bg-white flex flex-col">
       <h2 className="text-sm font-medium bg-gray-50 border-b px-4 h-12 flex items-center">
@@ -60,7 +60,7 @@ const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
   )
 }
 
-const SalesByCategory = ({goNext}: IWuDrilldownContext) => {
+export const SalesByCategory = ({goNext}: IWuDrilldownContext) => {
   return (
     <div className="p-4 h-full bg-white">
       <div className="flex flex-col h-full">
@@ -72,7 +72,7 @@ const SalesByCategory = ({goNext}: IWuDrilldownContext) => {
   )
 }
 
-const SalesByProduct = () => {
+export const SalesByProduct = () => {
   return (
     <div className="p-4 h-full bg-white flex flex-col">
       <div className="flex-1 overflow-auto">

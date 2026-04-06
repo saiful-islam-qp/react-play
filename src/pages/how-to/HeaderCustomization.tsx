@@ -2,6 +2,7 @@ import {lazy, Suspense} from 'react'
 import {NavLink} from 'react-router'
 import {ArrowLeft} from 'lucide-react'
 import {RightSideBar} from '../../components/sidebar/RightSidebar'
+import SimpleExample from '../../components/examples/SimpleExample'
 
 const CodePreviewLazy = lazy(() =>
   import('../../components/code-preview/CodePreview').then(module => ({
@@ -53,7 +54,7 @@ const fullExampleCode = `import {
 <WuDrilldown
   initial="LEVEL_1"
   baseTitle={{ id: 'LEVEL_1', title: 'Overall Sales Data' }}
-  headerClasses="wu-bg-gray-100 wu-border-b wu-px-4"
+  headerClasses="wu-bg-gray-200 wu-px-4"
   offsetHeight={42}
   items={{
     LEVEL_1: {
@@ -302,9 +303,20 @@ const HeaderCustomization = () => {
             >
               Full example
             </h2>
-            <Suspense fallback={<div className="text-sm">Loading…</div>}>
-              <CodePreviewLazy code={fullExampleCode} />
-            </Suspense>
+            <div className="grid grid-cols md:grid-cols-2 gap-4 mb-2">
+              <Suspense fallback={<div className="text-sm">Loading…</div>}>
+                <CodePreviewLazy code={fullExampleCode} />
+              </Suspense>
+              <SimpleExample headerClasses="bg-gray-200 px-4" />
+            </div>
+            <p className="text-sm text-slate-500">
+              <span className="text-red-500">Notice</span> : The header with
+              custom gray color will be appeared after user steps in or drill
+              downs else it will show the component from the initial level. If
+              you want same header in the initial level then you can add the
+              same classes in your initial level component's header. It is
+              solely up to the developer
+            </p>
           </div>
 
           {/* Footer */}

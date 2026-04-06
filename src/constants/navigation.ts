@@ -18,6 +18,13 @@ export const navigation: NavSection[] = [
     ],
   },
   {
+    title: 'Examples',
+    links: [
+      {name: 'Component Variants', href: '/examples/component-variants'},
+      {name: 'Scopes', href: '/examples/scopes'},
+    ],
+  },
+  {
     title: 'How to',
     links: [
       {name: 'What are levels', href: '/docs/what-are-levels'},
