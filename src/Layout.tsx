@@ -11,7 +11,7 @@ const Layout = () => {
     <div className="flex">
       {/* Backdrop — mobile only, sits behind sidebar, closes it on tap */}
       <div
-        className={`fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 lg:hidden ${
           sidebarOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'

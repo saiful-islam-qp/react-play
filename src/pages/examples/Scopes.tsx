@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useMemo, useState} from 'react'
 import {
   WuDrilldown,
   type IWuDrilldownAnimationVariant,
@@ -287,18 +287,18 @@ function UserList({onSelect}: UserListProps): JSX.Element {
 // ── UserProfile ───────────────────────────────────────────────────────────────
 
 interface UserProfileProps {
-  user: User
+  user: User | null
 }
 
 function UserProfile({user}: UserProfileProps): JSX.Element {
-  const badge = TYPE_BADGE[user.type]
+  const badge = TYPE_BADGE[user?.type || 'User']
 
   const fields: {label: string; value: string}[] = [
-    {label: 'Hometown', value: user.hometown},
-    {label: 'Blood group', value: user.bloodGroup},
-    {label: 'Department', value: user.department},
-    {label: 'Member since', value: String(user.joinedYear)},
-    {label: 'Email', value: user.email},
+    {label: 'Hometown', value: user?.hometown || ''},
+    {label: 'Blood group', value: user?.bloodGroup || ''},
+    {label: 'Department', value: user?.department || ''},
+    {label: 'Member since', value: String(user?.joinedYear)},
+    {label: 'Email', value: user?.email || ''},
   ]
 
   return (
@@ -307,19 +307,19 @@ function UserProfile({user}: UserProfileProps): JSX.Element {
       <div className="flex flex-col items-center pt-8 pb-6 px-6 border-b border-gray-100">
         <span
           className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 ring-4 ring-white shadow-sm"
-          style={{backgroundColor: AVATAR_BG[user.type]}}
+          style={{backgroundColor: AVATAR_BG[user?.type || 'User']}}
           aria-hidden="true"
         >
-          {initials(user.name)}
+          {initials(user?.name || 'NA')}
         </span>
         <h2 className="text-base font-semibold text-gray-900 mb-1">
-          {user.name}
+          {user?.name}
         </h2>
         <span
           className="text-xs font-medium px-3 py-1 rounded-full"
           style={{backgroundColor: badge.bg, color: badge.color}}
         >
-          {user.type}
+          {user?.type}
         </span>
       </div>
 
@@ -348,6 +348,24 @@ function UserProfile({user}: UserProfileProps): JSX.Element {
 function UserListDemo(): JSX.Element {
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
 
+  const items = useMemo(() => {
+    return {
+      LEVEL_1: {
+        component: ({goNext}: IWuDrilldownContext) => (
+          <UserList
+            onSelect={user => {
+              setSelectedUser(user)
+              goNext('LEVEL_2', {id: 'LEVEL_2', title: user.name})
+            }}
+          />
+        ),
+      },
+      LEVEL_2: {
+        component: () => <UserProfile user={selectedUser} />,
+      },
+    }
+  }, [selectedUser, setSelectedUser])
+
   return (
     <div className="h-[440px] border rounded-lg overflow-hidden border-gray-200">
       <WuDrilldown
@@ -356,22 +374,7 @@ function UserListDemo(): JSX.Element {
         headerClasses="bg-gray-50 border-b px-4 h-12 flex items-center"
         offsetHeight={48}
         variant="slideLeft"
-        items={{
-          LEVEL_1: {
-            component: ({goNext}: IWuDrilldownContext) => (
-              <UserList
-                onSelect={user => {
-                  setSelectedUser(user)
-                  goNext('LEVEL_2', {id: 'LEVEL_2', title: user.name})
-                }}
-              />
-            ),
-          },
-          LEVEL_2: {
-            component: () =>
-              selectedUser ? <UserProfile user={selectedUser} /> : null,
-          },
-        }}
+        items={items}
       />
     </div>
   )
