@@ -371,7 +371,7 @@ function UserListDemo(): JSX.Element {
       <WuDrilldown
         initial="LEVEL_1"
         baseTitle={{id: 'LEVEL_1', title: 'Team members'}}
-        headerClasses="bg-gray-50 border-b px-4 h-12 flex items-center"
+        headerClasses="bg-gray-50 border-b-2 px-4 flex items-center"
         offsetHeight={48}
         variant="slideLeft"
         items={items}
@@ -399,8 +399,8 @@ const DrilldownDemo = ({
     <WuDrilldown
       initial="LEVEL_1"
       baseTitle={{id: 'LEVEL_1', title: 'Sales by region'}}
-      headerClasses="bg-gray-50 border-b px-4 h-12 flex items-center"
-      offsetHeight={48}
+      headerClasses="bg-gray-50 border-b-2 px-4 flex items-center"
+      offsetHeight={42}
       variant={variant}
       mode={mode}
       dir={dir}
@@ -588,7 +588,7 @@ function SalesOverviewCard({
 }): JSX.Element {
   return (
     <div className="w-full h-full bg-white flex flex-col">
-      <div className="px-4 h-14 border-b border-gray-100 flex items-center justify-between">
+      <div className="p-3 border-b-2 border-gray-100 flex items-center justify-between">
         <h2 className="leading-3">Revenue Overview</h2>
         <button
           onClick={() =>

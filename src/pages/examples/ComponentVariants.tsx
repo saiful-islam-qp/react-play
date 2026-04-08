@@ -27,8 +27,8 @@ const DrilldownDemo = ({
     <WuDrilldown
       initial="LEVEL_1"
       baseTitle={{id: 'LEVEL_1', title: 'Sales by region'}}
-      headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
-      offsetHeight={48}
+      headerClasses="bg-gray-50 shadow-[inset_0_-1px_0_0_#e2e8f0] px-4 flex items-center"
+      offsetHeight={42}
       variant={variant}
       mode={mode}
       dir={dir}

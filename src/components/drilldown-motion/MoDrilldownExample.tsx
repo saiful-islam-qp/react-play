@@ -12,7 +12,7 @@ export const MoDrilldownExample: React.FC = () => {
       <WuDrilldown
         initial="LEVEL_1"
         baseTitle={{id: 'LEVEL_1', title: 'Overall Sales Data'}}
-        headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
+        // headerClasses="wu-bg-gray-50 wu-border-b wu-px-4 wu-h-12 wu-flex wu-items-center"
         offsetHeight={42}
         items={{
           LEVEL_1: {
@@ -35,7 +35,7 @@ export const MoDrilldownExample: React.FC = () => {
 export const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
   return (
     <div className="h-full bg-white flex flex-col">
-      <h2 className="text-sm font-medium bg-gray-50 border-b px-4 h-12 flex items-center">
+      <h2 className="text-sm font-medium bg-gray-50 border-b px-4 py-3 flex items-center">
         Sales by region
       </h2>
       <div className="flex-1 p-4">
