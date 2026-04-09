@@ -127,7 +127,7 @@ const EChartBarPercentage: React.FC<Props> = ({
     })
 
     myChart.on('click', function (params) {
-      if (handler) handler(`${params.seriesName}`)
+      if (handler) handler(`${params.name}: ${params.seriesName}`)
     })
 
     const observer = new ResizeObserver(() => {

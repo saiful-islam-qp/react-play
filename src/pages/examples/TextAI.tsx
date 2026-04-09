@@ -30,7 +30,7 @@ const DrilldownDemo = ({
   dir = 'ltr',
   items,
 }: DemoProps) => (
-  <div className="h-[380px] border rounded-lg bg-white overflow-hidden border-gray-200">
+  <div className="h-[400px] border rounded-lg bg-white overflow-hidden border-gray-200">
     <WuDrilldown
       initial="LEVEL_1"
       baseTitle={{id: 'LEVEL_1', title: 'Sentiment analysis by themes'}}
@@ -51,7 +51,8 @@ const sections = [
     id: 'sentiment-analysis',
     tag: 'Sentiment analysis',
     title: 'Sentiment analysis',
-    description: 'Analyze sentiment in text',
+    description:
+      'Navigate to the next level through the drilldown and analyze sentiment in text (All the responses are dummy data)',
     component: (
       <DrilldownDemo
         items={{
@@ -230,11 +231,9 @@ function ResponseAnalysis(): JSX.Element {
   return (
     <div className="h-full bg-white">
       <div className={styles.wrapper}>
-        <div className={styles.headerWrapper}>
-          <div>Render smiley and title</div>
-          <div>Render Right Items</div>
-        </div>
-
+        {/* <div className={styles.headerWrapper}>
+          <div className="font-medium text-sm">Responses</div>
+        </div> */}
         <div className={styles.textBlocksWrapper}>{renderTextBlocks}</div>
       </div>
     </div>
