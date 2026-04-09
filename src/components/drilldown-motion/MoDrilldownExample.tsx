@@ -32,7 +32,10 @@ export const MoDrilldownExample: React.FC = () => {
   )
 }
 
-export const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
+export const SalesByRegion = ({
+  goNext,
+  layout,
+}: IWuDrilldownContext & {layout?: 'vertical' | 'horizontal'}) => {
   return (
     <div className="h-full bg-white flex flex-col">
       <h2 className="text-sm font-medium bg-gray-50 border-b px-4 py-3 flex items-center">
@@ -40,6 +43,7 @@ export const SalesByRegion = ({goNext}: IWuDrilldownContext) => {
       </h2>
       <div className="flex-1 p-4">
         <EChartColumn
+          layout={layout ? layout : 'vertical'}
           handler={goNext}
           categories={['Africa', 'Middle East', 'USA', 'Europe']}
           series={[

@@ -16,12 +16,14 @@ interface DemoProps {
   variant?: IWuDrilldownAnimationVariant
   mode?: 'popLayout' | 'wait'
   dir?: 'ltr' | 'rtl'
+  layout?: 'vertical' | 'horizontal'
 }
 
 const DrilldownDemo = ({
   variant = 'default',
   mode = 'popLayout',
   dir = 'ltr',
+  layout = 'vertical',
 }: DemoProps) => (
   <div className="h-[340px] border rounded-lg bg-white overflow-hidden border-gray-200">
     <WuDrilldown
@@ -34,7 +36,9 @@ const DrilldownDemo = ({
       dir={dir}
       items={{
         LEVEL_1: {
-          component: (ctx: IWuDrilldownContext) => <SalesByRegion {...ctx} />,
+          component: (ctx: IWuDrilldownContext) => (
+            <SalesByRegion {...ctx} layout={layout} />
+          ),
         },
         LEVEL_2: {
           component: (ctx: IWuDrilldownContext) => <SalesByCategory {...ctx} />,
@@ -53,26 +57,31 @@ const basicVariants: {
   variant: IWuDrilldownAnimationVariant
   label: string
   description: string
+  layout: 'vertical' | 'horizontal'
 }[] = [
   {
+    layout: 'vertical',
     variant: 'default',
     label: 'default',
     description:
       'Subtle fade and scale. The baseline animation when no variant is set.',
   },
   {
+    layout: 'horizontal',
     variant: 'slideLeft',
     label: 'slideLeft',
     description:
       'New levels push in from the right — a natural forward-navigation feel.',
   },
   {
+    layout: 'vertical',
     variant: 'slideRight',
     label: 'slideRight',
     description:
       'New levels enter from the left. Mirrors slideLeft for back-step metaphors.',
   },
   {
+    layout: 'horizontal',
     variant: 'fadeZoom',
     label: 'fadeZoom',
     description:
@@ -167,7 +176,7 @@ const ComponentVariants = () => {
                   >
                     {v.description}
                   </p>
-                  <DrilldownDemo variant={v.variant} />
+                  <DrilldownDemo variant={v.variant} layout={v.layout} />
                 </div>
               ))}
             </div>

@@ -436,6 +436,7 @@ const sections = [
       />
     ),
   },
+
   {
     id: 'progressive-disclosure',
     tag: 'UX pattern',

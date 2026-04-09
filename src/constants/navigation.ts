@@ -22,6 +22,7 @@ export const navigation: NavSection[] = [
     links: [
       {name: 'Component Variants', href: '/examples/component-variants'},
       {name: 'Scopes', href: '/examples/scopes'},
+      {name: 'Text-AI', href: '/examples/text-ai'},
     ],
   },
   {

@@ -37,12 +37,14 @@ interface Props {
     id: `LEVEL_${number}`,
     data?: IWuDrilldownTitle | undefined,
   ) => void
+  layout: 'vertical' | 'horizontal'
 }
 
 const EChartColumn: React.FC<Props> = ({
   categories = [],
   series = [],
   handler,
+  layout = 'vertical',
 }) => {
   const chartRef = React.useRef<HTMLDivElement>(null)
 
@@ -50,6 +52,9 @@ const EChartColumn: React.FC<Props> = ({
     // Create the echarts instance
     if (!chartRef.current) return
     const myChart = echarts.init(chartRef.current)
+
+    const xAxis = getxAxis(layout, categories)
+    const yAxis = getyAxis(layout, categories)
 
     // Draw the chart
     myChart.setOption({
@@ -61,14 +66,8 @@ const EChartColumn: React.FC<Props> = ({
         top: '10',
       },
       tooltip: {},
-      xAxis: {
-        data: categories,
-        axisLine: {show: false},
-      },
-      yAxis: {
-        axisLine: {show: false},
-        splitLine: {lineStyle: {type: 'dashed'}},
-      },
+      xAxis,
+      yAxis,
       series: series,
       textStyle: {
         fontFamily: 'Fira Sans, sans-serif',
@@ -79,6 +78,7 @@ const EChartColumn: React.FC<Props> = ({
         left: 'center',
       },
     })
+
     myChart.on('click', function (params) {
       if (handler)
         handler(`LEVEL_2`, {
@@ -101,3 +101,25 @@ const EChartColumn: React.FC<Props> = ({
 }
 
 export default EChartColumn
+
+function getxAxis(layout: 'vertical' | 'horizontal', categories: string[]) {
+  if (layout === 'horizontal')
+    return {
+      type: 'value',
+      boundaryGap: [0, 0.01],
+    }
+
+  return {
+    data: categories,
+    axisLine: {show: false},
+  }
+}
+
+function getyAxis(layout: 'vertical' | 'horizontal', categories: string[]) {
+  if (layout === 'horizontal') return {type: 'category', data: categories}
+  return {
+    axisLine: {show: false},
+    splitLine: {lineStyle: {type: 'dashed'}},
+    type: 'value',
+  }
+}

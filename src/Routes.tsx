@@ -9,6 +9,7 @@ import BaseTitle from './pages/how-to/BaseTitle'
 import HeaderCustomization from './pages/how-to/HeaderCustomization'
 import ComponentVariants from './pages/examples/ComponentVariants'
 import Scopes from './pages/examples/Scopes'
+import TextAiExample from './pages/examples/TextAI'
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         <Route path="examples">
           <Route path="component-variants" element={<ComponentVariants />} />
           <Route path="scopes" element={<Scopes />} />
+          <Route path="text-ai" element={<TextAiExample />} />
         </Route>
         <Route path="*" element={<div className="p-4">Page Not Found</div>} />
       </Route>
