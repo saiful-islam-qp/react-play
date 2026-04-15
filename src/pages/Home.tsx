@@ -1,7 +1,11 @@
 import {lazy, Suspense} from 'react'
 import {MoDrilldownExample} from '../components/drilldown-motion/MoDrilldownExample'
-import {ExamplePost} from '../components/example-post/ExamplePost'
 import {RightSideBar} from '../components/sidebar/RightSidebar'
+import SimpleLevel from '../components/simple-level/SimpleLevel'
+import {
+  WuDrilldown,
+  type IWuDrilldownContext,
+} from '@npm-questionpro/wick-ui-lib'
 
 const CodePreviewLazy = lazy(() =>
   import('../components/code-preview/CodePreview').then(module => ({
@@ -134,7 +138,56 @@ function Home() {
                 >
                   Slide effect
                 </p>
-                <ExamplePost />
+                <div className="h-[350px] border rounded-lg bg-white overflow-hidden border-gray-300">
+                  <WuDrilldown
+                    initial="LEVEL_1"
+                    baseTitle={{id: 'LEVEL_1', title: 'BASE_TITLE'}}
+                    offsetHeight={42}
+                    items={{
+                      LEVEL_1: {
+                        component: (ctx: IWuDrilldownContext) => (
+                          <SimpleLevel
+                            title="Level 1 title"
+                            content="This is level 1"
+                            goNext={() =>
+                              ctx.goNext(`LEVEL_2`, {
+                                id: `LEVEL_2`,
+                                title: `Where you clicked in Level 1`,
+                              })
+                            }
+                            showHeader
+                            isInitial
+                          />
+                        ),
+                      },
+                      LEVEL_2: {
+                        component: (ctx: IWuDrilldownContext) => (
+                          <SimpleLevel
+                            title="Level 2 title"
+                            content="This is level 2"
+                            goNext={() =>
+                              ctx.goNext(`LEVEL_3`, {
+                                id: `LEVEL_3`,
+                                title: `Where you clicked in level 2`,
+                              })
+                            }
+                            showHeader
+                          />
+                        ),
+                      },
+                      LEVEL_3: {
+                        component: () => (
+                          <SimpleLevel
+                            title="Level 3 title"
+                            content="This is level 3"
+                            isNextDisabled
+                            showHeader
+                          />
+                        ),
+                      },
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

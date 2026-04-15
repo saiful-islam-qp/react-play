@@ -242,13 +242,14 @@ const WhatAreLevels = () => {
                             })
                           }
                           showHeader
+                          isInitial
                         />
                       ),
                     },
                     LEVEL_2: {
                       component: (ctx: IWuDrilldownContext) => (
                         <SimpleLevel
-                          title="Level 2"
+                          title="Level 2 title"
                           content="This is level 2"
                           goNext={() =>
                             ctx.goNext(`LEVEL_3`, {
@@ -256,15 +257,17 @@ const WhatAreLevels = () => {
                               title: `Where you clicked in level 2`,
                             })
                           }
+                          showHeader
                         />
                       ),
                     },
                     LEVEL_3: {
                       component: () => (
                         <SimpleLevel
-                          title="Level 3"
+                          title="Level 3 title"
                           content="This is level 3"
                           isNextDisabled
+                          showHeader
                         />
                       ),
                     },
