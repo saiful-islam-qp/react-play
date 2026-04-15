@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "pnpm run build && wrangler dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "pnpm run build && wrangler deploy"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,mdx}": [
@@ -40,6 +41,7 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.32.3",
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
@@ -59,6 +61,7 @@
     "tailwindcss": "^3.4.19",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "wrangler": "^4.83.0"
   }
 }
